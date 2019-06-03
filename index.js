@@ -38,7 +38,7 @@ app.use(
 );
 
 ///////////////handle Vulnerabilities//////////////
-/*
+
 app.use(csurf()); //place right after bodyParser and cookieSession///
 
 app.use(function(req, res, next){
@@ -46,7 +46,6 @@ app.use(function(req, res, next){
     next();
 });
 
-*/
 
 app.use(express.static('./public'));
 
