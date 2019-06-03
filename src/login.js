@@ -61,7 +61,7 @@ export class login extends React.Component {
                         </div>
                     )}
                     <p>
-                        Not yet a member? <a href="#"> Register </a>
+                        Not yet a member? <a href="/register"> Register </a>
                     </p>
                 </div>
         );

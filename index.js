@@ -6,6 +6,7 @@ const csurf = require("csurf");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
+const bc = require("./utils/bc")
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 app.use(compression());
@@ -37,6 +38,7 @@ app.use(
 );
 
 ///////////////handle Vulnerabilities//////////////
+/*
 app.use(csurf()); //place right after bodyParser and cookieSession///
 
 app.use(function(req, res, next){
@@ -44,7 +46,7 @@ app.use(function(req, res, next){
     next();
 });
 
-
+*/
 
 app.use(express.static('./public'));
 
@@ -71,12 +73,16 @@ app.post("/register", (req, res) => {
 		})
 		.then(results => {
 			const user = results.rows[0];
-			console.log("results: ", results);
+			console.log("user ID: ", user.id);
 			req.session.userId = user.id;
-			res.redirect("/profile");
+
+			res.json({
+				success: true,
+				userId: user.id
+			});
 		})
 		.catch(e => {
-			console.log(e);
+			console.log("post register: ", e);
 		});
 });
 

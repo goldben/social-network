@@ -19,11 +19,11 @@ export class Registration extends React.Component {
                 first: that.first,
                 last: that.last,
                 email: that.email,
-                pass: that.pass
+                password: that.password
             })
             .then(({ data }) => {
                 if (data.success) {
-                    location.replace("/");
+                    location.replace("/login");
                 } else {
                     this.setState({
                         error: true
@@ -33,7 +33,7 @@ export class Registration extends React.Component {
     }
     render() {
         return (
-                <div className="registration_form">
+                <div className="registration-form">
                     <input
                         name="first"
                         type="text"
@@ -56,14 +56,14 @@ export class Registration extends React.Component {
                         onChange={e => this.handleChange(e)}
                     />
                     <input
-                        name="pass"
+                        name="password"
                         type="password"
                         placeholder="password"
                         required
                         onChange={e => this.handleChange(e)}
                     />
                     <button
-                        className="registration_form_button"
+                        className="registration-form-button"
                         onClick={e => this.submit(e)}
                     >
                         {" "}

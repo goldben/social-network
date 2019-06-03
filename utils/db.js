@@ -1,5 +1,5 @@
 const spicedPg = require("spiced-pg");
-const dburl = process.env.DATABASE_URL || "postgres:postgres:postgres@localhost:5432/petition"
+const dburl = process.env.DATABASE_URL || "postgres:postgres:postgres@localhost:5432/socialnetwork"
 var db = spicedPg(dburl);
 
 ////////////7////////store functions/////////////////////////////////
