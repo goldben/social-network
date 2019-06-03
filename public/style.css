@@ -1,0 +1,29 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: url(//subtlepatterns.com/patterns/scribble_light.png);
+  font-family: Calluna, Arial, sans-serif;
+  min-height: 1000px;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: row;
+}
+/*--------------------Registration-------------------------- */
+.registration_form {
+	padding: 100px 0 0 100px ;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+input, select, textarea, button {
+	width: 80%;
+	height: 50px
+
+
+
+}

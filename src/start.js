@@ -7,7 +7,7 @@ let elem;
 if (location.pathname == '/welcome') {
     elem = <Welcome />
 } else {
-    elem = <img src="logo.gif" />
+    elem = <img src="img/logo.jpg" alt='jvjh' />
 }
 
 ReactDOM.render(
