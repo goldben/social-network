@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-export class login extends React.Component {
+
+export class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -61,7 +63,7 @@ export class login extends React.Component {
                         </div>
                     )}
                     <p>
-                        Not yet a member? <a href="/register"> Register </a>
+                        Not yet a member?  <Link to="/"> Register </Link>
                     </p>
                 </div>
         );

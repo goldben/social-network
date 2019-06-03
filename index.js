@@ -51,9 +51,8 @@ app.use(function(req, res, next){
 app.use(express.static('./public'));
 
 ////////////////////////////////////////////////////////////////////////////////
-app.get("/", (req, res) => {
-	res.redirect("/welcome")
-});
+
+
 
 
 
@@ -86,10 +85,39 @@ app.post("/register", (req, res) => {
 		});
 });
 
+app.post("/login", (req, res) => {
+	console.log("post login hit");
 
+	db.getUserDataByEmail(req.body.email).then(results => {
+		const user = results.rows[0];
+
+		bc.checkPassword(req.body.password, user.password)
+			.then(validPassword => {
+				if (validPassword) {
+					console.log("*******correct password******");
+
+					req.session.userId = user.id;
+					res.json({
+						success: true,
+						userId: user.id
+					});
+				} else {
+					//wrong password
+					req.session.error = "wrong password";
+					res.redirect("/login");
+				}
+			}).then(results => {
+				console.log("req.session  = ", req.session);
+				res.redirect("/logedin");
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	});
+});
 ////////////////////////////////////////////////////////////////////////////////
 app.get('*', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
+        res.sendFile(__dirname + '/index.html');
 });
 
 app.listen(8080, function() {

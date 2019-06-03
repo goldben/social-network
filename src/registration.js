@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export class Registration extends React.Component {
     constructor(props) {
@@ -75,7 +76,7 @@ export class Registration extends React.Component {
                         </div>
                     )}
                     <p>
-                        Already a member? <a href="#"> Login </a>
+                        Already a member? <Link to="/login"> Login </Link>
                     </p>
                 </div>
         );
