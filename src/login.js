@@ -8,23 +8,25 @@ export class Login extends React.Component {
         super(props);
         this.state = {};
     }
-    handleChange({ target }) {
+	handleChange({ target }) {
         console.log("target name: ", target.name);
         console.log("target value: ", target.value);
         this[target.name] = target.value;
     }
     submit() {
         console.log("post login,", this.email);
+		console.log("post login,", this.password);
+
         const that = this;
         axios
             .post("/login", {
 
                 email: that.email,
-                pass: that.pass
+                password: that.password
             })
             .then(({ data }) => {
                 if (data.success) {
-                    location.replace("/");
+                    location.replace("/site");
                 } else {
                     this.setState({
                         error: true
@@ -34,8 +36,7 @@ export class Login extends React.Component {
     }
     render() {
         return (
-                <div className="registration_form">
-
+                <div className="login-form">
                     <input
                         name="email"
                         type="email"
@@ -44,14 +45,14 @@ export class Login extends React.Component {
                         onChange={e => this.handleChange(e)}
                     />
                     <input
-                        name="pass"
+                        name="password"
                         type="password"
                         placeholder="password"
                         required
                         onChange={e => this.handleChange(e)}
                     />
                     <button
-                        className="registration_form_button"
+                        className="login-form-btn"
                         onClick={e => this.submit(e)}
                     >
                         {" "}

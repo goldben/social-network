@@ -87,8 +87,11 @@ app.post("/register", (req, res) => {
 
 app.post("/login", (req, res) => {
 	console.log("post login hit");
+	console.log("req.body: ", req.body);
 
 	db.getUserDataByEmail(req.body.email).then(results => {
+		console.log("password from table:", results.rows[0].password);
+		console.log("password from form: ", req.body.password);
 		const user = results.rows[0];
 
 		bc.checkPassword(req.body.password, user.password)
@@ -108,13 +111,20 @@ app.post("/login", (req, res) => {
 				}
 			}).then(results => {
 				console.log("req.session  = ", req.session);
-				res.redirect("/logedin");
 			})
 			.catch(err => {
 				console.log(err);
 			});
 	});
 });
+
+//////////////////////////////////Logout////////////////////////////////////////
+
+app.get("/logout", (req, res) => {
+	req.session = null;
+	res.redirect("/#/login");
+});
+
 ////////////////////////////////////////////////////////////////////////////////
 app.get('*', function(req, res) {
         res.sendFile(__dirname + '/index.html');

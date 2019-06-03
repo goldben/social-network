@@ -24,7 +24,7 @@ export class Registration extends React.Component {
             })
             .then(({ data }) => {
                 if (data.success) {
-                    location.replace("/login");
+                    location.replace("/site");
                 } else {
                     this.setState({
                         error: true
@@ -64,7 +64,7 @@ export class Registration extends React.Component {
                         onChange={e => this.handleChange(e)}
                     />
                     <button
-                        className="registration-form-button"
+                        className="registration-form-btn"
                         onClick={e => this.submit(e)}
                     >
                         {" "}
