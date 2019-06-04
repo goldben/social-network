@@ -5,7 +5,7 @@ import { Login } from './login';
 
 export function Welcome() {
     return (
-        <div className="wrapper">
+        <div className="welcome-wrapper">
 		<div>
             <h1 className="title">Welcome to BrainDead</h1>
             <img className="welcome-image" src="/img/logo.jpg" />

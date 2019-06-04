@@ -11,6 +11,7 @@ export function ProfilePic({ imageUrl, first, last, clickHandler }) {
             onClick={clickHandler}
         />
 		<p>hallo {first}</p>
+		<p>change profile image</p>
 		</div>
     );
 }

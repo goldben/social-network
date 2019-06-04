@@ -28,6 +28,7 @@ export class Uploader extends React.Component {
     }
     render() {
         return (
+			<div className="uploader">
 			<form>
 			<input type="file"
 			name="file"
@@ -43,11 +44,9 @@ export class Uploader extends React.Component {
 						{this.state.error}
 					</div>
 				)}
-				<p>
-					upload profile photo
-				</p>
-			</form>
 
+			</form>
+			</div>
         );
     }
 }

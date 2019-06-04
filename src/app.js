@@ -25,15 +25,30 @@ export class App extends React.Component {
             return <img src="/img/spinner.gif"/>;
         }
         return (
-            <div>
+
+            <div className="wrapper">
+			<header>
+				<img src="logo.jpg" />
+				<input name="search" type="text"/>
+				<h3>whatever</h3>
+			</header>
+			<div className="cover-photo-container">
+
                 <ProfilePic
                     imageUrl={this.state.imageUrl}
                     first={this.state.first}
                     clickHandler={e => this.setState({ uploaderVisible: true })}
                 />
-                {this.state.uploaderVisible && <Uploader />}
-				<img src="/img/logo.jpg" />
+                {this.state.uploaderVisible && <Uploader
+				/>}
+				</div>
+				<div className="container">
+					<div className="bio">
+					<p>sjlkvnasdökjvnsaökjfvnfslkjnfdkjlvndfjlkdbvl</p>
+					</div>
+					<img src="/img/logo.jpg" />
 
+				</div>
             </div>
         )
     }
