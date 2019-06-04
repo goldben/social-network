@@ -8,38 +8,42 @@ export class Registration extends React.Component {
         this.state = {};
     }
     handleChange({ target }) {
-        console.log("target name: ", target.name);
-        console.log("target value: ", target.value);
-        this[target.name] = target.value;
+    //    console.log("target name: ", target.name);
+    //    console.log("target value: ", target.value);
+		this.setState({
+			[target.name]: target.value
+		});
     }
-    submit() {
+	submit(e) {
+		e.preventDefault();
         console.log("post register, first", this.first);
         const that = this;
         axios
             .post("/register", {
-                first: that.first,
-                last: that.last,
-                email: that.email,
-                password: that.password
+                first: that.state.first,
+                last: that.state.last,
+                email: that.state.email,
+                password: that.state.password
             })
             .then(({ data }) => {
                 if (data.success) {
                     location.replace("/site");
                 } else {
                     this.setState({
-                        error: true
+                        error: data.error,
+
                     });
                 }
             });
     }
     render() {
         return (
-                <div className="registration-form">
+                <form onSubmit={e => this.submit(e)} className="registration-form">
                     <input
                         name="first"
                         type="text"
                         placeholder="first name"
-                        required
+						required
                         onChange={e => this.handleChange(e)}
                     />
                     <input
@@ -63,22 +67,26 @@ export class Registration extends React.Component {
                         required
                         onChange={e => this.handleChange(e)}
                     />
-                    <button
+                    <button disabled={!this.state.first}
                         className="registration-form-btn"
+						type="submit"
                         onClick={e => this.submit(e)}
                     >
                         {" "}
                         register
                     </button>
+
                     {this.state.error && (
-                        <div className="error">
-                        	Error, please try again.
+                        <div className="error-message">
+                        	{this.state.error}
                         </div>
                     )}
+
+
                     <p>
                         Already a member? <Link to="/login"> Login </Link>
                     </p>
-                </div>
+                </form>
         );
     }
 }

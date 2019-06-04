@@ -23,7 +23,16 @@ body {
 input, select, textarea, button {
 	width: 80%;
 	height: 50px
+}
 
+.error-message {
+	padding:10px;
+}
 
-
+button:disabled {
+	color: red;
+}
+.profile-img {
+	width: 100px;
+	float: right;
 }

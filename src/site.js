@@ -4,13 +4,12 @@ import React from 'react';
 export function Site() {
     return (
         <div className="wrapper">
-		<div>
+		<header>
             <h1 className="title">Discover BrainDead</h1>
-			
-		</div>
+
+		</header>
 		<img className="welcome-image" src="/img/logo.jpg" />
 
-		<img className="welcome-image" src="/img/logo.jpg" />
         </div>
     );
 }

@@ -6,14 +6,19 @@ import { Link } from "react-router-dom";
 export class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+			email: ''
+		};
     }
 	handleChange({ target }) {
-        console.log("target name: ", target.name);
-        console.log("target value: ", target.value);
-        this[target.name] = target.value;
+        // console.log("target name: ", target.name);
+        // console.log("target value: ", target.value);
+        this.setState({
+			[target.name]: target.value
+		})
     }
-    submit() {
+    submit(e) {
+		e.preventDefault();
         console.log("post login,", this.email);
 		console.log("post login,", this.password);
 
@@ -21,52 +26,52 @@ export class Login extends React.Component {
         axios
             .post("/login", {
 
-                email: that.email,
-                password: that.password
+                email: that.state.email,
+                password: that.state.password
             })
             .then(({ data }) => {
                 if (data.success) {
                     location.replace("/site");
                 } else {
                     this.setState({
-                        error: true
+                        error: data.error
                     });
                 }
             });
     }
     render() {
         return (
-                <div className="login-form">
+                <form onSubmit={e => this.submit(e)} className="login-form">
                     <input
                         name="email"
                         type="email"
                         placeholder="email"
-                        required
+						required
                         onChange={e => this.handleChange(e)}
                     />
                     <input
                         name="password"
                         type="password"
                         placeholder="password"
-                        required
+						required
                         onChange={e => this.handleChange(e)}
                     />
-                    <button
+                    <button disabled={!this.state.email}
                         className="login-form-btn"
-                        onClick={e => this.submit(e)}
+                        type="submit"
                     >
                         {" "}
                         Login
                     </button>
                     {this.state.error && (
-                        <div className="error">
-                        	Error, please try again.
+                        <div className="error-message">
+                        	{this.state.error}
                         </div>
                     )}
                     <p>
                         Not yet a member?  <Link to="/"> Register </Link>
                     </p>
-                </div>
+                </form>
         );
     }
 }

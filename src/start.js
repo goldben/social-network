@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Welcome} from './welcome';
-import {Site} from './site';
-
+import {App} from './app';
 
 let elem;
 
-if (location.pathname == '/') {
+
+if (location.pathname == '/welcome') {
     elem = <Welcome />
-} else if (location.pathname == '/site') {
-    elem = <Site />
 } else {
-    elem = <img src="img/logo.jpg" alt='jvjh' />
+    elem = <App />
 }
 
 ReactDOM.render(
