@@ -205,6 +205,30 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 		});
 	}
 });
+////////////////////////////////// EDIT BIO ////////////////////////////////////////
+
+
+app.post("/edit-bio", (req, res) => {
+	console.log("*******edit bio*****");
+	console.log(req.body);
+
+	if (req.body.bio) {
+		let bio = req.body.bio;
+		let id = req.session.userId;
+		db.updateBio(id, bio).then((results) => {
+				console.log(results);
+				res.json(results.rows[0]);
+			})
+			.catch(e => {
+				console.log('error at /uplaod', e);
+			});
+	} else {
+		res.json({
+			success: false
+		});
+	}
+});
+
 //////////////////////////////////Logout////////////////////////////////////////
 
 app.get("/logout", (req, res) => {

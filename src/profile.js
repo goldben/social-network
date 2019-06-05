@@ -9,19 +9,18 @@ export class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-			editorVisible: false
+			editorVisible: false,
         };
 
 
-		}
+	}
 
 
     componentDidMount() {
 
     }
     render() {
-		console.log(this.props);
-		console.log("showup in profile", this.props.showUploader);
+		
         return (
 
             <div className="profile-container">
@@ -40,27 +39,11 @@ export class Profile extends React.Component {
 				<div className="bio-container">
 					<Bio
 					bio={this.props.bio}
-                    first={this.props.first}
-					last={this.props.last}
-                    clickHandler={e => this.setState({ editorVisible: true })}
-                />
-                {this.state.editorVisible &&
-					<div className="bio-editor">
-					<textarea
-					className="bio"
-					>
-						your bio goes here
-					</textarea>
+					updateBio={this.props.updateBio}
+					editorVisible={this.state.editorVisible}
 
-					<button
-                        className="login-form-btn"
-                        type="submit"
-                    >
-                        {" "}
-                        save
-                    </button>
-					</div>}
-				</div>
+                />
+                </div>
 
 				</div>
         )

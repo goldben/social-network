@@ -10,7 +10,7 @@ export class App extends React.Component {
         this.state = {
             uploaderVisible: false
         };
-        this.edited = this.edited.bind(this);
+        this.updateBio = this.updateBio.bind(this);
         this.uploaded = this.uploaded.bind(this);
 		this.showUploader = this.showUploader.bind(this);
 
@@ -22,9 +22,9 @@ export class App extends React.Component {
             uploaderVisible: false
         });
     }
-    edited(bio) {
+    updateBio(newText) {
         this.setState({
-            bio: bio
+            bio: newText
         });
     }
 	showUploader() {
@@ -59,7 +59,9 @@ export class App extends React.Component {
 					imageUrl={this.state.imageUrl}
                     first={this.state.first}
 					last={this.state.last}
+					bio={this.state.bio}
 					showUploader={this.showUploader}
+					updateBio={this.updateBio}
 				 />
                 {this.state.uploaderVisible && <Uploader />}
             </div>

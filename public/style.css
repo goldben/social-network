@@ -37,6 +37,8 @@ button:disabled {
 
 .profile-container {
 	margin: 0 20% 0;
+	border: solid grey 1px;
+	height: 100vh;
 }
 header {
 	background:  #2A5491;
