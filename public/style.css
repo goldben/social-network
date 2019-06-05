@@ -35,8 +35,8 @@ button:disabled {
 	color: red;
 }
 
-.wrapper {
-
+.profile-container {
+	margin: 0 20% 0;
 }
 header {
 	background:  #2A5491;
@@ -49,13 +49,13 @@ header {
 }
 
 header input {
-	width:100px;
+	width:200px;
 	height:30px;
 }
 .cover-photo-container {
 	background-image: url("https://images.unsplash.com/photo-1557474295-714ea5fc2557?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1075&q=80");
 	height: 200px;
-	margin: 0 20% 0;
+	width: 100%;
 	border: solid grey 1px;
 
 }

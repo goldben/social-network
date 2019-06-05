@@ -23,12 +23,17 @@ export class Uploader extends React.Component {
 	   	axios.
         	post("/upload", data)
             .then(res => {
+				this.props.uploaded(res.data.imageurl);
                  console.log(res.statusText)
-        });
+        }).catch(e => {
+			console.log("upload photo", e);
+		})
     }
     render() {
         return (
 			<div className="uploader">
+			<p>change profile image</p>
+
 			<form>
 			<input type="file"
 			name="file"

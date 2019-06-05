@@ -1,17 +1,16 @@
 import React from "react";
 
-export function ProfilePic({ imageUrl, first, last, clickHandler }) {
+export function ProfilePic({ showUploader, imageUrl, first, last }) {
     imageUrl = imageUrl || "/img/default.png";
+	console.log("url in profilepic", imageUrl);
     return (
 		<div className="user-page">
         <img
             src={imageUrl}
             className="profile-img"
             alt={`${first} ${last}`}
-            onClick={clickHandler}
+            onClick={showUploader}
         />
-		<p>hallo {first}</p>
-		<p>change profile image</p>
 		</div>
     );
 }

@@ -1,8 +1,8 @@
-import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
-import axios from './axios';
-import {ProfilePic} from './profilepic';
-import {Uploader} from './uploader';
+import React from "react";
+import { HashRouter, Route } from "react-router-dom";
+import axios from "./axios";
+import { Profile } from "./profile";
+import { Uploader} from "./uploader";
 
 export class App extends React.Component {
     constructor(props) {
@@ -10,46 +10,59 @@ export class App extends React.Component {
         this.state = {
             uploaderVisible: false
         };
+        this.edited = this.edited.bind(this);
+        this.uploaded = this.uploaded.bind(this);
+		this.showUploader = this.showUploader.bind(this);
+
     }
+
+    uploaded(url) {
+        this.setState({
+            imageUrl: url,
+            uploaderVisible: false
+        });
+    }
+    edited(bio) {
+        this.setState({
+            bio: bio
+        });
+    }
+	showUploader() {
+		this.setState({
+			uploaderVisible: true
+		})
+
+	}
+
     componentDidMount() {
-        axios.get('/user').then(({ data }) => {
-			if (data.error) {
-				location.replace("/welcome");
-			} else {
-				this.setState(data);
-			}
-		});
+        axios.get("/user").then(({ data }) => {
+            if (data.error) {
+                location.replace("/welcome");
+            } else {
+                this.setState(data);
+            }
+        });
     }
+
     render() {
-        if (!this.state.id) {
+		if (!this.state.id) {
             return <img src="/img/spinner.gif"/>;
         }
         return (
-
-            <div className="wrapper">
-			<header>
-				<img src="logo.jpg" />
-				<input name="search" type="text"/>
-				<h3>whatever</h3>
-			</header>
-			<div className="cover-photo-container">
-
-                <ProfilePic
-                    imageUrl={this.state.imageUrl}
+            <div className="app-container">
+                <header>
+                    <img src="logo.jpg" />
+                    <input name="search" type="text" />
+                    <h3> whatever </h3>{" "}
+                </header>{" "}
+                <Profile
+					imageUrl={this.state.imageUrl}
                     first={this.state.first}
-                    clickHandler={e => this.setState({ uploaderVisible: true })}
-                />
-                {this.state.uploaderVisible && <Uploader
-				/>}
-				</div>
-				<div className="container">
-					<div className="bio">
-					<p>sjlkvnasdökjvnsaökjfvnfslkjnfdkjlvndfjlkdbvl</p>
-					</div>
-					<img src="/img/logo.jpg" />
-
-				</div>
+					last={this.state.last}
+					showUploader={this.showUploader}
+				 />
+                {this.state.uploaderVisible && <Uploader />}
             </div>
-        )
+        );
     }
 }
