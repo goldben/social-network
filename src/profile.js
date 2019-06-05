@@ -8,9 +8,8 @@ import {Bio} from './bio';
 export class Profile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-			editorVisible: false,
-        };
+
+		
 
 
 	}
@@ -20,7 +19,7 @@ export class Profile extends React.Component {
 
     }
     render() {
-		
+
         return (
 
             <div className="profile-container">
@@ -40,8 +39,8 @@ export class Profile extends React.Component {
 					<Bio
 					bio={this.props.bio}
 					updateBio={this.props.updateBio}
-					editorVisible={this.state.editorVisible}
-
+					showBioEditor={this.showBioEditor}
+					hideBioEditor={this.hideBioEditor}
                 />
                 </div>
 

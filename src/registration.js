@@ -72,7 +72,6 @@ export class Registration extends React.Component {
 						type="submit"
                         onClick={e => this.submit(e)}
                     >
-                        {" "}
                         register
                     </button>
 

@@ -32,6 +32,7 @@ export class Uploader extends React.Component {
     render() {
         return (
 			<div className="uploader">
+			<div className="x-uploader-btn" onClick={(this.props.hideUploader)}>x</div>
 			<p>change profile image</p>
 
 			<form>

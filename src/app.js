@@ -13,6 +13,7 @@ export class App extends React.Component {
         this.updateBio = this.updateBio.bind(this);
         this.uploaded = this.uploaded.bind(this);
 		this.showUploader = this.showUploader.bind(this);
+		this.hideUploader = this.hideUploader.bind(this);
 
     }
 
@@ -30,8 +31,13 @@ export class App extends React.Component {
 	showUploader() {
 		this.setState({
 			uploaderVisible: true
-		})
+		});
 
+	}
+	hideUploader() {
+		this.setState({
+			uploaderVisible: false
+		});
 	}
 
     componentDidMount() {
@@ -53,8 +59,8 @@ export class App extends React.Component {
                 <header>
                     <img src="logo.jpg" />
                     <input name="search" type="text" />
-                    <h3> whatever </h3>{" "}
-                </header>{" "}
+                    <h3> whatever </h3>
+                </header>
                 <Profile
 					imageUrl={this.state.imageUrl}
                     first={this.state.first}
@@ -63,7 +69,9 @@ export class App extends React.Component {
 					showUploader={this.showUploader}
 					updateBio={this.updateBio}
 				 />
-                {this.state.uploaderVisible && <Uploader />}
+                {this.state.uploaderVisible && <Uploader
+					hideUploader={this.hideUploader}
+					/>}
             </div>
         );
     }

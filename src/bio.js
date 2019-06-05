@@ -4,9 +4,11 @@ import axios from "./axios";
 export class Bio extends React.Component{
 	constructor(props) {
         super(props);
-        this.state = {
-
-		};
+		this.state = {
+			editorVisible: false
+        };
+		this.showBioEditor = this.showBioEditor.bind(this);
+		this.hideBioEditor = this.hideBioEditor.bind(this);
     }
 	handleChange({ target }) {
 		 console.log("name: ", target.name);
@@ -36,20 +38,32 @@ export class Bio extends React.Component{
 				}
 			});
 	}
+	showBioEditor() {
+		this.setState({
+			editorVisible: true
+		})
 
+	}
+	hideBioEditor(e) {
+		e.stopPropagation()
+		console.log("dfjkhslfkjnskjf");
+		this.setState({
+			editorVisible: false
+		});
+	}
 
 	render() {
 		var bio = this.props.bio || "go on, write your bio";
 
     return (
 		<div className="bio"
-		onClick={e => this.setState({ editorVisible: true })}
-
->
-
+		onClick={this.showBioEditor}
+		>
 		<p>{bio}</p>
 		{this.state.editorVisible &&
 			<div className="bio-editor">
+			<div className="x-bio-editor-btn" onClick={this.hideBioEditor}>x</div>
+
 			<form onSubmit={e => this.submit(e)} className="bio-form">
 			<textarea
 			name="textarea"
@@ -62,7 +76,7 @@ export class Bio extends React.Component{
 				className="login-form-btn"
 				type="submit"
 			>
-				{" "}
+
 				save
 			</button>
 			</form>

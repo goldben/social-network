@@ -60,7 +60,6 @@ export class Login extends React.Component {
                         className="login-form-btn"
                         type="submit"
                     >
-                        {" "}
                         Login
                     </button>
                     {this.state.error && (
