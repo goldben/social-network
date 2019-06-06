@@ -8,8 +8,6 @@ export class Profile extends React.Component {
     constructor(props) {
         super(props);
     }
-
-    componentDidMount() {}
     render() {
         return (
             <div className="profile-container">

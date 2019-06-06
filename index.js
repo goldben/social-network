@@ -11,26 +11,25 @@ const bc = require("./utils/bc");
 const multer = require(`multer`);
 const uidSafe = require(`uid-safe`);
 const path = require(`path`);
-const s3 = require('./s3');
+const s3 = require("./s3");
 const amazonUrl = require(`./config`).s3Url;
 
-
 const diskStorage = multer.diskStorage({
-	destination: function(req, file, callback) {
-		callback(null, __dirname + '/uploads');
-	},
-	filename: function(req, file, callback) {
-		uidSafe(24).then(function(uid) {
-			callback(null, uid + path.extname(file.originalname));
-		});
-	}
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
 });
 
 const uploader = multer({
-	storage: diskStorage,
-	limits: {
-		fileSize: 2097152
-	}
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
 });
 app.use(bodyParser.json());
 app.use(express.static("./public"));
@@ -75,37 +74,37 @@ app.use(express.static("./public"));
 
 ///////////////////////////////// APP GET USER//////////////////////////////////
 app.get("/user", (req, res) => {
-	console.log("*******GET /USER*******");
-	console.log("get user: ", req.session);
+    console.log("*******GET /USER*******");
+    console.log("get user: ", req.session);
 
-	if(!req.session.userId) {
-		console.log("redirect to welcome");
-		res.redirect("/welcome");
-
-	}
-	else {
-	db.getUserDataById(req.session.userId).then(results => {
-		const userData = results.rows[0];
-		console.log("got user data: ", userData);
-		res.json({
-			id: userData.id,
-			first: userData.first,
-			last: userData.last,
-			bio: userData.bio,
-			imageUrl: userData.imgurl,
-			success: true
-		});
-	}).catch(err =>{
-		console.log("GET USER DATA", err);
-	});
-}
+    if (!req.session.userId) {
+        console.log("redirect to welcome");
+        res.redirect("/welcome");
+    } else {
+        db.getUserDataById(req.session.userId)
+            .then(results => {
+                const userData = results.rows[0];
+                console.log("got user data: ", userData);
+                res.json({
+                    id: userData.id,
+                    first: userData.first,
+                    last: userData.last,
+                    bio: userData.bio,
+                    imageUrl: userData.imgurl,
+                    success: true
+                });
+            })
+            .catch(err => {
+                console.log("GET USER DATA", err);
+            });
+    }
 });
 
 /////////////////////////////////////Post//////////////////////////////////////
 
 app.post("/register", (req, res) => {
     console.log("*******POST REGISTER*******");
-	console.log(req.body.email);
+    console.log(req.body.email);
     const first = req.body.first;
     const last = req.body.last;
     const email = req.body.email;
@@ -151,10 +150,10 @@ app.post("/login", (req, res) => {
     }
     db.getUserDataByEmail(req.body.email)
         .then(results => {
-            		console.log("password from table:", results.rows[0].password);
-            		console.log("password from form: ", req.body.password);
+            console.log("password from table:", results.rows[0].password);
+            console.log("password from form: ", req.body.password);
             const user = results.rows[0];
-			console.log("get user data by id ", user);
+            console.log("get user data by id ", user);
             bc.checkPassword(req.body.password, user.password)
                 .then(validPassword => {
                     if (validPassword) {
@@ -182,57 +181,61 @@ app.post("/login", (req, res) => {
 //////////////////////////////////POST Uploader777777777777777777777777777777///
 
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
-	console.log(req.body);
-	// If nothing went wrong the file is already in the uploads directory
-	// req.file will refer to the image that was just uploaded
-	console.log('req.file: ', req.file);
-	// So what we want to store in the images table is the amazonaws URL + the filename.
-	let url = `${amazonUrl}${req.file.filename}`;
-	console.log(url);
+    console.log(req.body);
+    // If nothing went wrong the file is already in the uploads directory
+    // req.file will refer to the image that was just uploaded
+    console.log("req.file: ", req.file);
+    // So what we want to store in the images table is the amazonaws URL + the filename.
+    var url = `${amazonUrl}${req.file.filename}`;
 
-	if (req.file) {
-		let id = req.session.userId;
-		db.uploadImg(id, url).then((results) => {
-				console.log(results);
-				res.json(results.rows[0]);
-			})
-			.catch(e => {
-				console.log('error at /uplaod', e);
-			});
-	} else {
-		res.json({
-			success: false
-		});
-	}
+    if (req.file) {
+        let id = req.session.userId;
+        db.uploadImg(id, url)
+            .then(results => {
+                console.log(results);
+                console.log("uploaded successfuly. image url: ", url);
+                res.json({
+                    imageUrl: url,
+                    success: true
+                });
+            })
+            .catch(e => {
+                console.log("error at /uplaod", e);
+            });
+    } else {
+        res.json({
+            success: false
+        });
+    }
 });
 ////////////////////////////////// EDIT BIO ////////////////////////////////////////
 
-
 app.post("/edit-bio", (req, res) => {
-	console.log("*******edit bio*****");
-	console.log(req.body);
+    console.log("*******edit bio*****");
+    console.log(req.body);
 
-	if (req.body.bio) {
-		let bio = req.body.bio;
-		let id = req.session.userId;
-		db.updateBio(id, bio).then((results) => {
-				console.log(results);
-				res.json(results.rows[0]);
-			})
-			.catch(e => {
-				console.log('error at /uplaod', e);
-			});
-	} else {
-		res.json({
-			success: false
-		});
-	}
+    if (req.body.bio) {
+        let bio = req.body.bio;
+        let id = req.session.userId;
+        db.updateBio(id, bio)
+            .then(results => {
+                console.log(results);
+                res.json(results.rows[0]);
+            })
+            .catch(e => {
+                console.log("error at /uplaod", e);
+            });
+    } else {
+        res.json({
+            success: false
+        });
+    }
 });
 
 //////////////////////////////////Logout////////////////////////////////////////
 
 app.get("/logout", (req, res) => {
-	console.log("*******LOG OUT*******");
+    console.log("*******LOG OUT*******");
     req.session = null;
     res.redirect("/welcome");
 });

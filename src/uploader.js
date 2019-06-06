@@ -18,13 +18,14 @@ export class Uploader extends React.Component {
 	    })
 	}
     submit(e) {
-		const data = new FormData()
-	   	data.append('file', this.state.selectedFile)
+		const data = new FormData();
+	   	data.append('file', this.state.selectedFile);
 	   	axios.
         	post("/upload", data)
             .then(res => {
-				this.props.uploaded(res.data.imageurl);
-                 console.log(res.statusText)
+				console.log("res.data in uploader", res.data);
+				this.props.hideUploader;
+				this.props.uploaded(res.data.imageUrl);
         }).catch(e => {
 			console.log("upload photo", e);
 		})
