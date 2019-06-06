@@ -104,14 +104,19 @@ app.get("/user", (req, res) => {
 
 app.get("/otheruser/:id", (req, res) => {
     console.log("*******GET /OTHER-USER*******");
-
-        db.getUserDataById(req.params.id)
+	const id = req.params.id;
+	if(id == req.session.userId){
+		console.log("request for same users");
+		res.json({success: false})
+	} else {
+        db.getUserDataById(id)
             .then(results => {
                 res.json(results.rows[0]);
             })
             .catch(err => {
                 console.log("GET OTHER USER DATA", err);
             });
+		}
     });
 
 /////////////////////////////////////Post//////////////////////////////////////

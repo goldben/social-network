@@ -1,5 +1,7 @@
 * {
 	box-sizing: border-box;
+	margin: 0;
+padding: 0;
 }
 
 body {
@@ -34,45 +36,110 @@ input, select, textarea, button {
 button:disabled {
 	color: red;
 }
+/*--------------------------------------------------------------------------- */
 
+/*--------------------header-------------------------- */
+
+header {
+	background:  #2A5491;
+	height: 40px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 15%;
+	padding-right: 15%;
+}
+.logo {
+	width: 30px;
+	height: 30px;
+}
+
+.search-users input {
+	width: 30%;
+	margin: 0 20px;
+	width:100%;
+	height:20px;
+
+}
+
+.nav-bar-1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 100%;
+}
+
+.nav-bar-1 .nav-btn {
+	color: white;
+	width: 70px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	border-right: 1px dashed grey;
+
+}
+
+.nav-btn img {
+	position: relative;
+	height: 30px;
+	width:30px;
+	border-radius: 100%;
+}
+.nav-btn p {
+	position: relative;
+	top: 0;
+	width:30px;
+	margin:  0 10px;
+}
+
+.nav-bar-2 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 100%;
+}
+
+.nav-bar-2 .nav-btn {
+	color: white;
+	width: 70px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	border-right: 1px dashed grey;
+
+}
+/*---------------------------------profile---------------------------------- */
 .profile-container {
 	margin: 0 20% 0;
 	border: solid  #D4DCE9 1px;
 	height: 100vh;
 }
-header {
-	background:  #2A5491;
-	height: 50px;
-	padding: 10px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-.nav-bar {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	margin: 0 20% 0 20%;
-}
+			
+/*--------------------profile pic-------------------------- */
 
-.search-users {
-	width: 30%;
-	margin: 0 20px;
-}
-.search-users input {
-	width:100%;
-	height:30px;
+.profile-top {
+	margin-bottom: 10px;
 }
 
 .cover-photo-container {
 	background-image: url("https://images.unsplash.com/photo-1557502706-5a0e03129173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1009&q=80");
-	height: 200px;
+	height: 300px;
 	width: 100%;
 	border: solid  #D4DCE9 1px;
-	margin: 20px;
+	color: white;
 }
+
+.cover-photo-container h1{
+	position: relative;
+	bottom: -85px;
+	left: 210px;
+}
+
 .profile-img {
 	background-color: #fff;
 	border-radius: 2px;
@@ -83,24 +150,22 @@ header {
 	border: 4px solid #fff;
 	border-radius: 100%;
 	display: block;
-	top: 60px;
+	bottom:-170px ;
 	left: 30px;
+
+	z-index: 100;
 }
 .profile-img::after {
-
+top: -100%;
 }
 
 .profile-img:hover {
 
 
 }
-.face-icon {
-	height: 40px;
-	width:40px;
-	border-radius: 100%;
-	margin-bottom: 10px;
-}
 .timeline-nav-top {
+	position: relative;
+	bottom: ;
 	display: flex;
 	flex-direction: row;
 	background-color: white;

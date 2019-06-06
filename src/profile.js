@@ -11,17 +11,18 @@ export class Profile extends React.Component {
     render() {
         return (
             <div className="profile-container">
-                <div className="cover-photo-container">
-                    <ProfilePic
-                        imageUrl={this.props.imageUrl}
-                        first={this.props.first}
-                        last={this.props.last}
-                        showUploader={this.props.showUploader}
-                    />
-					<div className="timeline-nav-top">
-					</div>
+                <div className="profile-top">
+                    <div className="cover-photo-container">
+                        <ProfilePic
+                            imageUrl={this.props.imageUrl}
+                            first={this.props.first}
+                            last={this.props.last}
+                            showUploader={this.props.showUploader}
+                        />	
+						<h1>{this.props.first} {this.props.last} {this.props.id}</h1>
+                    </div>
+                    <div className="timeline-nav-top" />
                 </div>
-
                 <div className="profile-bottom">
                     <div className="bio-container">
                         <Bio
