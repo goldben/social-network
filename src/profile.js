@@ -18,7 +18,7 @@ export class Profile extends React.Component {
                             first={this.props.first}
                             last={this.props.last}
                             showUploader={this.props.showUploader}
-                        />	
+                        />
 						<h1>{this.props.first} {this.props.last} {this.props.id}</h1>
                     </div>
                     <div className="timeline-nav-top" />
@@ -30,7 +30,7 @@ export class Profile extends React.Component {
                             updateBio={this.props.updateBio}
                         />
                     </div>
-                    <div className="posts-container">
+                    <div className="posts-container">	
                         <h1>posts</h1>
                     </div>
                 </div>
