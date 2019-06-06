@@ -18,6 +18,8 @@ export class Profile extends React.Component {
                         last={this.props.last}
                         showUploader={this.props.showUploader}
                     />
+					<div className="timeline-nav-top">
+					</div>
                 </div>
 
                 <div className="profile-bottom">

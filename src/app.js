@@ -1,7 +1,9 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import { Link} from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
+import { OtherProfile } from "./other-profile";
 import { Uploader} from "./uploader";
 
 export class App extends React.Component {
@@ -57,22 +59,39 @@ export class App extends React.Component {
         return (
             <div className="app-container">
                 <header>
+					<div className="nav-bar">
                     <img src="logo.jpg" />
-                    <input name="search" type="text" />
+					<span className="search-users">
+					<input name="search" type="text" />
+					</span>
                     <h3> whatever </h3>
+					<img src={this.state.imageUrl} className="face-icon" />
+					</div>
                 </header>
-                <Profile
-					imageUrl={this.state.imageUrl}
-                    first={this.state.first}
-					last={this.state.last}
-					bio={this.state.bio}
-					showUploader={this.showUploader}
-					updateBio={this.updateBio}
-				 />
                 {this.state.uploaderVisible && <Uploader
 					uploaded={this.uploaded}
 					hideUploader={this.hideUploader}
 					/>}
+
+					<BrowserRouter>
+				    <div>
+				        <Route
+				            exact
+				            path="/"
+				            render={() => (
+								<Profile
+									imageUrl={this.state.imageUrl}
+				                    first={this.state.first}
+									last={this.state.last}
+									bio={this.state.bio}
+									showUploader={this.showUploader}
+									updateBio={this.updateBio}
+								 />
+				            )}
+				        />
+				        <Route path="/user/:id" component={OtherProfile} />
+				    </div>
+				</BrowserRouter>
             </div>
         );
     }

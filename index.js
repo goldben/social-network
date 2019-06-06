@@ -100,6 +100,20 @@ app.get("/user", (req, res) => {
     }
 });
 
+///////////////////////////////// APP GET OTHER USER//////////////////////////////////
+
+app.get("/otheruser/:id", (req, res) => {
+    console.log("*******GET /OTHER-USER*******");
+
+        db.getUserDataById(req.params.id)
+            .then(results => {
+                res.json(results.rows[0]);
+            })
+            .catch(err => {
+                console.log("GET OTHER USER DATA", err);
+            });
+    });
+
 /////////////////////////////////////Post//////////////////////////////////////
 
 app.post("/register", (req, res) => {
