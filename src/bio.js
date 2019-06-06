@@ -19,24 +19,18 @@ export class Bio extends React.Component{
 	}
 	submit(e) {
 		e.preventDefault();
-		console.log("new bio,", this.state.newBio);
-
-		const that = this;
 		axios
 			.post("/edit-bio", {
 
-				bio: that.state.newBio
+				bio: this.state.newBio
 			})
-			.then(({ data }) => {
-				if (data.bio) {
-					that.props.updateBio(data.BIO);
-					this.props.editorVisible = false;
-				} else {
-					this.setState({
-						error: data.error
-					});
-				}
-			});
+			.then(() => {
+
+					console.log("hide");
+					this.hideBioEditor();
+					this.props.updateBio(this.state.newBio);
+
+				});
 	}
 	showBioEditor() {
 		this.setState({
@@ -45,8 +39,7 @@ export class Bio extends React.Component{
 
 	}
 	hideBioEditor(e) {
-		e.stopPropagation()
-		console.log("dfjkhslfkjnskjf");
+
 		this.setState({
 			editorVisible: false
 		});
@@ -59,17 +52,18 @@ export class Bio extends React.Component{
 		<div className="bio"
 		onClick={this.showBioEditor}
 		>
+		<h3>my bio</h3>
 		<p>{bio}</p>
 		{this.state.editorVisible &&
 			<div className="bio-editor">
 			<div className="x-bio-editor-btn" onClick={this.hideBioEditor}>x</div>
-
 			<form onSubmit={e => this.submit(e)} className="bio-form">
-			<textarea
+			<textarea rows="10" cols="20"
 			name="textarea"
 			onChange={e => this.handleChange(e)}
+			defaultValue={this.props.bio}
+
 			>
-				{this.props.bio}
 			</textarea>
 
 			<button

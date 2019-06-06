@@ -70,6 +70,7 @@ export class App extends React.Component {
 					updateBio={this.updateBio}
 				 />
                 {this.state.uploaderVisible && <Uploader
+					uploaded={this.uploaded}
 					hideUploader={this.hideUploader}
 					/>}
             </div>

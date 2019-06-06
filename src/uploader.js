@@ -30,9 +30,10 @@ export class Uploader extends React.Component {
 		})
     }
     render() {
+		console.log("props in uploader", this.props);
         return (
 			<div className="uploader">
-			<div className="x-uploader-btn" onClick={(this.props.hideUploader)}>x</div>
+			<div className="x-uploader-btn" onClick={(this.props.hideUploader)}>X</div>
 			<p>change profile image</p>
 
 			<form>
@@ -44,13 +45,6 @@ export class Uploader extends React.Component {
 				className="upload-btn"
 				onClick={(e=> this.submit(e))}>Upload
 				</button>
-
-				{this.state.error && (
-					<div className="error-message">
-						{this.state.error}
-					</div>
-				)}
-
 			</form>
 			</div>
         );
