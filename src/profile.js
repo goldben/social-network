@@ -19,18 +19,18 @@ export class Profile extends React.Component {
                             last={this.props.last}
                             showUploader={this.props.showUploader}
                         />
-						<h1>{this.props.first} {this.props.last} {this.props.id}</h1>
+                        <h1>
+                            {this.props.first} {this.props.last} {this.props.id}
+                        </h1>
                     </div>
                     <div className="timeline-nav-top" />
                 </div>
                 <div className="profile-bottom">
-                    <div className="bio-container">
-                        <Bio
-                            bio={this.props.bio}
-                            updateBio={this.props.updateBio}
-                        />
-                    </div>
-                    <div className="posts-container">	
+                    <Bio
+                        bio={this.props.bio}
+                        updateBio={this.props.updateBio}
+                    />
+                    <div className="posts-container">
                         <h1>posts</h1>
                     </div>
                 </div>

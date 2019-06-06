@@ -8,84 +8,80 @@ export class Registration extends React.Component {
         this.state = {};
     }
     handleChange({ target }) {
-    //    console.log("target name: ", target.name);
-    //    console.log("target value: ", target.value);
-		this.setState({
-			[target.name]: target.value
-		});
+        //    console.log("target name: ", target.name);
+        //    console.log("target value: ", target.value);
+        this.setState({
+            [target.name]: target.value
+        });
     }
-	submit(e) {
-		e.preventDefault();
+    submit(e) {
+        e.preventDefault();
         console.log("post register, first", this.first);
-        const that = this;
         axios
             .post("/register", {
-                first: that.state.first,
-                last: that.state.last,
-                email: that.state.email,
-                password: that.state.password
+                first: this.state.first,
+                last: this.state.last,
+                email: this.state.email,
+                password: this.state.password
             })
             .then(({ data }) => {
                 if (data.success) {
-                    location.replace("/site");
+                    location.replace("/");
                 } else {
                     this.setState({
-                        error: data.error,
-
+                        error: data.error
                     });
                 }
             });
     }
     render() {
         return (
-                <form onSubmit={e => this.submit(e)} className="registration-form">
-                    <input
-                        name="first"
-                        type="text"
-                        placeholder="first name"
-						required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <input
-                        name="last"
-                        type="text"
-                        placeholder="last name"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="email"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="password"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <button disabled={!this.state.first}
-                        className="registration-form-btn"
-						type="submit"
-                        onClick={e => this.submit(e)}
-                    >
-                        register
-                    </button>
+            <form onSubmit={e => this.submit(e)} className="registration-form">
+                <input
+                    name="first"
+                    type="text"
+                    placeholder="first name"
+                    required
+                    onChange={e => this.handleChange(e)}
+                />
+                <input
+                    name="last"
+                    type="text"
+                    placeholder="last name"
+                    required
+                    onChange={e => this.handleChange(e)}
+                />
+                <input
+                    name="email"
+                    type="email"
+                    placeholder="email"
+                    required
+                    onChange={e => this.handleChange(e)}
+                />
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="password"
+                    required
+                    onChange={e => this.handleChange(e)}
+                />
+                <button
+                    disabled={!this.state.first}
+                    className="registration-form-btn"
+                    type="submit"
+                    onClick={e => this.submit(e)}
+                >
+                    register
+                </button>
 
-                    {this.state.error && (
-                        <div className="error-message">
-                        	{this.state.error}
-                        </div>
-                    )}
+                {this.state.error && (
+                    <div className="error-message">{this.state.error}</div>
+                )}
 
-
-                    <p>
-                        Already a member? <Link to="/login"> Login </Link>
-                    </p>
-                </form>
+                <p>
+                    Already a member? <Link to="/login"> Login </Link>
+                </p>
+            </form>
         );
     }
 }

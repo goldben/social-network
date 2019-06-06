@@ -51,7 +51,13 @@ export class App extends React.Component {
     }
 
     render() {
-        if (!this.state.id) {
+        const imageUrl = this.state.imageUrl || "/img/default.png";
+        const id = this.state.id;
+        const first = this.state.first;
+        const last = this.state.last;
+        const bio = this.state.bio;
+
+        if (!id) {
             return <img src="/img/spinner.gif" />;
         }
         return (
@@ -59,20 +65,25 @@ export class App extends React.Component {
                 <header>
                     <img src="/img/facebook-logo.png" className="logo" />
                     <span className="search-users">
-                        <input name="search" type="text" />
+                        <input name="search" type="text" placeholder="search" />
+                        <div className="search-results" />
                     </span>
                     <div className="nav-bar-1">
-                        <div className="nav-btn">
-                            <img src={this.state.imageUrl} />
-                            <p>{this.state.first}</p>
-                        </div>
-                        <div className="nav-btn">Home</div>
+                        <a href="/" className="nav-btn">
+                            <img src={imageUrl} />
+                            <p>{first}</p>
+                        </a>
+                        <a href="/" className="nav-btn">
+                            Home
+                        </a>
                         <div className="nav-btn">Create</div>
                     </div>
                     <div className="nav-bar-2">
                         <div className="nav-btn">FR</div>
                         <div className="nav-btn">ME</div>
-                        <div className="nav-btn">LO</div>
+                        <a href="/logout" className="nav-btn">
+                            Logout
+                        </a>
                     </div>
                 </header>
                 {this.state.uploaderVisible && (
@@ -89,11 +100,11 @@ export class App extends React.Component {
                                 path="/"
                                 render={() => (
                                     <Profile
-                                        imageUrl={this.state.imageUrl}
-                                        id={this.state.id}
-                                        first={this.state.first}
-                                        last={this.state.last}
-                                        bio={this.state.bio}
+                                        imageUrl={imageUrl}
+                                        id={id}
+                                        first={first}
+                                        last={last}
+                                        bio={bio}
                                         showUploader={this.showUploader}
                                         updateBio={this.updateBio}
                                     />
