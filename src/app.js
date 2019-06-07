@@ -92,37 +92,35 @@ export class App extends React.Component {
                         hideUploader={this.hideUploader}
                     />
                 )}
-                <div className="timeline">
-                    <BrowserRouter>
-                        <div>
-                            <Route
-                                exact
-                                path="/"
-                                render={() => (
-                                    <Profile
-                                        imageUrl={imageUrl}
-                                        id={id}
-                                        first={first}
-                                        last={last}
-                                        bio={bio}
-                                        showUploader={this.showUploader}
-                                        updateBio={this.updateBio}
-                                    />
-                                )}
-                            />
-                            <Route
-                                path="/user/:id"
-                                render={props => (
-                                    <OtherProfile
-                                        key={props.match.url}
-                                        match={props.match}
-                                        history={props.history}
-                                    />
-                                )}
-                            />
-                        </div>
-                    </BrowserRouter>
-                </div>
+                <BrowserRouter>
+                    <div>
+                        <Route
+                            exact
+                            path="/"
+                            render={() => (
+                                <Profile
+                                    imageUrl={imageUrl}
+                                    id={id}
+                                    first={first}
+                                    last={last}
+                                    bio={bio}
+                                    showUploader={this.showUploader}
+                                    updateBio={this.updateBio}
+                                />
+                            )}
+                        />
+                        <Route
+                            path="/user/:id"
+                            render={props => (
+                                <OtherProfile
+                                    key={props.match.url}
+                                    match={props.match}
+                                    history={props.history}
+                                />
+                            )}
+                        />
+                    </div>
+                </BrowserRouter>
             </div>
         );
     }

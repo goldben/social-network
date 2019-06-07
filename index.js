@@ -72,6 +72,15 @@ app.use(function(req, res, next) {
 
 app.use(express.static("./public"));
 
+app.get("/", (req, res, next) => {
+    if (!req.session.userId) {
+        console.log("redirect to welcome");
+        res.redirect("/welcome");
+    } else {
+        next();
+    }
+});
+
 ///////////////////////////////// APP GET USER//////////////////////////////////
 app.get("/user", (req, res) => {
     console.log("*******GET /USER*******");
