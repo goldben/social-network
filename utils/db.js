@@ -13,16 +13,6 @@ module.exports.storeInUsers = function(first, last, email, password) {
     );
 };
 
-////////////////////////////get functions////////////////////////////
-
-module.exports.getUserDataById = function(id) {
-    return db.query(`SELECT * FROM users WHERE id = $1`, [id]);
-};
-
-module.exports.getUserDataByEmail = function(email) {
-    return db.query(`SELECT * FROM users WHERE email = $1`, [email]);
-};
-
 module.exports.uploadImg = function(userId, url) {
     return db.query(
         `UPDATE users
@@ -55,4 +45,33 @@ module.exports.updateUser = function(
             WHERE id=$1;`,
         [userId, first, last, bio, url, email, hashedPass]
     );
+};
+
+////////////////////////////get functions////////////////////////////
+
+module.exports.getUserDataById = function(id) {
+    return db.query(`SELECT * FROM users WHERE id = $1`, [id]);
+};
+
+module.exports.getUserDataByEmail = function(email) {
+    return db.query(`SELECT * FROM users WHERE email = $1`, [email]);
+};
+
+module.exports.findUsers = function(text) {
+    if (text == "default") {
+        console.log("last 3 users from db");
+        return db.query(
+            `
+            SELECT * FROM users ORDER BY id DESC LIMIT 3;
+            `
+        );
+    } else {
+        return db.query(
+            `
+            SELECT * FROM users
+            WHERE first ILIKE $1 OR last ILIKE $1
+            `,
+            [text + "%"]
+        );
+    }
 };

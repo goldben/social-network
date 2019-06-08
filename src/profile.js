@@ -23,7 +23,6 @@ export class Profile extends React.Component {
                             {this.props.first} {this.props.last} {this.props.id}
                         </h1>
                     </div>
-                    <div className="timeline-nav-top" />
                 </div>
                 <div className="profile-bottom">
                     <Bio

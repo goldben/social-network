@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { OtherProfile } from "./other-profile";
+import { FindPeople } from "./find-people";
 import { Uploader } from "./uploader";
 
 export class App extends React.Component {
@@ -61,39 +62,47 @@ export class App extends React.Component {
             return <img src="/img/spinner.gif" />;
         }
         return (
-            <div className="app-container">
-                <header>
-                    <img src="/img/facebook-logo.png" className="logo" />
-                    <span className="search-users">
-                        <input name="search" type="text" placeholder="search" />
-                        <div className="search-results" />
-                    </span>
-                    <div className="nav-bar-1">
-                        <a href="/" className="nav-btn">
-                            <img src={imageUrl} />
-                            <p>{first}</p>
-                        </a>
-                        <a href="/" className="nav-btn">
-                            Home
-                        </a>
-                        <div className="nav-btn">Create</div>
-                    </div>
-                    <div className="nav-bar-2">
-                        <div className="nav-btn">FR</div>
-                        <div className="nav-btn">ME</div>
-                        <a href="/logout" className="nav-btn">
-                            Logout
-                        </a>
-                    </div>
-                </header>
-                {this.state.uploaderVisible && (
-                    <Uploader
-                        uploaded={this.uploaded}
-                        hideUploader={this.hideUploader}
-                    />
-                )}
-                <BrowserRouter>
-                    <div>
+            <BrowserRouter>
+                <div>
+                    <div className="app-container">
+                        <header>
+                            <img
+                                src="/img/facebook-logo.png"
+                                className="logo"
+                            />
+                            <span className="search-users">
+                                <input
+                                    name="search"
+                                    type="text"
+                                    placeholder="search"
+                                />
+                                <div className="search-results" />
+                            </span>
+                            <div className="nav-bar-1">
+                                <Link to="/" className="nav-btn">
+                                    <img src={imageUrl} />
+                                    <p>{first}</p>
+                                </Link>
+                                <Link to="/" className="nav-btn">
+                                    Home
+                                </Link>
+                                <div className="nav-btn">Create</div>
+                            </div>
+                            <div className="nav-bar-2">
+                                <div className="nav-btn">FR</div>
+                                <div className="nav-btn">ME</div>
+                                <Link to="/logout" className="nav-btn">
+                                    Logout
+                                </Link>
+                            </div>
+                        </header>
+                        {this.state.uploaderVisible && (
+                            <Uploader
+                                uploaded={this.uploaded}
+                                hideUploader={this.hideUploader}
+                            />
+                        )}
+
                         <Route
                             exact
                             path="/"
@@ -119,9 +128,13 @@ export class App extends React.Component {
                                 />
                             )}
                         />
+                        <Route
+                            exactpath="/find"
+                            render={() => <FindPeople />}
+                        />
                     </div>
-                </BrowserRouter>
-            </div>
+                </div>
+            </BrowserRouter>
         );
     }
 }

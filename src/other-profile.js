@@ -29,7 +29,7 @@ export class OtherProfile extends React.Component {
                 <div className="profile-top">
                     <div className="cover-photo-container">
                         <ProfilePic
-                            imageUrl={this.state.imageUrl}
+                            imageUrl={this.state.imgurl}
                             first={this.state.first}
                             last={this.state.last}
                         />
@@ -37,7 +37,6 @@ export class OtherProfile extends React.Component {
                             {this.state.first} {this.state.last}
                         </h1>
                     </div>
-                    <div className="timeline-nav-top" />
                 </div>
                 <div className="profile-bottom">
                     <div className="bio-container">

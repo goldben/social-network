@@ -48,7 +48,7 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////APP USE////////////////////////////////////////
 app.use(
     bodyParser.urlencoded({
         extended: false
@@ -72,6 +72,8 @@ app.use(function(req, res, next) {
 
 app.use(express.static("./public"));
 
+///////////////////////////////// APP GET///////////////////////////////////////
+
 app.get("/", (req, res, next) => {
     if (!req.session.userId) {
         console.log("redirect to welcome");
@@ -81,7 +83,7 @@ app.get("/", (req, res, next) => {
     }
 });
 
-///////////////////////////////// APP GET USER//////////////////////////////////
+/////////////////////// GET USER//////////////////
 app.get("/user", (req, res) => {
     console.log("*******GET /USER*******");
     console.log("get user: ", req.session);
@@ -109,7 +111,7 @@ app.get("/user", (req, res) => {
     }
 });
 
-///////////////////////////////// APP GET OTHER USER//////////////////////////////////
+///////////////////////GET OTHER USER/////////////////////
 
 app.get("/otheruser/:id", (req, res) => {
     console.log("*******GET /OTHER-USER*******");
@@ -126,6 +128,21 @@ app.get("/otheruser/:id", (req, res) => {
                 console.log("GET OTHER USER DATA", err);
             });
     }
+});
+////////////////////////////FIND USERS//////////////////////////
+
+app.post("/find-users", (req, res) => {
+    console.log("*******GET /USERS*******");
+    db.findUsers(req.body.find)
+        .then(results => {
+            console.log("found in db: ", results.rows);
+            res.json({
+                users: results.rows
+            });
+        })
+        .catch(err => {
+            console.log("FIND PEOPLE ERROR", err);
+        });
 });
 
 /////////////////////////////////////Post//////////////////////////////////////
