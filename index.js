@@ -13,7 +13,6 @@ const uidSafe = require(`uid-safe`);
 const path = require(`path`);
 const s3 = require("./s3");
 const amazonUrl = require(`./config`).s3Url;
-
 const diskStorage = multer.diskStorage({
     destination: function(req, file, callback) {
         callback(null, __dirname + "/uploads");
@@ -222,7 +221,13 @@ app.post("/login", (req, res) => {
             });
         });
 });
+//////////////////////////////////Logout////////////////////////////////////////
 
+app.get("/logout", (req, res) => {
+    console.log("*******LOG OUT*******");
+    req.session = null;
+    res.redirect("/welcome");
+});
 //////////////////////////////////POST Uploader777777777777777777777777777777///
 
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
@@ -275,14 +280,6 @@ app.post("/edit-bio", (req, res) => {
             success: false
         });
     }
-});
-
-//////////////////////////////////Logout////////////////////////////////////////
-
-app.get("/logout", (req, res) => {
-    console.log("*******LOG OUT*******");
-    req.session = null;
-    res.redirect("/welcome");
 });
 
 ////////////////////////////////////////////////////////////////////////////////

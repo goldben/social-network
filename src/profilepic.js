@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 export function ProfilePic({ showUploader, imageUrl, first, last }) {
     imageUrl = imageUrl || "/img/default.png";
@@ -10,6 +12,8 @@ export function ProfilePic({ showUploader, imageUrl, first, last }) {
                 alt={`${first} ${last}`}
             />
             <div className="overlay" onClick={showUploader} />
+            <FontAwesomeIcon icon={faCamera} />
+            <h3>Update</h3>
         </div>
     );
 }

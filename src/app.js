@@ -1,22 +1,39 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
+import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
 
 export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            uploaderVisible: false
+            uploaderVisible: false,
+            users: []
         };
         this.updateBio = this.updateBio.bind(this);
         this.uploaded = this.uploaded.bind(this);
         this.showUploader = this.showUploader.bind(this);
         this.hideUploader = this.hideUploader.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange({ target }) {
+        //    console.log("target name: ", target.name);
+        //    console.log("target value: ", target.value);
+        this.setState({
+            [target.name]: target.value
+        });
+        axios
+            .post("/find-users", { find: this.state.find })
+            .then(results => {});
     }
 
     uploaded(url) {
@@ -70,14 +87,8 @@ export class App extends React.Component {
                                 src="/img/facebook-logo.png"
                                 className="logo"
                             />
-                            <span className="search-users">
-                                <input
-                                    name="search"
-                                    type="text"
-                                    placeholder="search"
-                                />
-                                <div className="search-results" />
-                            </span>
+                            <FindPeopleInHeader />
+
                             <div className="nav-bar-1">
                                 <Link to="/" className="nav-btn">
                                     <img src={imageUrl} />
@@ -92,7 +103,7 @@ export class App extends React.Component {
                                 <div className="nav-btn">FR</div>
                                 <div className="nav-btn">ME</div>
                                 <Link to="/logout" className="nav-btn">
-                                    Logout
+                                    <FontAwesomeIcon icon={faSignOutAlt} />
                                 </Link>
                             </div>
                         </header>
@@ -130,7 +141,9 @@ export class App extends React.Component {
                         />
                         <Route
                             exactpath="/find"
-                            render={() => <FindPeople />}
+                            render={() => (
+                                <FindPeople name={this.state.search} />
+                            )}
                         />
                     </div>
                 </div>

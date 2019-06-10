@@ -62,18 +62,41 @@ header {
     padding-left: 19%;
     padding-right: 15%;
 }
+.search-btn {
+    width: 23px;
+    height: 18px;
+    margin-right: 100px;
+    background-color: grey;
+    color: dark-grey;
+}
+
 .logo {
     width: auto;
     height: 20px;
 }
 .search-users {
-    width: 400px;
-    margin-right: 100px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    width: 500px;
 }
+
 .search-users input {
-    width: 100%;
+    width: 400px;
     height: 20px;
     border-radius: 2px;
+}
+.search-btn {
+}
+.header-search-results {
+    position: fixed;
+    background: white;
+    border: solid light-grey 1px;
+    border-radius: 3px;
+    width: 400px;
+    color: black;
+    top: 30px;
+    left: 250px;
 }
 
 .nav-bar-1,
@@ -171,6 +194,7 @@ header {
 }
 
 .overlay {
+    color: white;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -257,20 +281,23 @@ header {
 }
 
 .filter {
+    color: #4b4f56;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 20px;
     width: 20%;
 }
 .results {
-    width: 70%;
+    width: 50%;
 }
 .search-result {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     margin-top: 10px;
     border-radius: 3px;
     border: 1px solid dark-grey;
     background: white;
-    padding: 12px;
+    padding: 12px 30px 12px 12px;
     color: #385898;
     cursor: pointer;
 }
@@ -280,12 +307,16 @@ header {
 .search-result img {
     width: 100px;
     height: 100px;
+    margin-right: 50px;
     border-radius: 100%;
     border: 1px solid dark-grey;
 }
 
 .search-result .card-bio {
-    width: 100px;
+    color: black;
+    font-size: 12px;
+    width: 100%;
     height: 50px;
     overflow: hidden;
+    margin-top: 50px;
 }
