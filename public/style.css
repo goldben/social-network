@@ -87,6 +87,7 @@ header {
     border-radius: 1px;
 }
 .search-btn {
+    position: relative;
 }
 .header-search-results {
     z-index: 1000;

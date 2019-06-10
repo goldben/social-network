@@ -112,38 +112,53 @@ app.get("/user", (req, res) => {
 
 ///////////////////////GET OTHER USER/////////////////////
 
-app.get("/otheruser/:id", (req, res) => {
+app.get("/otheruser/:id", async (req, res) => {
     console.log("*******GET /OTHER-USER*******");
     const id = req.params.id;
     if (id == req.session.userId) {
         console.log("request for same users");
         res.json({ success: false });
     } else {
-        db.getUserDataById(id)
-            .then(results => {
-                res.json(results.rows[0]);
-            })
-            .catch(err => {
-                console.log("GET OTHER USER DATA", err);
-            });
+        try {
+            const user = await db.getUserDataById(id);
+            res.json({ user: user.rows[0] });
+        } catch (err) {
+            console.log("GET OTHER USER DATA", err);
+        }
     }
 });
 ////////////////////////////FIND USERS//////////////////////////
 
-app.post("/find-users", (req, res) => {
+app.post("/find-users", async (req, res) => {
     console.log("*******GET /USERS*******");
-    db.findUsers(req.body.find)
-        .then(results => {
-            console.log("found in db: ", results.rows);
-            res.json({
-                users: results.rows
-            });
-        })
-        .catch(err => {
-            console.log("FIND PEOPLE ERROR", err);
+    try {
+        const users = await db.findUsers(req.body.find);
+        console.log("users found in db: ", users);
+        res.json({
+            users: users
         });
+    } catch (err) {
+        console.log("FIND PEOPLE ERROR", err);
+    }
 });
 
+////////////////////////////FIND USERS//////////////////////////
+
+app.post("/find", async (req, res, next) => {
+    console.log("*******GET /USERS*******");
+    try {
+        let { query } = req.query;
+        if (!query && query != "") {
+            next();
+        } else {
+            let users = await db.findUsers(query);
+            console.log("found users in db: ", users);
+            res.json({ users: users });
+        }
+    } catch (err) {
+        console.log("FIND PEOPLE ERROR", err);
+    }
+});
 /////////////////////////////////////Post//////////////////////////////////////
 
 app.post("/register", (req, res) => {

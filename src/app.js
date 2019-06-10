@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { OtherProfile } from "./other-profile";
-import { SearchResults } from "./search-results";
+import { FindPeople } from "./find-people";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
 
@@ -126,6 +126,10 @@ export class App extends React.Component {
                                     history={props.history}
                                 />
                             )}
+                        />
+                        <Route
+                            exactpath={"/find"}
+                            render={() => <FindPeople />}
                         />
                     </div>
                 </div>

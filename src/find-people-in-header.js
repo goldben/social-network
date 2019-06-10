@@ -9,9 +9,8 @@ import { Link } from "react-router-dom";
 import { ProfilePic } from "./profilepic";
 
 export default function FindPeopleInHeader() {
-    const [query, setQuery] = useState("default");
+    const [query, setQuery] = useState("last3");
     const [users, setUser] = useState([]);
-    let showResults = true;
 
     useEffect(
         () => {
@@ -44,7 +43,7 @@ export default function FindPeopleInHeader() {
                     onChange={e => setQuery(e.target.value)}
                     onBlur={e =>
                         setTimeout(() => {
-                            setQuery(null);
+                            setQuery("last3");
                         }, 100)
                     }
                 />
@@ -56,21 +55,21 @@ export default function FindPeopleInHeader() {
             </span>
 
             <div className="header-search-results">
-                {users.length &&
-                    showResults &&
-                    users.map(user => (
-                        <div key={user.id}>
-                            <Link to={`/user/${user.id}`}>
-                                <div className="search-result">
-                                    <div className="info">
-                                        <p>
-                                            {user.first} {user.last}
-                                        </p>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
+                {users.length
+                    ? users.map(user => (
+                          <div key={user.id}>
+                              <Link to={`/user/${user.id}`}>
+                                  <div className="search-result">
+                                      <div className="info">
+                                          <p>
+                                              {user.first} {user.last}
+                                          </p>
+                                      </div>
+                                  </div>
+                              </Link>
+                          </div>
+                      ))
+                    : null}
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import React from "react";
+import queryString from "query-string";
 import { BrowserRouter, Route } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
@@ -10,16 +11,13 @@ export class SearchResults extends React.Component {
         this.state = {};
     }
     componentDidMount() {
-        const query = this.props.match.params.query;
-        axios.post("/find-users", { find: query }).then(({ data }) => {
-            console.log("request for same user");
-            if (data.success == false) {
-                this.props.history.push("/");
-            } else {
-                console.log("data at other profile", data);
-                this.setState(data);
-            }
-        });
+        const query = queryString
+            .parse(this.props.location.search)
+            .then(query => {
+                axios.post("/find-users?query=" + query).then(results => {
+                    setUser(results.data.users.slice(0, 10));
+                });
+            });
     }
 
     render() {

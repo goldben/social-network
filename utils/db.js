@@ -58,7 +58,7 @@ module.exports.getUserDataByEmail = function(email) {
 };
 
 module.exports.findUsers = function(text) {
-    if (text == "default") {
+    if (text == "last3") {
         console.log("last 3 users from db");
         return db.query(
             `
