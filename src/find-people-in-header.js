@@ -9,8 +9,9 @@ import { Link } from "react-router-dom";
 import { ProfilePic } from "./profilepic";
 
 export default function FindPeopleInHeader() {
-    const [query, setQuery] = useState("aaaaaaaaaaaaa");
+    const [query, setQuery] = useState("default");
     const [users, setUser] = useState([]);
+    let showResults = true;
 
     useEffect(
         () => {
@@ -20,7 +21,7 @@ export default function FindPeopleInHeader() {
                 .post("/find-users", { find: query })
                 .then(results => {
                     if (!abort) {
-                        setUser(results.data.users);
+                        setUser(results.data.users.slice(0, 5));
                         return () => {
                             abort = true;
                         };
@@ -41,6 +42,11 @@ export default function FindPeopleInHeader() {
                     type="text"
                     placeholder="search"
                     onChange={e => setQuery(e.target.value)}
+                    onBlur={e =>
+                        setTimeout(() => {
+                            setQuery(null);
+                        }, 100)
+                    }
                 />
                 <Link to="/find">
                     <div className="search-btn">
@@ -51,6 +57,7 @@ export default function FindPeopleInHeader() {
 
             <div className="header-search-results">
                 {users.length &&
+                    showResults &&
                     users.map(user => (
                         <div key={user.id}>
                             <Link to={`/user/${user.id}`}>

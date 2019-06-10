@@ -54,7 +54,7 @@ header {
     font-weight: bold;
     background: #3b5998;
     border: solid black 1px;
-    height: 35px;
+    height: 40px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -78,17 +78,18 @@ header {
     text-decoration: none;
     display: flex;
     flex-direction: row;
-    width: 500px;
+    width: 600px;
 }
 
 .search-users input {
     width: 400px;
-    height: 20px;
-    border-radius: 2px;
+    height: 25px;
+    border-radius: 1px;
 }
 .search-btn {
 }
 .header-search-results {
+    z-index: 1000;
     position: fixed;
     background: white;
     border: solid light-grey 1px;
@@ -96,7 +97,7 @@ header {
     width: 400px;
     color: black;
     top: 30px;
-    left: 250px;
+    left: 270px;
 }
 
 .nav-bar-1,

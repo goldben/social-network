@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { OtherProfile } from "./other-profile";
-import { FindPeople } from "./find-people";
+import { SearchResults } from "./search-results";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
 
@@ -16,24 +16,12 @@ export class App extends React.Component {
         super(props);
         this.state = {
             uploaderVisible: false,
-            users: []
+            query: "default"
         };
         this.updateBio = this.updateBio.bind(this);
         this.uploaded = this.uploaded.bind(this);
         this.showUploader = this.showUploader.bind(this);
         this.hideUploader = this.hideUploader.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-    handleChange({ target }) {
-        //    console.log("target name: ", target.name);
-        //    console.log("target value: ", target.value);
-        this.setState({
-            [target.name]: target.value
-        });
-        axios
-            .post("/find-users", { find: this.state.find })
-            .then(results => {});
     }
 
     uploaded(url) {
@@ -74,6 +62,7 @@ export class App extends React.Component {
         const first = this.state.first;
         const last = this.state.last;
         const bio = this.state.bio;
+        const query = this.state.query;
 
         if (!id) {
             return <img src="/img/spinner.gif" />;
@@ -88,7 +77,6 @@ export class App extends React.Component {
                                 className="logo"
                             />
                             <FindPeopleInHeader />
-
                             <div className="nav-bar-1">
                                 <Link to="/" className="nav-btn">
                                     <img src={imageUrl} />
@@ -102,9 +90,9 @@ export class App extends React.Component {
                             <div className="nav-bar-2">
                                 <div className="nav-btn">FR</div>
                                 <div className="nav-btn">ME</div>
-                                <Link to="/logout" className="nav-btn">
+                                <a href="/logout" className="nav-btn">
                                     <FontAwesomeIcon icon={faSignOutAlt} />
-                                </Link>
+                                </a>
                             </div>
                         </header>
                         {this.state.uploaderVisible && (
@@ -137,12 +125,6 @@ export class App extends React.Component {
                                     match={props.match}
                                     history={props.history}
                                 />
-                            )}
-                        />
-                        <Route
-                            exactpath="/find"
-                            render={() => (
-                                <FindPeople name={this.state.search} />
                             )}
                         />
                     </div>
