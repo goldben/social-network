@@ -130,6 +130,16 @@ app.get("/otheruser/:id", async (req, res) => {
         }
     }
 });
+
+app.post("friend-request", async (req, res) => {
+    console.log("*******SEND FRIEND REQUEST*******");
+    const senderId = req.body.senderId;
+    const recieverId = req.body.recieverId;
+    const action = req.body.action;
+
+    const request = await db.sendFriendRequest(senderId, recieverId);
+    res.json;
+});
 ////////////////////////////FIND USERS//////////////////////////
 
 app.post("/find-users", (req, res) => {

@@ -84,21 +84,21 @@ module.exports.getFriendshipStatus = function(friendId) {
     );
 };
 
-module.exports.sendFriendRequest = function(userId, friendId) {
+module.exports.sendFriendRequest = function(senderId, recieverId) {
     return db.query(
-        `INSERT INTO friendships (sender_id, reciever-id) VALUES ($1, $2) RETURNING id`,
-        [userId, friendId]
+        `INSERT INTO friendships (sender_id, reciever-id) VALUES ($1, $2) RETURNING *`,
+        [senderId, recieverId]
     );
 };
-module.exports.cancelFriendRequest = function(userId, friendId) {
+module.exports.cancleFriendRequest = function(senderId, recieverId) {
     return db.query(
         `DELETE from friendships WHERE receiver_id = $1 AND sender_id = $2`,
-        [userId, friendId]
+        [senderId, recieverId]
     );
 };
-module.exports.acceptFriendRequest = function(userId, friendId) {
+module.exports.acceptFriendRequest = function(senderId, recieverId) {
     return db.query(
-        `UPDATE friendships SET accepted = true WHERE receiver_id = $1 AND sender_id = $2`,
-        [userId, friendId]
+        `UPDATE friendships SET accepted = true WHERE receiver_id = $1 AND sender_id = $2 RETURNING *`,
+        [senderId, recieverId]
     );
 };
