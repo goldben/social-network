@@ -121,24 +121,27 @@ app.get("/otheruser/:id", async (req, res) => {
         try {
             let userData = await db.getUserDataById(id);
             let friendshipStatus = await db.getFriendshipStatus(id);
-            friendshipStatus = { friendshipStatus: friendshipStatus.rows[0] };
+            friendshipStatus = { friendshipStatus: friendshipStatus };
             console.log("friendshipStatus: ", friendshipStatus);
             const merged = { ...userData.rows[0], ...friendshipStatus };
             res.json(merged);
         } catch (err) {
-            console.log("GET OTHER USER DATA", err);
+            console.log("GET OTHER USER DATA ERROR: ", err);
         }
     }
 });
-
-app.post("friend-request", async (req, res) => {
+////////////////////////////////////////////////////////
+app.post("change-friendship-status", async (req, res) => {
     console.log("*******SEND FRIEND REQUEST*******");
     const senderId = req.body.senderId;
     const recieverId = req.body.recieverId;
     const action = req.body.action;
-
-    const request = await db.sendFriendRequest(senderId, recieverId);
-    res.json;
+    try {
+        const request = await db.sendFriendRequest(senderId, recieverId);
+        res.json(request);
+    } catch (err) {
+        console.log("friendship error", err);
+    }
 });
 ////////////////////////////FIND USERS//////////////////////////
 

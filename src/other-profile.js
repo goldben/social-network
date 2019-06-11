@@ -3,12 +3,14 @@ import { BrowserRouter, Route } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { ProfilePic } from "./profilepic";
+import { FriendshipButton } from "./friendship-button";
 
 export class OtherProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
+
     componentDidMount() {
         const id = this.props.match.params.id;
         axios.get("/otheruser/" + id).then(({ data }) => {
@@ -23,7 +25,7 @@ export class OtherProfile extends React.Component {
     }
 
     render() {
-        console.log("this.state", this.state);
+        console.log("other profile this.state: ", this.state);
         return (
             <div className="profile-container">
                 <div className="profile-top">
@@ -40,7 +42,12 @@ export class OtherProfile extends React.Component {
                                 </h1>
                             </span>
                             <span className="profile-action">
-                                <button>{this.state.friendshipStatus}</button>
+                                <FriendshipButton
+                                    userId={this.state.id}
+                                    friendshipStatus={
+                                        this.state.friendshipStatus
+                                    }
+                                />
                                 <button>Message</button>
                             </span>
                         </div>
