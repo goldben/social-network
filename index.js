@@ -121,7 +121,9 @@ app.get("/otheruser/:id", async (req, res) => {
         try {
             let userData = await db.getUserDataById(id);
             let friendshipStatus = await db.getFriendshipStatus(id);
-            friendshipStatus = { friendshipStatus: friendshipStatus };
+
+            friendshipStatus = { friendshipStatus: "Add Friend" };
+
             console.log("friendshipStatus: ", friendshipStatus);
             const merged = { ...userData.rows[0], ...friendshipStatus };
             res.json(merged);
@@ -133,9 +135,10 @@ app.get("/otheruser/:id", async (req, res) => {
 ////////////////////////////////////////////////////////
 app.post("change-friendship-status", async (req, res) => {
     console.log("*******SEND FRIEND REQUEST*******");
-    const senderId = req.body.senderId;
+    const senderId = req.session.userId;
     const recieverId = req.body.recieverId;
     const action = req.body.action;
+    console.log("senderid: ", senderId, " recieverId: ", recieverId);
     try {
         const request = await db.sendFriendRequest(senderId, recieverId);
         res.json(request);

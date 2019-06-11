@@ -2,29 +2,20 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "./axios";
 
-export function FriendshipButton(currentStatus, userId) {
-    const [friendshipStatus, setFriendshipStatus] = useState(currentStatus);
+export function FriendshipButton({ recieverId, currentStatus }) {
+    console.log("friend button have been rendered!");
+    console.log("currentStatus", currentStatus);
 
-    useEffect(
-        () => {
-            console.log("friend button have been rendered!");
-            let abort;
-            axios
-                .post("/change-friendship-status/" + userId)
-                .then(newStatus => {
-                    if (!abort) {
-                        setFriendshipStatus(newStatus);
-                        return () => {
-                            abort = true;
-                        };
-                    }
-                })
-                .catch(err => {
-                    console.log("friendship button error: ", err);
-                });
-        },
-        [friendshipStatus]
-    );
+    async function updateFriendship() {
+        try {
+            const newstatus = axios.post("/change-friendship-status/", {
+                recieverId: recieverId
+            });
+            currentStatus = newStatus;
+        } catch (e) {
+            console.log("friendship button error: ", e);
+        }
+    }
 
-    return <button>{friendshipStatus}</button>;
+    return <button onClick={updateFriendship}>{currentStatus}</button>;
 }
