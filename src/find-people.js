@@ -5,12 +5,12 @@ import axios from "./axios";
 import { Link } from "react-router-dom";
 
 export function FindPeople() {
-    const [query, setQuery] = useState(null);
+    const [query, setQuery] = useState("last3");
     const [users, setUser] = useState([]);
 
     useEffect(
         () => {
-            console.log(`"${users.length}" have been rendered!`);
+            console.log(`${users.length} have been rendered!`);
             let abort;
             axios
                 .post("/find-users", { find: query })
@@ -43,6 +43,8 @@ export function FindPeople() {
                 </div>
 
                 <div className="results">
+                    <h4>people</h4>
+
                     {users.length ? (
                         users.map(user => (
                             <div key={user.id}>

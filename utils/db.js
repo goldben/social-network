@@ -75,3 +75,30 @@ module.exports.findUsers = function(text) {
         );
     }
 };
+/////////////////////////////////////////FRIENDSHIPS//////////////////////////////////////////////////
+
+module.exports.getFriendshipStatus = function(friendId) {
+    return db.query(
+        `SELECT * FROM friendships WHERE receiver_id = $1 OR sender_id = $1`,
+        [friendId]
+    );
+};
+
+module.exports.sendFriendRequest = function(userId, friendId) {
+    return db.query(
+        `INSERT INTO friendships (sender_id, reciever-id) VALUES ($1, $2) RETURNING id`,
+        [userId, friendId]
+    );
+};
+module.exports.cancelFriendRequest = function(userId, friendId) {
+    return db.query(
+        `DELETE from friendships WHERE receiver_id = $1 AND sender_id = $2`,
+        [userId, friendId]
+    );
+};
+module.exports.acceptFriendRequest = function(userId, friendId) {
+    return db.query(
+        `UPDATE friendships SET accepted = true WHERE receiver_id = $1 AND sender_id = $2`,
+        [userId, friendId]
+    );
+};

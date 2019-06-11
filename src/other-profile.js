@@ -33,9 +33,17 @@ export class OtherProfile extends React.Component {
                             first={this.state.first}
                             last={this.state.last}
                         />
-                        <h1>
-                            {this.state.first} {this.state.last}
-                        </h1>
+                        <div className="cover-content">
+                            <span className="cover-name">
+                                <h1>
+                                    {this.state.first} {this.state.last}
+                                </h1>
+                            </span>
+                            <span className="profile-action">
+                                <button>{this.state.friendshipStatus}</button>
+                                <button>Message</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="profile-bottom">

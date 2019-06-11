@@ -112,20 +112,22 @@ app.get("/user", (req, res) => {
 
 ///////////////////////GET OTHER USER/////////////////////
 
-app.get("/otheruser/:id", (req, res) => {
+app.get("/otheruser/:id", async (req, res) => {
     console.log("*******GET /OTHER-USER*******");
     const id = req.params.id;
     if (id == req.session.userId) {
-        console.log("request for same users");
         res.json({ success: false });
     } else {
-        db.getUserDataById(id)
-            .then(results => {
-                res.json(results.rows[0]);
-            })
-            .catch(err => {
-                console.log("GET OTHER USER DATA", err);
-            });
+        try {
+            let userData = await db.getUserDataById(id);
+            let friendshipStatus = await db.getFriendshipStatus(id);
+            friendshipStatus = { friendshipStatus: friendshipStatus.rows[0] };
+            console.log("friendshipStatus: ", friendshipStatus);
+            const merged = { ...userData.rows[0], ...friendshipStatus };
+            res.json(merged);
+        } catch (err) {
+            console.log("GET OTHER USER DATA", err);
+        }
     }
 });
 ////////////////////////////FIND USERS//////////////////////////
