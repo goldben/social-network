@@ -5,7 +5,7 @@ import axios from "./axios";
 import { Link } from "react-router-dom";
 
 export function FindPeople() {
-    const [query, setQuery] = useState("default");
+    const [query, setQuery] = useState(null);
     const [users, setUser] = useState([]);
 
     useEffect(
@@ -43,7 +43,7 @@ export function FindPeople() {
                 </div>
 
                 <div className="results">
-                    {users.length &&
+                    {users.length ? (
                         users.map(user => (
                             <div key={user.id}>
                                 <Link to={`/user/${user.id}`}>
@@ -70,7 +70,19 @@ export function FindPeople() {
                                     </div>
                                 </Link>
                             </div>
-                        ))}
+                        ))
+                    ) : (
+                        <div className="no-results">
+                            <span>
+                                <p>We couldn't find anything for</p>
+                                <h4>{query}</h4>
+                            </span>
+                            <p>
+                                Looking for people or posts? Try entering a
+                                name, location or different words.
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

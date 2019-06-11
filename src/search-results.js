@@ -31,34 +31,35 @@ export class SearchResults extends React.Component {
                     </div>
 
                     <div className="results">
-                        {users.length &&
-                            users.map(user => (
-                                <div key={user.id}>
-                                    <Link to={`/user/${user.id}`}>
-                                        <div className="search-result">
-                                            <div className="">
-                                                <img
-                                                    src={
-                                                        user.imgurl ||
-                                                        "/img/default.png"
-                                                    }
-                                                    alt={`${user.first} ${
-                                                        user.last
-                                                    }`}
-                                                />
-                                            </div>
-                                            <div className="info">
-                                                <h3>
-                                                    {user.first} {user.last}
-                                                </h3>
-                                                <div className="card-bio">
-                                                    <p>{user.bio}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
-                            ))}
+                        {users.length
+                            ? users.map(user => (
+                                  <div key={user.id}>
+                                      <Link to={`/user/${user.id}`}>
+                                          <div className="search-result">
+                                              <div className="">
+                                                  <img
+                                                      src={
+                                                          user.imgurl ||
+                                                          "/img/default.png"
+                                                      }
+                                                      alt={`${user.first} ${
+                                                          user.last
+                                                      }`}
+                                                  />
+                                              </div>
+                                              <div className="info">
+                                                  <h3>
+                                                      {user.first} {user.last}
+                                                  </h3>
+                                                  <div className="card-bio">
+                                                      <p>{user.bio}</p>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </Link>
+                                  </div>
+                              ))
+                            : null}
                     </div>
                 </div>
             </div>

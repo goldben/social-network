@@ -127,10 +127,7 @@ export class App extends React.Component {
                                 />
                             )}
                         />
-                        <Route
-                            exactpath={"/find"}
-                            render={() => <FindPeople />}
-                        />
+                        <Route path={"/find"} render={() => <FindPeople />} />
                     </div>
                 </div>
             </BrowserRouter>

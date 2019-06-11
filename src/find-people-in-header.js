@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { ProfilePic } from "./profilepic";
 
 export default function FindPeopleInHeader() {
-    const [query, setQuery] = useState("last3");
+    const [query, setQuery] = useState(null);
     const [users, setUser] = useState([]);
 
     useEffect(
@@ -43,7 +43,7 @@ export default function FindPeopleInHeader() {
                     onChange={e => setQuery(e.target.value)}
                     onBlur={e =>
                         setTimeout(() => {
-                            setQuery("last3");
+                            setUser([]);
                         }, 100)
                     }
                 />
