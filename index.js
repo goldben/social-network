@@ -122,21 +122,37 @@ app.get("/otheruser/:id", async (req, res) => {
             let userData = await db.getUserDataById(id);
             let friendshipStatus = await db.getFriendshipStatus(id);
             console.log("friendshipStatus: ", friendshipStatus);
-            let request = friendshipStatus.rows[0];
-            console.log(typeof request);
+            let noRequest = friendshipStatus.rowCount == 0;
 
-            switch (friendshipStatus) {
-                case request == undefined:
-                    friendshipStatus = { friendshipStatus: "Add Friend" };
-                    break;
-                case "Cancel Request":
-                    friendshipStatus = { friendshipStatus: "Cancel Request" };
-                    break;
-                case true:
-                    friendshipStatus = { friendshipStatus: "accept Request" };
-                    break;
-                default:
-                    friendshipStatus = { friendshipStatus: "shit!" };
+            if (noRequest) {
+                friendshipStatus = { friendshipStatus: "Add Friend" };
+            } else {
+                let accepted = friendshipStatus.rows[0].accepted;
+                let recieverId = friendshipStatus.rows[0].reciever_id;
+                console.log("request status: ", accepted);
+                console.log("recieverId: ", recieverId);
+
+                switch (accepted) {
+                    case true:
+                        friendshipStatus = {
+                            friendshipStatus: "unfriend"
+                        };
+                        break;
+                    case false:
+                        if (recieverId == id) {
+                            friendshipStatus = {
+                                friendshipStatus: "accept"
+                            };
+                        } else {
+                            friendshipStatus = {
+                                friendshipStatus: "Cancel Request"
+                            };
+                        }
+
+                        break;
+                    default:
+                        friendshipStatus = { friendshipStatus: "shit!" };
+                }
             }
 
             console.log("friendshipStatus2: ", friendshipStatus);
@@ -162,17 +178,17 @@ app.post("/change-friendship-status", async (req, res) => {
                     senderId,
                     recieverId
                 );
-                console.log("friend added", addFriend);
-                res.json(addFriend);
+                console.log("Cancel Request");
+                res.json("Cancel Request");
                 break;
             case "Cancel Request":
                 const cancelRequest = await db.cancelFriendRequest(
                     senderId,
                     recieverId
                 );
-                console.log("friend request canceled", cancelRequest);
-                res.json(cancelRequest);
-
+                console.log("Add Friend");
+                res.json("Add Friend");
+                break;
             case "Accept":
                 const acceptlRequest = await db.acceptFriendRequest(
                     senderId,
