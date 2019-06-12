@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import axios from "./axios";
 import { Link } from "react-router-dom";
+import { FriendshipButton } from "./friendship-button";
 
 export function FindPeople() {
     const [query, setQuery] = useState("last3");

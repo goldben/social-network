@@ -113,15 +113,15 @@ app.get("/user", (req, res) => {
 ///////////////////////GET OTHER USER/////////////////////
 
 app.get("/otheruser/:id", async (req, res) => {
-    console.log("*******GET /OTHER-USER*******");
+    console.log("*******GET OTHER USER DATA*******");
     const id = req.params.id;
-    const userId = req.session.userId;
+    const senderId = req.session.userId;
     if (id == req.session.userId) {
         res.json({ success: false });
     } else {
         try {
             let userData = await db.getUserDataById(id);
-            let friendshipStatus = await db.getFriendshipStatus(userId, id);
+            let friendshipStatus = await db.getFriendshipStatus(senderId, id);
             //console.log("friendshipStatus: ", friendshipStatus);
             let noRequest = friendshipStatus.rowCount == 0;
 
@@ -129,9 +129,9 @@ app.get("/otheruser/:id", async (req, res) => {
                 friendshipStatus = { friendshipStatus: "Add Friend" };
             } else {
                 let accepted = friendshipStatus.rows[0].accepted;
-                const otherProfileId = friendshipStatus.rows[0].receiver_id;
+                const receiverId = friendshipStatus.rows[0].receiver_id;
                 console.log("request status: ", accepted);
-                console.log("otherProfileId: ", otherProfileId);
+                console.log("receiverId: ", receiverId);
 
                 switch (accepted) {
                     case true:
@@ -140,7 +140,7 @@ app.get("/otheruser/:id", async (req, res) => {
                         };
                         break;
                     case false:
-                        if (otherProfileId == id) {
+                        if (receiverId == id) {
                             friendshipStatus = {
                                 friendshipStatus: "Cancel Request"
                             };
@@ -156,7 +156,61 @@ app.get("/otheruser/:id", async (req, res) => {
                 }
             }
 
-            const merged = { ...userData.rows[0], ...friendshipStatus };
+            const merged = { ...userData.rows[0] };
+            console.log("user data + friendship status: ", merged);
+
+            res.json(merged);
+        } catch (err) {
+            console.log("GET OTHER USER DATA ERROR: ", err);
+        }
+    }
+});
+///////////////////////GET OTHER USER/////////////////////
+
+app.get("/friendship-status/:id", async (req, res) => {
+    console.log("*******GET FRIENDSHIP STATUS*******");
+    const id = req.params.id;
+    const senderId = req.session.userId;
+    if (id == req.session.userId) {
+        res.json({ success: false });
+    } else {
+        try {
+            let friendshipStatus = await db.getFriendshipStatus(senderId, id);
+            //console.log("friendshipStatus: ", friendshipStatus);
+            let noRequest = friendshipStatus.rowCount == 0;
+
+            if (noRequest) {
+                friendshipStatus = { friendshipStatus: "Add Friend" };
+            } else {
+                let accepted = friendshipStatus.rows[0].accepted;
+                const receiverId = friendshipStatus.rows[0].receiver_id;
+                console.log("request status: ", accepted);
+                console.log("receiverId: ", receiverId);
+
+                switch (accepted) {
+                    case true:
+                        friendshipStatus = {
+                            friendshipStatus: "Unfriend"
+                        };
+                        break;
+                    case false:
+                        if (receiverId == id) {
+                            friendshipStatus = {
+                                friendshipStatus: "Cancel Request"
+                            };
+                        } else {
+                            friendshipStatus = {
+                                friendshipStatus: "Accept"
+                            };
+                        }
+
+                        break;
+                    default:
+                        friendshipStatus = { friendshipStatus: "shit!" };
+                }
+            }
+
+            const merged = { ...friendshipStatus };
             console.log("user data + friendship status: ", merged);
 
             res.json(merged);
@@ -168,25 +222,25 @@ app.get("/otheruser/:id", async (req, res) => {
 ////////////////////////////////////////////////////////
 app.post("/change-friendship-status", async (req, res) => {
     console.log("*******change-friendship-status*******");
-    const userId = req.session.userId;
-    const otherProfileId = req.body.otherProfileId;
+    const senderId = req.session.userId;
+    const receiverId = req.body.receiverId;
     const action = req.body.action;
-    console.log("userId: ", userId, " otherProfileId: ", otherProfileId);
+    console.log("senderid: ", senderId, " receiverId: ", receiverId);
 
     try {
         switch (action) {
             case "Add Friend":
                 const addFriend = await db.sendFriendRequest(
-                    userId,
-                    otherProfileId
+                    senderId,
+                    receiverId
                 );
                 console.log("friend request sent");
                 res.json("Cancel Request");
                 break;
             case "Cancel Request":
                 const cancelRequest = await db.cancelFriendRequest(
-                    userId,
-                    otherProfileId
+                    senderId,
+                    receiverId
                 );
                 console.log("canceled request", cancelRequest);
 
@@ -194,8 +248,8 @@ app.post("/change-friendship-status", async (req, res) => {
                 break;
             case "Unfriend":
                 const unfriend = await db.cancelFriendRequest(
-                    userId,
-                    otherProfileId
+                    senderId,
+                    receiverId
                 );
                 console.log("canceled request", unfriend);
 
@@ -203,8 +257,8 @@ app.post("/change-friendship-status", async (req, res) => {
                 break;
             case "Accept":
                 const acceptRequest = await db.acceptFriendRequest(
-                    otherProfileId,
-                    userId
+                    receiverId,
+                    senderId
                 );
                 console.log("friend request accepted", acceptRequest);
                 res.json("Unfriend");
