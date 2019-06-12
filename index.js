@@ -121,10 +121,25 @@ app.get("/otheruser/:id", async (req, res) => {
         try {
             let userData = await db.getUserDataById(id);
             let friendshipStatus = await db.getFriendshipStatus(id);
-
-            friendshipStatus = { friendshipStatus: "Add Friend" };
-
             console.log("friendshipStatus: ", friendshipStatus);
+            let request = friendshipStatus.rows[0];
+            console.log(typeof request);
+
+            switch (friendshipStatus) {
+                case request == undefined:
+                    friendshipStatus = { friendshipStatus: "Add Friend" };
+                    break;
+                case "Cancel Request":
+                    friendshipStatus = { friendshipStatus: "Cancel Request" };
+                    break;
+                case true:
+                    friendshipStatus = { friendshipStatus: "accept Request" };
+                    break;
+                default:
+                    friendshipStatus = { friendshipStatus: "shit!" };
+            }
+
+            console.log("friendshipStatus2: ", friendshipStatus);
             const merged = { ...userData.rows[0], ...friendshipStatus };
             res.json(merged);
         } catch (err) {
@@ -133,17 +148,45 @@ app.get("/otheruser/:id", async (req, res) => {
     }
 });
 ////////////////////////////////////////////////////////
-app.post("change-friendship-status", async (req, res) => {
+app.post("/change-friendship-status", async (req, res) => {
     console.log("*******SEND FRIEND REQUEST*******");
     const senderId = req.session.userId;
     const recieverId = req.body.recieverId;
     const action = req.body.action;
     console.log("senderid: ", senderId, " recieverId: ", recieverId);
+
     try {
-        const request = await db.sendFriendRequest(senderId, recieverId);
-        res.json(request);
+        switch (action) {
+            case "Add Friend":
+                const addFriend = await db.sendFriendRequest(
+                    senderId,
+                    recieverId
+                );
+                console.log("friend added", addFriend);
+                res.json(addFriend);
+                break;
+            case "Cancel Request":
+                const cancelRequest = await db.cancelFriendRequest(
+                    senderId,
+                    recieverId
+                );
+                console.log("friend request canceled", cancelRequest);
+                res.json(cancelRequest);
+
+            case "Accept":
+                const acceptlRequest = await db.acceptFriendRequest(
+                    senderId,
+                    recieverId
+                );
+                console.log("friend request accepted", acceptlRequest);
+                res.json(acceptlRequest);
+
+                break;
+            default:
+                console.log("hmm, Iguess something went wrong...");
+        }
     } catch (err) {
-        console.log("friendship error", err);
+        console.log("/change-friendship-status error", err);
     }
 });
 ////////////////////////////FIND USERS//////////////////////////
