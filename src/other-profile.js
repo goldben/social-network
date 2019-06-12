@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { ProfilePic } from "./profilepic";
-import { FriendshipButton } from "./friendship-button";
+import { FriendshipButton } from "./friendship-button1";
 
 export class OtherProfile extends React.Component {
     constructor(props) {
@@ -30,11 +30,14 @@ export class OtherProfile extends React.Component {
             <div className="profile-container">
                 <div className="profile-top">
                     <div className="cover-photo-container">
-                        <ProfilePic
-                            imageUrl={this.state.imgurl}
-                            first={this.state.first}
-                            last={this.state.last}
-                        />
+                        <div className="profile-img-container">
+                            <img
+                                src={this.state.imgurl}
+                                className="profile-img"
+                                alt={`${this.state.first} ${this.state.last}`}
+                            />
+                        </div>
+
                         <div className="cover-content">
                             <span className="cover-name">
                                 <h1>
@@ -45,6 +48,7 @@ export class OtherProfile extends React.Component {
                                 <FriendshipButton
                                     receiverId={this.props.match.params.id}
                                 />
+
                                 <button>Message</button>
                             </span>
                         </div>

@@ -19,9 +19,13 @@ export class Profile extends React.Component {
                             last={this.props.last}
                             showUploader={this.props.showUploader}
                         />
-                        <h1>
-                            {this.props.first} {this.props.last} {this.props.id}
-                        </h1>
+                        <div className="cover-content">
+                            <span className="cover-name">
+                                <h1>
+                                    {this.props.first} {this.props.last}{" "}
+                                </h1>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="profile-bottom">

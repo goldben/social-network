@@ -95,7 +95,7 @@ module.exports.sendFriendRequest = function(senderId, receiverId) {
 };
 module.exports.cancelFriendRequest = function(senderId, receiverId) {
     return db.query(
-        `DELETE FROM friendships WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)`,
+        `DELETE FROM friendships WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1) RETURNING *`,
         [senderId, receiverId]
     );
 };

@@ -45,8 +45,17 @@ export function FriendshipButton({ receiverId }) {
     }
 
     return (
-        <button className="friend-btn" onClick={updateFriendship}>
-            {friendshipStatus}
-        </button>
+        <div className="dropdown">
+            <button className="friend-btn" onClick={updateFriendship}>
+                {friendshipStatus}
+            </button>
+            <div className="dropdown-content">
+                <a href="#">Get notifications</a>
+                <a href="#">Close friends</a>
+                <a href="#">acquaintances</a>
+                <a href="#">Add to another list</a>
+                <a href="#">Unfriend</a>
+            </div>
+        </div>
     );
 }

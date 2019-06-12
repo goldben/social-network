@@ -44,14 +44,12 @@ export function FindPeople() {
                 </div>
 
                 <div className="results">
-                    <h4>people</h4>
-
                     {users.length ? (
                         users.map(user => (
                             <div key={user.id}>
-                                <Link to={`/user/${user.id}`}>
-                                    <div className="search-result">
-                                        <div className="">
+                                <div className="search-result">
+                                    <div className="">
+                                        <Link to={`/user/${user.id}`}>
                                             <img
                                                 src={
                                                     user.imgurl ||
@@ -61,17 +59,28 @@ export function FindPeople() {
                                                     user.last
                                                 }`}
                                             />
-                                        </div>
-                                        <div className="info">
+                                        </Link>
+                                    </div>
+                                    <div className="info">
+                                        <Link to={`/user/${user.id}`}>
                                             <h3>
                                                 {user.first} {user.last}
                                             </h3>
-                                            <div className="card-bio">
-                                                <p>{user.bio}</p>
-                                            </div>
+                                        </Link>
+
+                                        <div className="card-bio">
+                                            <p>{user.bio}</p>
                                         </div>
                                     </div>
-                                </Link>
+                                    <div className="friend-btn-container">
+                                        <FriendshipButton
+                                            receiverId={user.id}
+                                        />
+                                        <div className="small-message-btn">
+                                            ...
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         ))
                     ) : (
