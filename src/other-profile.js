@@ -43,7 +43,7 @@ export class OtherProfile extends React.Component {
                             </span>
                             <span className="profile-action">
                                 <FriendshipButton
-                                    recieverId={this.state.id}
+                                    receiverId={this.state.id}
                                     currentStatus={this.state.friendshipStatus}
                                 />
                                 <button>Message</button>

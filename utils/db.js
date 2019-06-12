@@ -77,28 +77,31 @@ module.exports.findUsers = function(text) {
 };
 /////////////////////////////////////////FRIENDSHIPS//////////////////////////////////////////////////
 
-module.exports.getFriendshipStatus = function(friendId) {
+module.exports.getFriendshipStatus = function(userId, friendId) {
     return db.query(
-        `SELECT * FROM friendships WHERE receiver_id = $1 OR sender_id = $1`,
-        [friendId]
+        `
+        SELECT * FROM friendships
+        WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)
+        `,
+        [userId, friendId]
     );
 };
 
-module.exports.sendFriendRequest = function(senderId, recieverId) {
+module.exports.sendFriendRequest = function(senderId, receiverId) {
     return db.query(
         `INSERT INTO friendships (sender_id, receiver_id) VALUES ($1, $2) RETURNING *`,
-        [senderId, recieverId]
+        [senderId, receiverId]
     );
 };
-module.exports.cancelFriendRequest = function(senderId, recieverId) {
+module.exports.cancelFriendRequest = function(senderId, receiverId) {
     return db.query(
-        `DELETE from friendships WHERE sender_id = $1 AND receiver_id = $2`,
-        [senderId, recieverId]
+        `DELETE FROM friendships WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1)`,
+        [senderId, receiverId]
     );
 };
-module.exports.acceptFriendRequest = function(senderId, recieverId) {
+module.exports.acceptFriendRequest = function(senderId, receiverId) {
     return db.query(
         `UPDATE friendships SET accepted = true WHERE sender_id = $1 AND receiver_id = $2 RETURNING *`,
-        [senderId, recieverId]
+        [senderId, receiverId]
     );
 };
