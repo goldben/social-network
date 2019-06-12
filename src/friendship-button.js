@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "./axios";
 
-export function FriendshipButton({ receiverId, currentStatus }) {
+export function FriendshipButton({ otherProfileId, currentStatus }) {
     const [friendshipStatus, setStatus] = useState("");
     useEffect(
         () => {
@@ -15,14 +15,14 @@ export function FriendshipButton({ receiverId, currentStatus }) {
     console.log("currentStatus", currentStatus);
 
     console.log("friendshipStatus", friendshipStatus);
-    console.log("receiverId", receiverId);
+    console.log("otherProfileId", otherProfileId);
 
     async function updateFriendship() {
         console.log("button clicked");
         try {
             console.log("trying");
             let newStatus = await axios.post("/change-friendship-status", {
-                receiverId: receiverId,
+                otherProfileId: otherProfileId,
                 action: friendshipStatus
             });
             newStatus = newStatus.data;
