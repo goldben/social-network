@@ -93,7 +93,7 @@ module.exports.sendFriendRequest = function(senderId, receiverId) {
         [senderId, receiverId]
     );
 };
-module.exports.cancelFriendRequest = function(senderId, receiverId) {
+module.exports.deleteFriendRequest = function(senderId, receiverId) {
     return db.query(
         `DELETE FROM friendships WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1) RETURNING *`,
         [senderId, receiverId]
@@ -102,6 +102,6 @@ module.exports.cancelFriendRequest = function(senderId, receiverId) {
 module.exports.acceptFriendRequest = function(senderId, receiverId) {
     return db.query(
         `UPDATE friendships SET accepted = true WHERE sender_id = $1 AND receiver_id = $2 RETURNING *`,
-        [senderId, receiverId]
+        [receiverId, senderId]
     );
 };

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "./axios";
 
 export function FriendshipButton({ receiverId }) {
+    let dropdown;
     let currentStatus;
     const [friendshipStatus, setStatus] = useState("");
     useEffect(
@@ -38,6 +39,11 @@ export function FriendshipButton({ receiverId }) {
             });
             newStatus = newStatus.data;
             console.log("newStatus: ", newStatus);
+            if (newStatus == "Unfriend") {
+                dropdown = true;
+            } else {
+                dropdown = false;
+            }
             setStatus(newStatus);
         } catch (e) {
             console.log("friendship button error: ", e);
@@ -49,13 +55,17 @@ export function FriendshipButton({ receiverId }) {
             <button className="friend-btn" onClick={updateFriendship}>
                 {friendshipStatus}
             </button>
-            <div className="dropdown-content">
-                <a href="#">Get notifications</a>
-                <a href="#">Close friends</a>
-                <a href="#">acquaintances</a>
-                <a href="#">Add to another list</a>
-                <a href="#">Unfriend</a>
-            </div>
+            {dropdown && (
+                <div className="dropdown-content">
+                    <a href="#">Get notifications</a>
+                    <a href="#">Close friends</a>
+                    <a href="#">acquaintances</a>
+                    <a href="#">Add to another list</a>
+                    <a href="#" onClick={updateFriendship}>
+                        {friendshipStatus}
+                    </a>
+                </div>
+            )}
         </div>
     );
 }
