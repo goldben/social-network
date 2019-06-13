@@ -4,6 +4,7 @@ import axios from "./axios";
 import { Profile } from "./profile";
 import { ProfilePic } from "./profilepic";
 import { FriendshipButton } from "./friendship-button1";
+import { ForcedFriendshipButton } from "./forced-friendship-button";
 
 export class OtherProfile extends React.Component {
     constructor(props) {
@@ -60,6 +61,10 @@ export class OtherProfile extends React.Component {
                         {this.state.bio}
                     </div>
                     <div className="posts-container">
+                        <ForcedFriendshipButton
+                            receiverId={this.props.match.params.id}
+                            name={this.state.first}
+                        />
                         <h3>posts</h3>
                     </div>
                 </div>

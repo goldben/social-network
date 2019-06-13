@@ -185,7 +185,10 @@ app.get("/friendship-status/:id", async (req, res) => {
             let noRequest = friendshipStatus.rowCount == 0;
 
             if (noRequest) {
-                friendshipStatus = { friendshipStatus: "Add Friend" };
+                friendshipStatus = {
+                    friendshipStatus: "Add Friend",
+                    buttonText: "Add Friend"
+                };
             } else {
                 let accepted = friendshipStatus.rows[0].accepted;
                 const receiverId = friendshipStatus.rows[0].receiver_id;
@@ -202,11 +205,13 @@ app.get("/friendship-status/:id", async (req, res) => {
                     case false:
                         if (receiverId == otherUserId) {
                             friendshipStatus = {
-                                friendshipStatus: "Cancel Request"
+                                friendshipStatus: "Cancel Request",
+                                buttonText: "Cancel Request"
                             };
                         } else {
                             friendshipStatus = {
-                                friendshipStatus: "Accept"
+                                friendshipStatus: "Accept",
+                                buttonText: "Accept"
                             };
                         }
                         break;
@@ -221,6 +226,7 @@ app.get("/friendship-status/:id", async (req, res) => {
         }
     }
 });
+
 ///////////////////////  POST change-friendship-status  ////////////////////////
 app.post("/change-friendship-status", async (req, res) => {
     console.log("*******change-friendship-status*******");
@@ -437,6 +443,61 @@ app.post("/edit-bio", (req, res) => {
     }
 });
 
+/////////////////////////////////// friends-friends //////////////////////
+app.get("/get-friends", async (req, res) => {
+    console.log("**********  GET FRIENDS  ************");
+    const userId = req.session.userId;
+    console.log("userId", userId);
+    try {
+        const friends = await db.getfriends(userId);
+        console.log("found", friends.rows.length, "friends: ", friends.rows);
+
+        res.json(friends.rows);
+    } catch (err) {
+        console.log("get-friends", err);
+    }
+});
+
+app.post("/accept-friendship", async (req, res) => {
+    const userId = req.session.userId;
+    const otherUserId = req.body.otherUserId;
+
+    try {
+        const acceptRequest = await db.acceptFriendRequest(userId, otherUserId);
+        console.log("friend request accepted", acceptRequest);
+        res.json("Unfriend");
+    } catch (err) {
+        console.log("/accept-friendship", err);
+    }
+});
+
+app.post("/end-friendship", async (req, res) => {
+    const userId = req.session.userId;
+    const otherUserId = req.body.otherUserId;
+
+    try {
+        const unfriend = await db.deleteFriendRequest(userId, otherUserId);
+        console.log("Unfriend", unfriend);
+
+        res.json("Add Friend");
+    } catch (err) {
+        console.log("/end-friendship"), err;
+    }
+});
+//////////////////////////////////////////////////////////////////////////////
+app.post("/forced-friendship", async (req, res) => {
+    console.log("**********  FORCED FRIEND  ************");
+    const userId = req.session.userId;
+    const otherUserId = req.body.id;
+
+    try {
+        const force = await db.forceToBeFriends(userId, otherUserId, true);
+        console.log("forced friendship", force);
+        res.json("Unfriend");
+    } catch (err) {
+        console.log("/forced-friendship", err);
+    }
+});
 ////////////////////////////////////////////////////////////////////////////////
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

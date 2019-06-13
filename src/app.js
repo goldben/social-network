@@ -1,15 +1,15 @@
 import React from "react";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { BrowserRouter, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
+import Friends from "./friends";
 
 export class App extends React.Component {
     constructor(props) {
@@ -101,7 +101,7 @@ export class App extends React.Component {
                                 hideUploader={this.hideUploader}
                             />
                         )}
-
+                        <Route path="/friends" component={Friends} />
                         <Route
                             exact
                             path="/"

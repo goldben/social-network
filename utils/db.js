@@ -75,7 +75,7 @@ module.exports.findUsers = function(text) {
         );
     }
 };
-/////////////////////////////////////////FRIENDSHIPS//////////////////////////////////////////////////
+/////////////////////////////////   FRIENDSHIPS   //////////////////////////////
 
 module.exports.getFriendshipStatus = function(userId, friendId) {
     return db.query(
@@ -103,5 +103,26 @@ module.exports.acceptFriendRequest = function(senderId, receiverId) {
     return db.query(
         `UPDATE friendships SET accepted = true WHERE sender_id = $1 AND receiver_id = $2 RETURNING *`,
         [receiverId, senderId]
+    );
+};
+module.exports.forceToBeFriends = function(senderId, receiverId, accepted) {
+    return db.query(
+        `INSERT INTO friendships (sender_id, receiver_id, accepted) VALUES ($1, $2, $3) RETURNING *`,
+        [senderId, receiverId, accepted]
+    );
+};
+/////////////////////////////////   FRIENDSHIPS   //////////////////////////////
+
+module.exports.getfriends = function(userId) {
+    return db.query(
+        `
+    SELECT users.id, first, last, imgUrl, accepted
+    FROM friendships
+    JOIN users
+    ON (accepted = false AND receiver_id = $1 )
+    OR (accepted = true AND receiver_id = $1 )
+    OR (accepted = true AND sender_id = $1 )
+`,
+        [userId]
     );
 };
