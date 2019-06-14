@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { getFriends } from "./actions";
+import { getFriends, send, accept, unfriend } from "./actions";
 import { Link } from "react-router-dom";
 import { FriendshipButton } from "./friendship-button";
 
@@ -39,7 +39,7 @@ class Friends extends React.Component {
                                                 />
                                             </Link>
                                         </div>
-                                        <div className="info">
+                                        <div className="name">
                                             <Link to={`/user/${friend.id}`}>
                                                 <h3>
                                                     {friend.first} {friend.last}
@@ -47,9 +47,15 @@ class Friends extends React.Component {
                                             </Link>
                                         </div>
                                         <div className="friend-btn">
-                                            <FriendshipButton
-                                                receiverId={friend.id}
-                                            />
+                                            <button
+                                                onClick={e =>
+                                                    this.props.dispatch(
+                                                        unfriend(friend.id)
+                                                    )
+                                                }
+                                            >
+                                                Unfriend
+                                            </button>
                                         </div>
                                     </friends-list-item>
                                 </div>

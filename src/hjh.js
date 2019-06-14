@@ -1,52 +1,72 @@
-<div className="friends-page">
-    <div className="find-main">
-        <div className="filter">
-            <h2> Filter results</h2>
-        </div>
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "./axios";
 
-        <div className="results">
-            {users.length ? (
-                users.map(user => (
-                    <div key={user.id}>
-                        <div className="search-result">
-                            <div className="">
-                                <Link to={`/user/${user.id}`}>
-                                    <img
-                                        src={user.imgurl || "/img/default.png"}
-                                        alt={`${user.first} ${user.last}`}
-                                    />
-                                </Link>
-                            </div>
-                            <div className="info">
-                                <Link to={`/user/${user.id}`}>
-                                    <h3>
-                                        {user.first} {user.last}
-                                    </h3>
-                                </Link>
+export function FriendshipButton({ receiverId }) {
+    let currentStatus;
+    const [friendshipStatus, setStatus] = useState("");
+    useEffect(
+        () => {
+            (async () => {
+                currentStatus = await axios.get(
+                    "/friendship-status/" + receiverId
+                );
+                //    console.log("currentStatus", currentStatus.data);
+                console.log(
+                    "currentStatus.data.friendshipStatus",
+                    currentStatus.data.friendshipStatus
+                );
+                setStatus(currentStatus.data.friendshipStatus);
+            })();
+        },
+        [currentStatus]
+    );
 
-                                <div className="card-bio">
-                                    <p>{user.bio}</p>
-                                </div>
-                            </div>
-                            <div className="friend-btn-container">
-                                <FriendshipButton receiverId={user.id} />
-                                <div className="small-message-btn">...</div>
-                            </div>
-                        </div>
-                    </div>
-                ))
-            ) : (
-                <div className="no-results">
-                    <span>
-                        <p>We couldn't find anything for</p>
-                        <h4>{query}</h4>
-                    </span>
-                    <p>
-                        Looking for people or posts? Try entering a name,
-                        location or different words.
-                    </p>
-                </div>
-            )}
-        </div>
-    </div>
-</div>;
+    console.log("friend button have been rendered!");
+    console.log("currentStatus", currentStatus);
+
+    console.log("friendshipStatus", friendshipStatus);
+    console.log("receiverId", receiverId);
+
+    async function updateFriendship() {
+        console.log("button clicked");
+        let newStatus;
+
+        try {
+            switch (friendshipStatus) {
+                case "Add Friend":
+                    newStatus = await send(id);
+                    console.log("friend request sent: ");
+                    break;
+                case "Cancel Request":
+                    newStatus = await axios.post("/end-friendship", {
+                        otherUserId: receiverId
+                    });
+                    break;
+                case "Unfriend":
+                    newStatus = await axios.post("/end-friendship", {
+                        otherUserId: receiverId
+                    });
+                    break;
+                case "Accept":
+                    newStatus = await axios.post("/accept-friendship", {
+                        otherUserId: receiverId
+                    });
+                    break;
+                default:
+                    console.log("hmm, Iguess something went wrong...");
+            }
+            newStatus = newStatus.data;
+            console.log("newStatus: ", newStatus);
+            setStatus(newStatus);
+        } catch (err) {
+            console.log("/change-friendship-status error", err);
+        }
+    }
+
+    return (
+        <button className="friend-btn" onClick={updateFriendship}>
+            {friendshipStatus}
+        </button>
+    );
+}

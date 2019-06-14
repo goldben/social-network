@@ -7,7 +7,7 @@ export async function getFriends() {
         let data = await axios.get("/get-friends");
         console.log("actions found these friends: ", data.data);
         return {
-            type: "FRIENDS",
+            type: "GET_FRIENDS",
             data: data.data
         };
     } catch (err) {
@@ -16,19 +16,34 @@ export async function getFriends() {
     return {};
 }
 
-export function acceptFriendRequest() {
-    axios.post("/accept-friendship").then(({ data }) => {
-        return {
-            type: "ACCEPT_FRIEND_REQUEST",
-            data: data
-        };
+export async function send(id) {
+    data = await axios.post("/add-friend", {
+        otherUserId: id
     });
+    console.log("action: friend request sent");
+    return {
+        type: "SEND_FRIEND_REQUEST",
+        data: id
+    };
 }
-export function unfriend() {
-    axios.post("/end-friendship").then(({ data }) => {
-        return {
-            type: "UNFRIEND",
-            data: data
-        };
+
+export async function accept(id) {
+    axios.post("/accept-friendship", {
+        otherUserId: id
     });
+    console.log("action: accepted friend request");
+    return {
+        type: "ACCEPT_FRIEND_REQUEST",
+        data: id
+    };
+}
+export function unfriend(id) {
+    axios.post("/end-friendship", {
+        otherUserId: id
+    });
+    console.log("action: end friendship");
+    return {
+        type: "UNFRIEND",
+        data: id
+    };
 }

@@ -336,7 +336,8 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 20px 30px 12px 12px;
+    justify-content: center;
+    padding: 20px 30px 20px 20px;
     color: #385898;
     margin-bottom: 2px;
 }
@@ -359,26 +360,25 @@ header {
 .search-result .card-bio {
     color: black;
     font-size: 12px;
-    width: 22vw;
+    width: 320px;
     height: 50px;
     overflow: hidden;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .friend-btn-container {
     position: relative;
-    top: -35px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     font-size: 13px;
     font-weight: bold;
-    height: 25px;
-    width: 300px;
+    height: 100%;
 }
 .friend-btn {
     color: #4b4f56;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: bold;
     width: 80px;
     height: 25px;
@@ -388,7 +388,7 @@ header {
     color: #4b4f56;
     background-color: lightgrey;
     height: 25px;
-    width: 40px;
+    width: 30px;
     text-align: center;
     border: solid grey 1px;
 }
@@ -451,13 +451,14 @@ friends-list {
 friends-list-item {
     display: inline-block;
     margin: 0 0 13px 13px;
-    padding: 0 10px 0 0;
+    padding: 5px;
     position: relative;
-    width: 100%;
+    width: 90%;
     background: white;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     color: #385898;
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 2px;
@@ -466,4 +467,8 @@ friends img {
     width: 100px;
     height: 100px;
     border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.name {
+    width: 45%;
+    margin-left: 15px;
 }
