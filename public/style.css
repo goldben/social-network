@@ -46,7 +46,6 @@ button {
 }
 
 button:disabled {
-    color: red;
 }
 /*--------------------------------------------------------------------------- */
 
@@ -161,7 +160,6 @@ header {
 /*--------------------profile pic-------------------------- */
 
 .profile-top {
-    margin-bottom: 20px;
 }
 
 .cover-photo-container {
@@ -237,13 +235,28 @@ header {
 }
 
 .timeline-nav-top {
-    position: relative;
-    bottom: ;
     display: flex;
     flex-direction: row;
     background-color: white;
-    height: 50px;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
     width: 100%;
+    padding-left: 200px;
+    padding-right: 150px;
+    margin-bottom: 20px;
+}
+.timeline-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 200px;
+    color: #3b5998;
+    font-weight: bold;
+}
+.timeline-nav-btn:hover {
+    background-color: #f2f3f5;
 }
 /*--------------------uploder-------------------------- */
 
@@ -420,4 +433,12 @@ header {
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+friends {
+	display: flex;
+	fle
+}
+friends img {
+    width: 150px;
+    height: 150px;
 }

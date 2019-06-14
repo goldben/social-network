@@ -55,6 +55,14 @@ export class OtherProfile extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="timeline-nav-top">
+                    <span className="timeline-nav-btn">Timeline</span>
+                    <span className="timeline-nav-btn">About</span>
+                    <span className="timeline-nav-btn">Friends</span>
+                    <span className="timeline-nav-btn">Photos</span>
+                    <span className="timeline-nav-btn">Archive</span>
+                    <span className="timeline-nav-btn">More</span>
+                </div>
                 <div className="profile-bottom">
                     <div className="bio-container">
                         <h3>intro</h3>

@@ -1,5 +1,6 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, Link } from "react-router-dom";
+
 import axios from "./axios";
 import { ProfilePic } from "./profilepic";
 import { Bio } from "./bio";
@@ -27,6 +28,16 @@ export class Profile extends React.Component {
                             </span>
                         </div>
                     </div>
+                </div>
+                <div className="timeline-nav-top">
+                    <span className="timeline-nav-btn">Timeline</span>
+                    <span className="timeline-nav-btn">About</span>
+                    <Link to="/friends" className="timeline-nav-btn">
+                        Friends
+                    </Link>
+                    <span className="timeline-nav-btn">Photos</span>
+                    <span className="timeline-nav-btn">Archive</span>
+                    <span className="timeline-nav-btn">More</span>
                 </div>
                 <div className="profile-bottom">
                     <Bio

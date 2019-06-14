@@ -17,7 +17,7 @@ class Friends extends React.Component {
         }
 
         return (
-            <div>
+            <friends>
                 <div>
                     <h1>Friends list</h1>
                     {this.props.friends.length &&
@@ -75,7 +75,7 @@ class Friends extends React.Component {
                             </div>
                         ))}
                 </div>
-            </div>
+            </friends>
         );
     }
 }
