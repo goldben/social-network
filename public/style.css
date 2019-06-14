@@ -380,7 +380,7 @@ header {
     color: #4b4f56;
     font-size: 13px;
     font-weight: bold;
-    width: 80%;
+    width: 80px;
     height: 25px;
 }
 
@@ -435,10 +435,35 @@ header {
     background-color: #3e8e41;
 }
 friends {
-	display: flex;
-	fle
+    display: flex;
+    flex-direction: column;
+    margin: 0 20% 0;
+    background-color: white;
+}
+friends-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 0.5em;
+    grid-column-gap: 0.5em;
+}
+
+friends-list-item {
+    display: inline-block;
+    margin: 0 0 13px 13px;
+    padding: 0 10px 0 0;
+    position: relative;
+    width: 100%;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #385898;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2px;
 }
 friends img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }

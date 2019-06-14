@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import { getFriends } from "./actions";
 import { Link } from "react-router-dom";
+import { FriendshipButton } from "./friendship-button";
 
 class Friends extends React.Component {
     componentDidMount() {
@@ -19,32 +20,41 @@ class Friends extends React.Component {
         return (
             <friends>
                 <div>
-                    <h1>Friends list</h1>
-                    {this.props.friends.length &&
-                        this.props.friends.map(friend => (
-                            <div key={friend.id}>
-                                <div className="">
-                                    <Link to={`/user/${friend.id}`}>
-                                        <img
-                                            src={
-                                                friend.imgurl ||
-                                                "/img/default.png"
-                                            }
-                                            alt={`${friend.first} ${
-                                                friend.last
-                                            }`}
-                                        />
-                                    </Link>
+                    <h1>Friends</h1>
+                    <friends-list>
+                        {this.props.friends.length &&
+                            this.props.friends.map(friend => (
+                                <div key={friend.id}>
+                                    <friends-list-item>
+                                        <div className="">
+                                            <Link to={`/user/${friend.id}`}>
+                                                <img
+                                                    src={
+                                                        friend.imgurl ||
+                                                        "/img/default.png"
+                                                    }
+                                                    alt={`${friend.first} ${
+                                                        friend.last
+                                                    }`}
+                                                />
+                                            </Link>
+                                        </div>
+                                        <div className="info">
+                                            <Link to={`/user/${friend.id}`}>
+                                                <h3>
+                                                    {friend.first} {friend.last}
+                                                </h3>
+                                            </Link>
+                                        </div>
+                                        <div className="friend-btn">
+                                            <FriendshipButton
+                                                receiverId={friend.id}
+                                            />
+                                        </div>
+                                    </friends-list-item>
                                 </div>
-                                <div className="info">
-                                    <Link to={`/user/${friend.id}`}>
-                                        <h3>
-                                            {friend.first} {friend.last}
-                                        </h3>
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                    </friends-list>
                 </div>
                 <div>
                     <h1>Pending list</h1>
