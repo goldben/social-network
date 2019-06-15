@@ -39,6 +39,8 @@ export class Uploader extends React.Component {
                 >
                     X
                 </div>
+                <img src={this.props.imageUrl} />
+
                 <p>change profile image</p>
 
                 <form>

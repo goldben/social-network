@@ -36,17 +36,17 @@ export class Profile extends React.Component {
         });
     }
     render() {
-        console.log(this.props);
+        console.log(this.state);
         let coverImgurl;
         if (this.state.coverImgUrl) {
-            coverImgurl = `url(${this.state.coverImgUrl})`;
+            coverImgurl = this.state.coverImgUrl;
         } else {
             coverImgurl =
-                'url("https://images.unsplash.com/photo-1557502706-5a0e03129173")';
+                "https://images.unsplash.com/photo-1557502706-5a0e03129173";
         }
-
+        let image = `url("${coverImgurl}")`;
         let backgroundImg = {
-            backgroundImage: coverImgurl,
+            backgroundImage: image,
             backgroundSize: "cover",
             height: "300px",
             width: "100%",
@@ -108,6 +108,7 @@ export class Profile extends React.Component {
                     <Uploader
                         hideUploader={this.hideUploader}
                         uploaded={this.uploaded}
+                        coverImageUrl={coverImgurl}
                     />
                 )}
             </div>
