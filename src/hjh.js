@@ -1,72 +1,35 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import axios from "./axios";
+app.post("/cover-upload", uploader.single("file"), s3.upload, function(
+    req,
+    res
+) {
+    console.log(req.body);
+    console.log("req.file: ", req.file);
+    var url = `${amazonUrl}${req.file.filename}`;
 
-export function FriendshipButton({ receiverId }) {
-    let currentStatus;
-    const [friendshipStatus, setStatus] = useState("");
-    useEffect(
-        () => {
-            (async () => {
-                currentStatus = await axios.get(
-                    "/friendship-status/" + receiverId
-                );
-                //    console.log("currentStatus", currentStatus.data);
-                console.log(
-                    "currentStatus.data.friendshipStatus",
-                    currentStatus.data.friendshipStatus
-                );
-                setStatus(currentStatus.data.friendshipStatus);
-            })();
-        },
-        [currentStatus]
-    );
+    if (req.file) {
+        let userId = req.session.userId;
 
-    console.log("friend button have been rendered!");
-    console.log("currentStatus", currentStatus);
-
-    console.log("friendshipStatus", friendshipStatus);
-    console.log("receiverId", receiverId);
-
-    async function updateFriendship() {
-        console.log("button clicked");
-        let newStatus;
-
-        try {
-            switch (friendshipStatus) {
-                case "Add Friend":
-                    newStatus = await send(id);
-                    console.log("friend request sent: ");
-                    break;
-                case "Cancel Request":
-                    newStatus = await axios.post("/end-friendship", {
-                        otherUserId: receiverId
-                    });
-                    break;
-                case "Unfriend":
-                    newStatus = await axios.post("/end-friendship", {
-                        otherUserId: receiverId
-                    });
-                    break;
-                case "Accept":
-                    newStatus = await axios.post("/accept-friendship", {
-                        otherUserId: receiverId
-                    });
-                    break;
-                default:
-                    console.log("hmm, Iguess something went wrong...");
-            }
-            newStatus = newStatus.data;
-            console.log("newStatus: ", newStatus);
-            setStatus(newStatus);
-        } catch (err) {
-            console.log("/change-friendship-status error", err);
-        }
+        db.uploadCoverImg(userId, url)
+            .then(results => {
+                console.log(results);
+                console.log("uploaded successfuly. image url: ", url);
+                res.json({
+                    imageUrl: url,
+                    success: true
+                });
+            })
+            .catch(e => {
+                console.log("error at /uplaod", e);
+            });
+    } else {
+        res.json({
+            success: false
+        });
     }
+});
 
-    return (
-        <button className="friend-btn" onClick={updateFriendship}>
-            {friendshipStatus}
-        </button>
-    );
-}
+{this.state.uploaderVisible && (
+	<Uploader
+		uploaded={this.uploaded}
+		onBlur={e => {this.state.uploaderVisible = false}						/>
+)}

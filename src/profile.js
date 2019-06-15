@@ -1,6 +1,6 @@
 import React from "react";
 import { HashRouter, Route, Link } from "react-router-dom";
-
+import { Uploader } from "./cover-uploader";
 import axios from "./axios";
 import { ProfilePic } from "./profilepic";
 import { Bio } from "./bio";
@@ -8,12 +8,61 @@ import { Bio } from "./bio";
 export class Profile extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            uploaderVisible: false,
+            coverImgUrl: this.props.coverImgUrl
+        };
+        this.uploaded = this.uploaded.bind(this);
+        this.showUploader = this.showUploader.bind(this);
+        this.hideUploader = this.hideUploader.bind(this);
+    }
+    showUploader() {
+        this.setState({
+            uploaderVisible: true
+        });
+    }
+    hideUploader() {
+        this.setState({
+            uploaderVisible: false
+        });
+    }
+
+    uploaded(url) {
+        this.setState({
+            imageUrl: url,
+            uploaderVisible: false
+        });
     }
     render() {
+        console.log(this.props);
+        let coverImgurl;
+        if (this.state.coverImgUrl) {
+            coverImgurl = `url(${this.state.coverImgUrl})`;
+        } else {
+            coverImgurl =
+                'url("https://images.unsplash.com/photo-1557502706-5a0e03129173")';
+        }
+
+        let backgroundImg = {
+            backgroundImage: coverImgurl,
+            backgroundSize: "cover",
+            height: "300px",
+            width: "100%",
+            borderBottom: "solid #d4dce9 1px",
+            borderLeft: "solid #d4dce9 1px",
+            borderRight: "solid #d4dce9 1px",
+            color: "white"
+        };
         return (
             <div className="profile-container">
                 <div className="profile-top">
-                    <div className="cover-photo-container">
+                    <div
+                        style={backgroundImg}
+                        onClick={() => {
+                            this.showUploader();
+                            console.log("click", this.state.uploaderVisible);
+                        }}
+                    >
                         <ProfilePic
                             imageUrl={this.props.imageUrl}
                             first={this.props.first}
@@ -48,6 +97,12 @@ export class Profile extends React.Component {
                         <h1>posts</h1>
                     </div>
                 </div>
+                {this.state.uploaderVisible && (
+                    <Uploader
+                        hideUploader={this.hideUploader}
+                        uploaded={this.uploaded}
+                    />
+                )}
             </div>
         );
     }

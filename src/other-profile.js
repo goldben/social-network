@@ -26,11 +26,29 @@ export class OtherProfile extends React.Component {
     }
 
     render() {
+        let coverImgurl;
+        if (this.props.coverImgUrl) {
+            coverImgurl = `url(${this.props.coverImgUrl})`;
+        } else {
+            coverImgurl =
+                'url("https://images.unsplash.com/photo-1557502706-5a0e03129173")';
+        }
+
+        let backgroundImg = {
+            backgroundImage: coverImgurl,
+            height: "300px",
+            width: "100%",
+            borderBottom: "solid #d4dce9 1px",
+            borderLeft: "solid #d4dce9 1px",
+            borderRight: "solid #d4dce9 1px",
+            color: "white"
+        };
+
         console.log("other profile this.state: ", this.state);
         return (
             <div className="profile-container">
                 <div className="profile-top">
-                    <div className="cover-photo-container">
+                    <div style={backgroundImg}>
                         <div className="profile-img-container">
                             <img
                                 src={this.state.imgurl}
@@ -38,7 +56,6 @@ export class OtherProfile extends React.Component {
                                 alt={`${this.state.first} ${this.state.last}`}
                             />
                         </div>
-
                         <div className="cover-content">
                             <span className="cover-name">
                                 <h1>

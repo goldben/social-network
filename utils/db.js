@@ -21,6 +21,14 @@ module.exports.uploadImg = function(userId, url) {
         [userId, url]
     );
 };
+module.exports.uploadCoverImg = function(userId, url) {
+    return db.query(
+        `UPDATE users
+			SET coverImgUrl = $2
+			WHERE id = $1`,
+        [userId, url]
+    );
+};
 
 module.exports.updateBio = function(userId, bio) {
     return db.query(

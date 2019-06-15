@@ -16,8 +16,8 @@ export async function getFriends() {
     return {};
 }
 
-export async function send(id) {
-    data = await axios.post("/add-friend", {
+export function send(id) {
+    axios.post("/add-friend", {
         otherUserId: id
     });
     console.log("action: friend request sent");
@@ -27,7 +27,7 @@ export async function send(id) {
     };
 }
 
-export async function accept(id) {
+export function accept(id) {
     axios.post("/accept-friendship", {
         otherUserId: id
     });

@@ -16,7 +16,7 @@ export class App extends React.Component {
         super(props);
         this.state = {
             uploaderVisible: false,
-            query: "default"
+            query: "last3"
         };
         this.updateBio = this.updateBio.bind(this);
         this.uploaded = this.uploaded.bind(this);
@@ -57,7 +57,9 @@ export class App extends React.Component {
     }
 
     render() {
+        console.log(this.state.coverImgUrl);
         const imageUrl = this.state.imageUrl || "/img/default.png";
+        const coverImgUrl = this.state.coverImgUrl;
         const id = this.state.id;
         const first = this.state.first;
         const last = this.state.last;
@@ -108,6 +110,7 @@ export class App extends React.Component {
                             render={() => (
                                 <Profile
                                     imageUrl={imageUrl}
+                                    coverImgUrl={coverImgUrl}
                                     id={id}
                                     first={first}
                                     last={last}

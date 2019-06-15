@@ -95,14 +95,7 @@ app.get("/user", (req, res) => {
             .then(results => {
                 const userData = results.rows[0];
                 console.log("got user data: ", userData);
-                res.json({
-                    id: userData.id,
-                    first: userData.first,
-                    last: userData.last,
-                    bio: userData.bio,
-                    imageUrl: userData.imgurl,
-                    success: true
-                });
+                res.json({ userData });
             })
             .catch(err => {
                 console.log("GET USER DATA", err);
@@ -358,6 +351,36 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
         });
     }
 });
+app.post("/upload-cover", uploader.single("file"), s3.upload, function(
+    req,
+    res
+) {
+    console.log(req.body);
+    console.log("req.file: ", req.file);
+    var url = `${amazonUrl}${req.file.filename}`;
+
+    if (req.file) {
+        let userId = req.session.userId;
+
+        db.uploadCoverImg(userId, url)
+            .then(results => {
+                console.log(results);
+                console.log("uploaded successfuly. image url: ", url);
+                res.json({
+                    imageUrl: url,
+                    success: true
+                });
+            })
+            .catch(e => {
+                console.log("error at /uplaod", e);
+            });
+    } else {
+        res.json({
+            success: false
+        });
+    }
+});
+
 ////////////////////////////////// EDIT BIO ////////////////////////////////////////
 
 app.post("/edit-bio", (req, res) => {

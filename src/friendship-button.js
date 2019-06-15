@@ -36,10 +36,9 @@ export function FriendshipButton({ receiverId }) {
         try {
             switch (friendshipStatus) {
                 case "Add Friend":
-                    (newStatus = await send),
-                        {
-                            otherUserId: receiverId
-                        };
+                    newStatus = await axios.post("/add-friend", {
+                        otherUserId: receiverId
+                    });
                     console.log("friend request sent: ");
                     break;
                 case "Cancel Request":
