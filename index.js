@@ -95,7 +95,15 @@ app.get("/user", (req, res) => {
             .then(results => {
                 const userData = results.rows[0];
                 console.log("got user data: ", userData);
-                res.json({ userData });
+                res.json({
+                    id: userData.id,
+                    first: userData.first,
+                    last: userData.last,
+                    bio: userData.bio,
+                    imageUrl: userData.imgurl,
+                    coverImgUrl: userData.coverimgurl,
+                    success: true
+                });
             })
             .catch(err => {
                 console.log("GET USER DATA", err);

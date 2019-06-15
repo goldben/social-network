@@ -4,6 +4,8 @@ import { Uploader } from "./cover-uploader";
 import axios from "./axios";
 import { ProfilePic } from "./profilepic";
 import { Bio } from "./bio";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -57,12 +59,17 @@ export class Profile extends React.Component {
             <div className="profile-container">
                 <div className="profile-top">
                     <div
+                        className="cover-img-container"
                         style={backgroundImg}
                         onClick={() => {
                             this.showUploader();
                             console.log("click", this.state.uploaderVisible);
                         }}
                     >
+                        <span className="popup">
+                            <FontAwesomeIcon icon={faCamera} />
+                            <p>Upload Cover Photo</p>
+                        </span>
                         <ProfilePic
                             imageUrl={this.props.imageUrl}
                             first={this.props.first}

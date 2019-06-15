@@ -7,7 +7,13 @@ export default function reducer(state = {}, action) {
         case "SEND_FRIEND_REQUEST":
             return { ...state, friends: action.data };
         case "ACCEPT_FRIEND_REQUEST":
-            return { ...state, friend: action.data };
+            return {
+                ...state,
+                friend: state.friends.map(friend => {
+                    friend.accepted = true;
+                    return friend;
+                })
+            };
         case "UNFRIEND":
             return {
                 ...state,

@@ -153,14 +153,12 @@ header {
 }
 /*---------------------------------profile---------------------------------- */
 .profile-container {
+    width: 930px;
     margin: 0 20% 0;
     height: 100vh;
 }
 
 /*--------------------profile pic-------------------------- */
-
-.profile-top {
-}
 
 .cover-content {
     width: 100%;
@@ -172,6 +170,33 @@ header {
     bottom: -80px;
     left: 210px;
 }
+.cover-img-container:hover {
+    cursor: pointer;
+}
+.cover-img-container:hover .popup {
+    opacity: 0.8;
+}
+.popup {
+    position: relative;
+    top: 25px;
+    left: 25px;
+    background: #1c1e21;
+    color: white;
+    padding: 5px 10px;
+    border: solid white 1px;
+    border-radius: 3px;
+    height: 34px;
+    opacity: 0.1;
+    cursor: pointer;
+    transition: opacity 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        width 0.3s step-end;
+}
+.popup p {
+    display: inline-block;
+    position: relative;
+    margin-left: 10px;
+}
+
 .cover-name {
     width: 400px;
 }
@@ -205,22 +230,27 @@ header {
 }
 
 .overlay {
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     color: white;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    opacity: 0.5;
     overflow: hidden;
     width: 150px;
     height: 0;
     border-bottom-left-radius: 150px;
     border-bottom-right-radius: 150px;
     transition: 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .profile-img-container:hover .overlay {
-    background-color: black;
     height: 75px;
 }
 
@@ -232,7 +262,7 @@ header {
     justify-content: center;
     height: 40px;
     width: 100%;
-    padding-left: 200px;
+    padding-left: 250px;
     padding-right: 150px;
     margin-bottom: 20px;
 }

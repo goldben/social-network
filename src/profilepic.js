@@ -11,9 +11,12 @@ export function ProfilePic({ showUploader, imageUrl, first, last }) {
                 className="profile-img"
                 alt={`${first} ${last}`}
             />
-            <div className="overlay" onClick={showUploader} />
-            <FontAwesomeIcon icon={faCamera} />
-            <h3>Update</h3>
+            <div className="overlay" onClick={showUploader}>
+                <div>
+                    <FontAwesomeIcon icon={faCamera} />
+                    <h3>Update</h3>
+                </div>
+            </div>
         </div>
     );
 }
