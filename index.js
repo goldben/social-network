@@ -481,6 +481,18 @@ app.post("/forced-friendship", async (req, res) => {
         console.log("/forced-friendship", err);
     }
 });
+app.post("/forced-request", async (req, res) => {
+    console.log("**********  FORCED REQUEST  ************");
+    const userId = req.session.userId;
+    const otherUserId = req.body.id;
+    try {
+        const force = await db.forceRequest(otherUserId, userId);
+        console.log("Force Request: ", force);
+        res.json("Accept");
+    } catch (err) {
+        console.log("/forced-request: ", err);
+    }
+});
 ////////////////////////////////////////////////////////////////////////////////
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/index.html");

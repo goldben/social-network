@@ -119,6 +119,12 @@ module.exports.forceToBeFriends = function(senderId, receiverId, accepted) {
         [senderId, receiverId, accepted]
     );
 };
+module.exports.forceRequest = function(senderId, receiverId) {
+    return db.query(
+        `INSERT INTO friendships (sender_id, receiver_id) VALUES ($1, $2) RETURNING *`,
+        [senderId, receiverId]
+    );
+};
 /////////////////////////////////   FRIENDSHIPS   //////////////////////////////
 
 module.exports.getfriends = function(userId) {

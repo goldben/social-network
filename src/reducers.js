@@ -9,8 +9,10 @@ export default function reducer(state = {}, action) {
         case "ACCEPT_FRIEND_REQUEST":
             return {
                 ...state,
-                friend: state.friends.map(friend => {
-                    friend.accepted = true;
+                friends: state.friends.map(friend => {
+                    if (friend.id == action.data) {
+                        friend.accepted = true;
+                    }
                     return friend;
                 })
             };

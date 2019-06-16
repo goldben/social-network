@@ -65,31 +65,46 @@ class Friends extends React.Component {
                 <div>
                     <h1>Pending list</h1>
 
-                    {this.props.pending.length &&
-                        this.props.pending.map(friend => (
-                            <div key={friend.id}>
-                                <div className="">
-                                    <Link to={`/user/${friend.id}`}>
-                                        <img
-                                            src={
-                                                friend.imgurl ||
-                                                "/img/default.png"
-                                            }
-                                            alt={`${friend.first} ${
-                                                friend.last
-                                            }`}
-                                        />
-                                    </Link>
+                    <pending-list>
+                        {this.props.pending.length &&
+                            this.props.pending.map(friend => (
+                                <div key={friend.id}>
+                                    <pending-list-item>
+                                        <div className="">
+                                            <Link to={`/user/${friend.id}`}>
+                                                <img
+                                                    src={
+                                                        friend.imgurl ||
+                                                        "/img/default.png"
+                                                    }
+                                                    alt={`${friend.first} ${
+                                                        friend.last
+                                                    }`}
+                                                />
+                                            </Link>
+                                        </div>
+                                        <div className="name">
+                                            <Link to={`/user/${friend.id}`}>
+                                                <h3>
+                                                    {friend.first} {friend.last}
+                                                </h3>
+                                            </Link>
+                                        </div>
+                                        <div className="friend-btn">
+                                            <button
+                                                onClick={e =>
+                                                    this.props.dispatch(
+                                                        accept(friend.id)
+                                                    )
+                                                }
+                                            >
+                                                Accept
+                                            </button>
+                                        </div>
+                                    </pending-list-item>
                                 </div>
-                                <div className="info">
-                                    <Link to={`/user/${friend.id}`}>
-                                        <h3>
-                                            {friend.first} {friend.last}
-                                        </h3>
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                    </pending-list>
                 </div>
             </friends>
         );

@@ -28,11 +28,23 @@ export function ForcedFriendshipButton({ receiverId, name }) {
     console.log("friendshipStatus", friendshipStatus);
     console.log("receiverId", receiverId);
 
-    async function updateFriendship() {
+    async function forceFriendship() {
         console.log("button clicked");
         try {
-            console.log("trying");
             let newStatus = await axios.post("/forced-friendship", {
+                id: receiverId
+            });
+            newStatus = newStatus.data;
+            console.log("newStatus: ", newStatus);
+            setStatus(newStatus);
+        } catch (e) {
+            console.log("friendship button error: ", e);
+        }
+    }
+    async function forceRequest() {
+        console.log("button clicked");
+        try {
+            let newStatus = await axios.post("/forced-request", {
                 id: receiverId
             });
             newStatus = newStatus.data;
@@ -44,8 +56,13 @@ export function ForcedFriendshipButton({ receiverId, name }) {
     }
 
     return (
-        <button className="friend-btn" onClick={updateFriendship}>
-            F
-        </button>
+        <div>
+            <button className="friend-btn" onClick={forceFriendship}>
+                Force Friendship
+            </button>
+            <button className="friend-btn" onClick={forceRequest}>
+                Force Request
+            </button>
+        </div>
     );
 }
