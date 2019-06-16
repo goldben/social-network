@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { getFriends, send, accept, unfriend } from "./actions";
 import { Link } from "react-router-dom";
 import { FriendshipButton } from "./friendship-button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 class Friends extends React.Component {
     componentDidMount() {
@@ -18,7 +20,7 @@ class Friends extends React.Component {
         }
 
         return (
-            <friends>
+            <div className="friends">
                 <div>
                     <h1>Friends</h1>
                     <friends-list>
@@ -47,15 +49,42 @@ class Friends extends React.Component {
                                             </Link>
                                         </div>
                                         <div className="friend-btn">
-                                            <button
-                                                onClick={e =>
-                                                    this.props.dispatch(
-                                                        unfriend(friend.id)
-                                                    )
-                                                }
-                                            >
-                                                Unfriend
-                                            </button>
+                                            <div className="dropdown">
+                                                <button className="friend-btn">
+                                                    <FontAwesomeIcon
+                                                        icon={faCheck}
+                                                    />
+                                                    &nbsp;Friends
+                                                </button>
+                                                <div className="dropdown-content">
+                                                    <a href="#">
+                                                        Get notifications
+                                                    </a>
+                                                    <div className="border">
+                                                        <a href="#">
+                                                            Close friends
+                                                        </a>
+                                                        <a href="#">
+                                                            acquaintances
+                                                        </a>
+                                                        <a href="#">
+                                                            Add to another list
+                                                        </a>
+                                                    </div>
+                                                    <a
+                                                        href="#"
+                                                        onClick={e =>
+                                                            this.props.dispatch(
+                                                                unfriend(
+                                                                    friend.id
+                                                                )
+                                                            )
+                                                        }
+                                                    >
+                                                        Unfriend
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </friends-list-item>
                                 </div>
@@ -90,8 +119,9 @@ class Friends extends React.Component {
                                                 </h3>
                                             </Link>
                                         </div>
-                                        <div className="friend-btn">
+                                        <div>
                                             <button
+                                                className="friend-btn"
                                                 onClick={e =>
                                                     this.props.dispatch(
                                                         accept(friend.id)
@@ -106,12 +136,10 @@ class Friends extends React.Component {
                             ))}
                     </pending-list>
                 </div>
-            </friends>
+            </div>
         );
     }
 }
-
-// return { myAnimals: state.listAnimals };
 
 const mapStateToProps = state => {
     if (state.friends) {
@@ -124,8 +152,6 @@ const mapStateToProps = state => {
                 pending.push(item);
             }
         });
-        // let friends = state.friends_wannabes.filter(accepted == true);
-        // let pending = state.friends_wannabes.filter(accepted == false);
     }
 
     return {

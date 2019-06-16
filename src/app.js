@@ -80,7 +80,7 @@ export class App extends React.Component {
                             />
                             <FindPeopleInHeader />
                             <div className="nav-bar-1">
-                                <Link to="/" className="nav-btn">
+                                <Link to="/profile" className="nav-btn">
                                     <img src={imageUrl} />
                                     <p>{first}</p>
                                 </Link>
@@ -104,10 +104,9 @@ export class App extends React.Component {
                                 imageUrl={imageUrl}
                             />
                         )}
-                        <Route path="/friends" component={Friends} />
                         <Route
                             exact
-                            path="/"
+                            path="/profile"
                             render={() => (
                                 <Profile
                                     imageUrl={imageUrl}

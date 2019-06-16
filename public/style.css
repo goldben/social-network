@@ -153,11 +153,18 @@ header {
 }
 /*---------------------------------profile---------------------------------- */
 .profile-container {
-    width: 930px;
+    width: 950px;
     margin: 0 20% 0;
     height: 100vh;
 }
-
+.profile-top {
+}
+.profile-bottom {
+    display: flex;
+    flex-direction: row;
+}
+.profile-bottom > {
+}
 /*--------------------profile pic-------------------------- */
 
 .cover-content {
@@ -340,11 +347,6 @@ header {
     border-radius: 5px;
 }
 
-.profile-bottom {
-    display: flex;
-    flex-direction: row;
-}
-
 .bio-container {
     word-wrap: break-word;
     margin-right: 15px;
@@ -445,13 +447,16 @@ header {
 /*--------------------dropdown-------------------------- */
 
 .dropbtn {
-    background-color: #4caf50;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
 }
-
+.border {
+    margin: 10px;
+    border-top: solid lightgrey 1px;
+    border-bottom: solid lightgrey 1px;
+}
 .dropdown {
     position: relative;
     display: inline-block;
@@ -461,20 +466,23 @@ header {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
+    border: solid grey 1px;
+    min-width: 190px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
 }
 
 .dropdown-content a {
     color: black;
-    padding: 12px 16px;
+    padding: 5px 20px;
     text-decoration: none;
     display: block;
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background: #3b5998;
 }
 
 .dropdown:hover .dropdown-content {
@@ -484,10 +492,12 @@ header {
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
-friends {
+.friends {
+    width: 950px;
+
+    font-size: 12px;
     display: flex;
     flex-direction: column;
-    margin: 0 20% 0;
     background-color: white;
 }
 friends-list,
@@ -503,24 +513,22 @@ friends-list-item,
 pending-list-item {
     display: inline-block;
     margin: 0 0 13px 13px;
-    padding: 5px;
     position: relative;
     width: 90%;
     background: white;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     color: #385898;
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 2px;
 }
-friends img {
+.friends img {
     width: 100px;
     height: 100px;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .name {
-    width: 45%;
+    width: 38%;
     margin-left: 15px;
 }
