@@ -36,59 +36,77 @@ export class Registration extends React.Component {
     }
     render() {
         return (
-            <div className="registration-form">
-                <div>
-                    <h1 className="title">Welcome to BrainDead</h1>
+            <div className="registration-container">
+                <div className="recent-logins">
+                    <div>
+                        <h1>Recent logins</h1>
+                        <p>Click your picture or add an account.</p>
+                    </div>
+                    <div className="Add Acount">Add Account</div>
+                    <div> sfdfdsfdsfdsf</div>
                 </div>
-                <form
-                    onSubmit={e => this.submit(e)}
-                    className="registration-form"
-                >
-                    <input
-                        name="first"
-                        type="text"
-                        placeholder="first name"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <input
-                        name="last"
-                        type="text"
-                        placeholder="last name"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="email"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="password"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <button
-                        disabled={!this.state.first}
-                        className="registration-form-btn"
-                        type="submit"
-                        onClick={e => this.submit(e)}
+                <div className="registration-form">
+                    <div>
+                        <h1>Create a new account</h1>
+                        <p>It's free and always will be.</p>
+                    </div>
+                    <form
+                        onSubmit={e => this.submit(e)}
+                        className="registration-form"
                     >
-                        register
-                    </button>
+                        <div className="name-input">
+                            <input
+                                name="first"
+                                type="text"
+                                placeholder="first name"
+                                required
+                                onChange={e => this.handleChange(e)}
+                            />
+                            <input
+                                name="last"
+                                type="text"
+                                placeholder="last name"
+                                required
+                                onChange={e => this.handleChange(e)}
+                            />
+                        </div>
+                        <input
+                            name="email"
+                            type="email"
+                            placeholder="email"
+                            required
+                            onChange={e => this.handleChange(e)}
+                        />
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="password"
+                            required
+                            onChange={e => this.handleChange(e)}
+                        />
+                        <div className="terms">
+                            By clicking Sign Up, you agree to our Terms. Learn
+                            how we collect, use and share your data in our Data
+                            Policy and how we use cookies and similar technology
+                            in our Cookie Policy. You may receive SMS
+                            notifications from us and can opt out at any time.
+                        </div>
+                        <button
+                            disabled={!this.state.first}
+                            className="registration-form-btn"
+                            type="submit"
+                            onClick={e => this.submit(e)}
+                        >
+                            <h3>Sign Up</h3>
+                        </button>
 
-                    {this.state.error && (
-                        <div className="error-message">{this.state.error}</div>
-                    )}
-
-                    <p>
-                        Already a member? <Link to="/login"> Login </Link>
-                    </p>
-                </form>
+                        {this.state.error && (
+                            <div className="error-message">
+                                {this.state.error}
+                            </div>
+                        )}
+                    </form>
+                </div>
             </div>
         );
     }

@@ -38,39 +38,45 @@ export class Login extends React.Component {
     }
     render() {
         return (
-            <div className="login-form">
-                <div>
-                    <h1 className="title">Welcome to BrainDead</h1>
+            <div className="bluebar">
+                <h1>fakebook</h1>
+                <div className="login-form">
+                    <div>
+                        <span>email</span>
+                        <span> passsword</span>
+                    </div>
+                    <form onSubmit={e => this.submit(e)}>
+                        <input
+                            name="email"
+                            type="email"
+                            placeholder="email"
+                            required
+                            onChange={e => this.handleChange(e)}
+                        />
+                        <div>
+                            <input
+                                name="password"
+                                type="password"
+                                placeholder="password"
+                                required
+                                onChange={e => this.handleChange(e)}
+                            />
+                            Forgotten account?
+                        </div>
+                        <button
+                            disabled={!this.state.email}
+                            className="login-form-btn"
+                            type="submit"
+                        >
+                            Login
+                        </button>
+                        {this.state.error && (
+                            <div className="error-message">
+                                {this.state.error}
+                            </div>
+                        )}
+                    </form>
                 </div>
-                <form onSubmit={e => this.submit(e)}>
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="email"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="password"
-                        required
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <button
-                        disabled={!this.state.email}
-                        className="login-form-btn"
-                        type="submit"
-                    >
-                        Login
-                    </button>
-                    {this.state.error && (
-                        <div className="error-message">{this.state.error}</div>
-                    )}
-                    <p>
-                        Not yet a member? <Link to="/"> Register </Link>
-                    </p>
-                </form>
             </div>
         );
     }

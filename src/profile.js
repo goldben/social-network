@@ -2,12 +2,11 @@ import React from "react";
 import { BrowserRouter, HashRouter, Route, Link } from "react-router-dom";
 import Friends from "./friends";
 import About from "./about";
+import { PhotoViewer } from "./photo-viewer";
 
 import { Uploader } from "./cover-uploader";
 import axios from "./axios";
 import { ProfilePic } from "./profilepic";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -66,16 +65,11 @@ export class Profile extends React.Component {
                             style={backgroundImg}
                             onClick={() => {
                                 this.showUploader();
-                                console.log(
-                                    "click",
-                                    this.state.uploaderVisible
-                                );
+                                console.log("click", "show image viewer");
                             }}
                         >
-                            <span className="popup">
-                                <FontAwesomeIcon icon={faCamera} />
-                                <p>Upload Cover Photo</p>
-                            </span>
+                            <div className="clicker" />
+                            <Uploader />
                             <ProfilePic
                                 imageUrl={this.props.imageUrl}
                                 first={this.props.first}
@@ -115,10 +109,13 @@ export class Profile extends React.Component {
                         />
                     </div>
                     {this.state.uploaderVisible && (
-                        <Uploader
+                        <PhotoViewer
                             hideUploader={this.hideUploader}
                             uploaded={this.uploaded}
                             coverImageUrl={coverImgurl}
+                            imageUrl={this.props.imageUrl}
+                            first={this.props.first}
+                            last={this.props.last}
                         />
                     )}
                 </div>

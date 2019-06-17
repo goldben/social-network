@@ -8,10 +8,21 @@ export function Welcome() {
         <div className="welcome-wrapper">
             <HashRouter>
                 <div>
-                    <Route exact path="/" component={Registration} />
-                    <Route path="/login" component={Login} />
+                    <Login />
+                    <Registration />
                 </div>
             </HashRouter>
+            <div>
+                <div className="languages">
+                    English (UK) Deutsch Türkçe Polski Italiano Română Français
+                    (France) Русский العربية Español Português (Brasil) Sign
+                    UpLog InMessengerFacebook Lite Watch PeopleProfilesPagesPage
+                    categoriesEventsPlacesGamesLocationsMarketplaceGroupsInstagramLocalFundraisersServicesAboutCreate
+                    adCreate PageDevelopersCareersPrivacyCookiesAdChoices
+                    Impressum/Terms/NetzDGAccount securityLogin helpHelp
+                    Settings Activity log Facebook © 2019
+                </div>
+            </div>
         </div>
     );
 }

@@ -9,7 +9,6 @@ import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
-import Friends from "./friends";
 
 export class App extends React.Component {
     constructor(props) {

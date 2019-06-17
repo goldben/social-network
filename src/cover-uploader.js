@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 export class Uploader extends React.Component {
     constructor(props) {
         super(props);
@@ -32,36 +33,28 @@ export class Uploader extends React.Component {
     render() {
         console.log("props in uploader", this.props);
         return (
-            <div className="uploader">
-                <div
-                    className="x-uploader-btn"
-                    onClick={this.props.hideUploader}
-                >
-                    X
-                </div>
-                <div className="update-container">
-                    <div className="update-img">
-                        <img src={this.props.coverImageUrl} alt="cover-image" />
-                    </div>
-                    <div className="update-img-form">
-                        <p>change profile image</p>
+            <div className="dropdown">
+                <span className="popup">
+                    <FontAwesomeIcon icon={faCamera} />
+                    <p>Upload Cover Photo</p>
+                </span>
+                <div className="dropdown-content">
+                    <a href="#">select photo</a>
+                    <form>
+                        <input
+                            type="file"
+                            name="file"
+                            onChange={e => this.handleChange(e)}
+                        />
 
-                        <form>
-                            <input
-                                type="file"
-                                name="file"
-                                onChange={e => this.handleChange(e)}
-                            />
-
-                            <button
-                                type="button"
-                                className="upload-btn"
-                                onClick={e => this.submit(e)}
-                            >
-                                Upload
-                            </button>
-                        </form>
-                    </div>
+                        <button
+                            type="button"
+                            className="upload-btn"
+                            onClick={e => this.submit(e)}
+                        >
+                            Upload
+                        </button>
+                    </form>
                 </div>
             </div>
         );
