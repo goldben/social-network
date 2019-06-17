@@ -267,7 +267,7 @@ header {
     background-color: white;
     align-items: center;
     justify-content: center;
-    height: 40px;
+    height: 45px;
     width: 100%;
     padding-left: 250px;
     padding-right: 150px;
@@ -315,7 +315,9 @@ header {
 .x-uploader-btn:hover {
     color: white;
 }
-
+.update-container {
+    height: 70%;
+}
 .update-img {
     width: 660px;
     height: 371px;
@@ -328,12 +330,12 @@ header {
     width: 100%;
 }
 .update-img-form {
-    height: 70%;
+    max-height: 100%;
     background-color: white;
 }
 
 .upload-btn {
-    position: absolute;
+    position: relative;
     bottom: 10px;
     width: 150px;
     margin-left: 5px;

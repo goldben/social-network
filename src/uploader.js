@@ -39,25 +39,28 @@ export class Uploader extends React.Component {
                 >
                     X
                 </div>
-                <img src={this.props.imageUrl} />
+                <div className="update-img">
+                    <img src={this.props.imageUrl} />
+                </div>
+                <div className="update-img-form">
+                    <p>change profile image</p>
 
-                <p>change profile image</p>
+                    <form>
+                        <input
+                            type="file"
+                            name="file"
+                            onChange={e => this.handleChange(e)}
+                        />
 
-                <form>
-                    <input
-                        type="file"
-                        name="file"
-                        onChange={e => this.handleChange(e)}
-                    />
-
-                    <button
-                        type="button"
-                        className="upload-btn"
-                        onClick={e => this.submit(e)}
-                    >
-                        Upload
-                    </button>
-                </form>
+                        <button
+                            type="button"
+                            className="upload-btn"
+                            onClick={e => this.submit(e)}
+                        >
+                            Upload
+                        </button>
+                    </form>
+                </div>
             </div>
         );
     }
