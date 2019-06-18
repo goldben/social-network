@@ -140,3 +140,27 @@ module.exports.getfriends = function(userId) {
         [userId]
     );
 };
+
+////////////////////////////////   MESSAGES    /////////////////////////////////
+
+function storeMessages(message, sender_id) {
+    return db.query(
+        `
+    INSERT INTO messages (message, sender_id)
+    VALUES ($1,$2)
+    RETURNING *
+    `,
+        [message, sender_id]
+    );
+}
+
+function getMessages() {
+    return db.query(
+        `
+        SELECT messages.id, first, last, imgurl, message, messages.created_at FROM messages
+        JOIN users
+        ON sender_id = users.id
+        LIMIT 20
+        `
+    );
+}

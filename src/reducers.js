@@ -23,6 +23,10 @@ export default function reducer(state = {}, action) {
                     friend => friend.id != action.data
                 )
             };
+        case "GET_CHAT_HISTORY":
+            return { ...state, messages: action.data };
+        case "NEW_MESSAGE":
+            return { ...state, messages: [...state.messages, action.data] };
         default:
             return state;
     }

@@ -47,3 +47,15 @@ export function unfriend(id) {
         data: id
     };
 }
+export function getMessages(msgs) {
+    return {
+        type: "GET_CHAT_HISTORY",
+        data: msgs
+    };
+}
+export function newMessage(msg) {
+    return {
+        type: "NEW_MESSAGES",
+        data: msg
+    };
+}
