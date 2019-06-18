@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FriendshipButton } from "./friendship-button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Bio } from "./bio";
 
 export class About extends React.Component {
@@ -16,15 +16,15 @@ export class About extends React.Component {
     componentDidMount() {
         //this.props.dispatch(getBio());
     }
-
     render() {
-        console.log("about props", this.props);
+        console.log("about props: ", this.props);
         return (
-            <div>
-                <Bio bio={this.props.bio} updateBio={this.props.updateBio} />
-                <div className="posts-container">
-                    <h1>posts</h1>
+            <div className="main">
+                <div className>
+                    <FontAwesomeIcon icon={faUser} className="icon" />
+                    <h2>About</h2>
                 </div>
+                <Bio bio={this.props.bio} updateBio={this.props.updateBio} />
             </div>
         );
     }

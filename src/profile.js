@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, HashRouter, Route, Link } from "react-router-dom";
 import Friends from "./friends";
-import About from "./about";
+import { About } from "./about";
 import { PhotoViewer } from "./photo-viewer";
 
 import { Uploader } from "./cover-uploader";
@@ -49,6 +49,7 @@ export class Profile extends React.Component {
         let backgroundImg = {
             backgroundImage: image,
             backgroundSize: "cover",
+            //            backgroundRepeat: "no-repeat",
             height: "300px",
             width: "100%",
             borderBottom: "solid #d4dce9 1px",
@@ -87,7 +88,7 @@ export class Profile extends React.Component {
                     </div>
                     <div className="timeline-nav-top">
                         <span className="timeline-nav-btn">Timeline</span>
-                        <Link to="/about" className="timeline-nav-btn">
+                        <Link to="/profile/about" className="timeline-nav-btn">
                             About
                         </Link>
                         <Link
@@ -103,9 +104,10 @@ export class Profile extends React.Component {
                     <div className="profile-bottom">
                         <Route path="/profile/friends" component={Friends} />
                         <Route
-                            path="/about"
+                            path="/profile/about"
                             component={About}
                             bio={this.props.bio}
+                            updateBio={this.updateBio}
                         />
                     </div>
                     {this.state.uploaderVisible && (

@@ -9,6 +9,7 @@ import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
+import { Messenger } from "./messenger";
 
 export class App extends React.Component {
     constructor(props) {
@@ -130,6 +131,7 @@ export class App extends React.Component {
                         />
                         <Route path={"/find"} render={() => <FindPeople />} />
                     </div>
+                    <Messenger />
                 </div>
             </BrowserRouter>
         );
