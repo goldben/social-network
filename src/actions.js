@@ -55,7 +55,7 @@ export function getMessages(msgs) {
 }
 export function newMessage(msg) {
     return {
-        type: "NEW_MESSAGES",
+        type: "NEW_MESSAGE",
         data: msg
     };
 }

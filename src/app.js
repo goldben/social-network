@@ -10,7 +10,7 @@ import { FindPeople } from "./find-people";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
 
-import ChatBox from "./chat-box";
+import ChatPage from "./chat-page";
 
 export class App extends React.Component {
     constructor(props) {
@@ -80,7 +80,10 @@ export class App extends React.Component {
                             />
                             <FindPeopleInHeader />
                             <div className="nav-bar-1">
-                                <Link to="/profile" className="nav-btn">
+                                <Link
+                                    to="/profile"
+                                    className="nav-btn img-icon"
+                                >
                                     <img src={imageUrl} />
                                     <p>{first}</p>
                                 </Link>
@@ -91,7 +94,9 @@ export class App extends React.Component {
                             </div>
                             <div className="nav-bar-2">
                                 <div className="nav-btn">FR</div>
-                                <div className="nav-btn">ME</div>
+                                <Link to="/chat" className="nav-btn">
+                                    ME
+                                </Link>
                                 <a href="/logout" className="nav-btn">
                                     <FontAwesomeIcon icon={faSignOutAlt} />
                                 </a>
@@ -130,8 +135,8 @@ export class App extends React.Component {
                             )}
                         />
                         <Route path={"/find"} render={() => <FindPeople />} />
+                        <Route path={"/chat"} render={() => <ChatPage />} />
                     </div>
-                    <ChatBox />
                 </div>
             </BrowserRouter>
         );

@@ -5,6 +5,7 @@ import { Profile } from "./profile";
 import { ProfilePic } from "./profilepic";
 import { FriendshipButton } from "./friendship-button1";
 import { ForcedFriendshipButton } from "./forced-friendship-button";
+import ChatBox from "./chat-box";
 
 export class OtherProfile extends React.Component {
     constructor(props) {
@@ -93,6 +94,7 @@ export class OtherProfile extends React.Component {
                         <h3>posts</h3>
                     </div>
                 </div>
+                <ChatBox />
             </div>
         );
     }

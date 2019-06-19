@@ -509,6 +509,7 @@ server.listen(8080, function() {
 
 io.on("connection", async function(socket) {
     console.log("user trying to connect");
+
     try {
         if (!socket.request.session.userId) {
             console.log(`Socket is disconnected`);
@@ -516,7 +517,7 @@ io.on("connection", async function(socket) {
         }
         const userId = socket.request.session.userId;
         const messages = await db.getMessages();
-        console.log("messages in db: ", messages);
+        console.log("messages in db: ", messages.rows);
         console.log(`user ${userId}, socket id ${socket.id} is connected`);
         io.sockets.emit("getMessages", messages.rows.reverse());
 

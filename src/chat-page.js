@@ -5,7 +5,7 @@ import { init } from "./socket";
 
 import { getMessages, newMessage } from "./actions";
 
-class ChatBox extends React.Component {
+class ChatPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -96,4 +96,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(ChatBox);
+export default connect(mapStateToProps)(ChatPage);
