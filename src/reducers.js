@@ -28,6 +28,15 @@ export default function reducer(state = {}, action) {
         case "GET_PRIVATE_CHAT_HISTORY":
             return { ...state, privateMessages: action.data };
         case "NEW_MESSAGE":
+            console.log("action.data", action.data.receiver_id);
+            if (action.data.receiver_id == null) {
+                return { ...state, messages: [...state.messages, action.data] };
+            } else {
+                return {
+                    ...state,
+                    privateMessages: [...state.privateMessages, action.data]
+                };
+            }
             return { ...state, messages: [...state.messages, action.data] };
         default:
             return state;
