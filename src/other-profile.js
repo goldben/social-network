@@ -19,17 +19,17 @@ export class OtherProfile extends React.Component {
     componentDidMount() {
         const id = this.props.match.params.id;
         axios.get("/otheruser/" + id).then(({ data }) => {
-            console.log("request for same user");
+            //console.log("request for same user");
             if (data.success == false) {
                 this.props.history.push("/");
             } else {
-                console.log("data at other profile", data);
+                //        console.log("data at other profile", data);
                 this.setState(data);
             }
         });
     }
     showChatBox() {
-        console.log("showChatBox", this.state.showChatBox);
+        //    console.log("showChatBox", this.state.showChatBox);
         if (!this.state.showChatBox) {
             this.setState({
                 showChatBox: true
@@ -39,7 +39,7 @@ export class OtherProfile extends React.Component {
                 showChatBox: false
             });
         }
-        console.log("showChatBox", this.state.showChatBox);
+        //    console.log("showChatBox", this.state.showChatBox);
     }
     render() {
         let coverImgurl;
@@ -60,7 +60,7 @@ export class OtherProfile extends React.Component {
             color: "white"
         };
 
-        console.log("other profile this.state: ", this.state);
+        //    console.log("other profile this.state: ", this.state);
         return (
             <div className="profile-container">
                 <div className="profile-top">

@@ -21,7 +21,10 @@ class ChatPage extends React.Component {
         e.preventDefault();
         console.log("send message: ", this.state.newMessage);
         let socket = init();
-        socket.emit("newMessage", this.state.newMessage);
+        socket.emit("newMessage", {
+            text: this.state.newMessage,
+            receiverId: null
+        });
     }
 
     render() {

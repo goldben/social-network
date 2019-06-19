@@ -517,33 +517,36 @@ io.on("connection", async function(socket) {
         }
         const userId = socket.request.session.userId;
         const getMessages = await db.getMessages();
-        const gangChat = getMessages.rows.filter(msg => !msg.receiver_id);
+        const gangChat = getMessages.rows.filter(
+            msg => msg.receiver_id == null
+        );
 
-        const privateMessages = getMessages.rows.filter(msg => msg.receIver_id);
+        let privateMessages = getMessages.rows.filter(
+            msg => msg.sender_id == userId || msg.receiver_id == userId
+        );
 
         console.log("messages in db: ", gangChat.length);
-        console.log("privateMessages in db: ", privateMessages.length);
+        console.log("privateMessages in db: ", privateMessages);
 
         console.log(`user ${userId}, socket id ${socket.id} is connected`);
         socket.emit("getMessages", gangChat.reverse());
-
         socket.emit("getPrivateMessages", privateMessages.reverse());
 
         socket.on("newMessage", async function(message) {
-            let newMessage = await db.storeMessages(message, userId);
+            console.log("message text", message.text);
+            console.log("message receiver id ", message.receiverId);
+
+            let newMessage = await db.storeMessages(
+                message.text,
+                userId,
+                message.receiverId
+            );
             console.log("newMessage", newMessage.rows[0].id);
             newMessage = await db.getNewMessage(newMessage.rows[0].id);
 
             io.sockets.emit("newMessage", newMessage.rows[0]);
         });
-        socket.on("newPrivateMessage", async function(message, otherUserId) {
-            let newMessage = await db.storePrivateMessages(
-                message,
-                userId,
-                otherUserId
-            );
-            io.sockets.emit("newPrivateMessage", newMessage.rows[0]);
-        });
+
         socket.on("disconnect", function() {
             console.log(
                 `user ${userId}, socket id ${socket.id} is disconnected`

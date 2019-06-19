@@ -11,7 +11,15 @@ class ChatBox extends React.Component {
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
     }
-
+    componentDidMount() {
+        let userId = this.props.id;
+        const messages = this.props.messages.filter(
+            msg => msg.sender_id == userId || msg.receiver_id == userId
+        );
+        this.setState({
+            messages: messages
+        });
+    }
     handleChange(e) {
         this.setState({
             newMessage: e.target.value
@@ -21,7 +29,10 @@ class ChatBox extends React.Component {
         e.preventDefault();
         console.log("send message: ", this.state.newMessage);
         let socket = init();
-        socket.emit("newMessage", this.state.newMessage);
+        socket.emit("newMessage", {
+            text: this.state.newMessage,
+            receiverId: this.props.id
+        });
     }
 
     render() {
@@ -45,8 +56,8 @@ class ChatBox extends React.Component {
                 </div>
                 <div className="chat">
                     <div className="chat-display">
-                        {this.props.messages &&
-                            this.props.messages.map(msg => (
+                        {this.state.messages &&
+                            this.state.messages.map(msg => (
                                 <div className="message-item" key={msg.id}>
                                     <p>{msg.created_at}</p>
 
@@ -86,7 +97,7 @@ class ChatBox extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log("state ", state.privateMessages);
+    console.log("privateMessages ", state.privateMessages);
 
     return {
         messages: state.privateMessages

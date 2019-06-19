@@ -143,14 +143,14 @@ module.exports.getfriends = function(userId) {
 
 ////////////////////////////////   MESSAGES    /////////////////////////////////
 
-exports.storeMessages = function(message, sender_id) {
+exports.storeMessages = function(message, sender_id, receiver_id) {
     return db.query(
         `
-    INSERT INTO messages (message, sender_id)
-    VALUES ($1,$2)
+    INSERT INTO messages (message, sender_id, receiver_id)
+    VALUES ($1,$2,$3)
     RETURNING id
     `,
-        [message, sender_id]
+        [message, sender_id, receiver_id]
     );
 };
 
@@ -181,7 +181,7 @@ exports.storePrivateMessages = function(message, sender_id, receiver_id) {
     return db.query(
         `
     INSERT INTO messages (message, sender_id, receiver_id)
-    VALUES ($1,$2)
+    VALUES ($1,$2, $3)
     RETURNING *
     `,
         [message, sender_id, receiver_id]

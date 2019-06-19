@@ -25,6 +25,8 @@ export default function reducer(state = {}, action) {
             };
         case "GET_CHAT_HISTORY":
             return { ...state, messages: action.data };
+        case "GET_PRIVATE_CHAT_HISTORY":
+            return { ...state, privateMessages: action.data };
         case "NEW_MESSAGE":
             return { ...state, messages: [...state.messages, action.data] };
         default:
