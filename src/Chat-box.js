@@ -86,9 +86,10 @@ class ChatBox extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log("state ", state);
+    console.log("state ", state.privateMessages);
+
     return {
-        messages: state.messages
+        messages: state.privateMessages
     };
 };
 

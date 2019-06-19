@@ -118,6 +118,7 @@ export class OtherProfile extends React.Component {
                 {this.state.showChatBox && (
                     <ChatBox
                         hideChatBox={this.showChatBox}
+                        id={this.props.match.params.id}
                         imgurl={this.state.imgurl}
                         first={this.state.first}
                         last={this.state.last}

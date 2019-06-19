@@ -148,7 +148,7 @@ exports.storeMessages = function(message, sender_id) {
         `
     INSERT INTO messages (message, sender_id)
     VALUES ($1,$2)
-    RETURNING *
+    RETURNING id
     `,
         [message, sender_id]
     );
@@ -157,11 +157,22 @@ exports.storeMessages = function(message, sender_id) {
 exports.getMessages = function() {
     return db.query(
         `
-        SELECT messages.id, first, last, imgurl, message, messages.created_at FROM messages
+        SELECT messages.id, first, last, imgurl, message, receiver_id , sender_id ,messages.created_at FROM messages
         JOIN users
         ON sender_id = users.id
         LIMIT 20
         `
+    );
+};
+exports.getNewMessage = function(messages_id) {
+    return db.query(
+        `
+        SELECT messages.id, first, last, imgurl, message, receiver_id , sender_id ,messages.created_at FROM messages
+        JOIN users
+        ON sender_id = users.id
+        WHERE messages.id = $1
+        `,
+        [messages_id]
     );
 };
 ////////////////////////////////   PRIVATE MESSAGES    /////////////////////////////////
@@ -174,15 +185,5 @@ exports.storePrivateMessages = function(message, sender_id, receiver_id) {
     RETURNING *
     `,
         [message, sender_id, receiver_id]
-    );
-};
-
-exports.getPrivateMessages = function(sender_id, receiver_id) {
-    return db.query(
-        `
-        SELECT messages.id, message, messages.created_at FROM messages
-        WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1) RETURNING *
-        ORDER BY id DESC LIMIT 20
-        `
     );
 };

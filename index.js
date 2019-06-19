@@ -516,14 +516,33 @@ io.on("connection", async function(socket) {
             return socket.disconnect(true);
         }
         const userId = socket.request.session.userId;
-        const messages = await db.getMessages();
-        console.log("messages in db: ", messages.rows);
+        const getMessages = await db.getMessages();
+        const gangChat = getMessages.rows.filter(msg => !msg.receiver_id);
+
+        const privateMessages = getMessages.rows.filter(msg => msg.receIver_id);
+
+        console.log("messages in db: ", gangChat.length);
+        console.log("privateMessages in db: ", privateMessages.length);
+
         console.log(`user ${userId}, socket id ${socket.id} is connected`);
-        io.sockets.emit("getMessages", messages.rows.reverse());
+        socket.emit("getMessages", gangChat.reverse());
+
+        socket.emit("getPrivateMessages", privateMessages.reverse());
 
         socket.on("newMessage", async function(message) {
             let newMessage = await db.storeMessages(message, userId);
-            io.emit("newMessage", newMessage.rows[0]);
+            console.log("newMessage", newMessage.rows[0].id);
+            newMessage = await db.getNewMessage(newMessage.rows[0].id);
+
+            io.sockets.emit("newMessage", newMessage.rows[0]);
+        });
+        socket.on("newPrivateMessage", async function(message, otherUserId) {
+            let newMessage = await db.storePrivateMessages(
+                message,
+                userId,
+                otherUserId
+            );
+            io.sockets.emit("newPrivateMessage", newMessage.rows[0]);
         });
         socket.on("disconnect", function() {
             console.log(

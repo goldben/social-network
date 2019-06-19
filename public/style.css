@@ -730,7 +730,6 @@ pending-list-item {
     overflow: scroll;
     display: flex;
     flex-direction: column;
-    border: solid grey 1px;
     padding: 20px;
     height: 90%;
     width: 100%<;
@@ -761,7 +760,7 @@ pending-list-item {
     background-color: white;
     overflow: hidden;
     position: fixed;
-    bottom: 10px;
+    bottom: -60px;
     right: 100px;
     width: 400px;
     height: 500px;

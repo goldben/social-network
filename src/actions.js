@@ -53,6 +53,12 @@ export function getMessages(msgs) {
         data: msgs
     };
 }
+export function getPrivateMessages(msgs) {
+    return {
+        type: "GET_PRIVATE_CHAT_HISTORY",
+        data: msgs
+    };
+}
 export function newMessage(msg) {
     return {
         type: "NEW_MESSAGE",
