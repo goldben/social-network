@@ -83,13 +83,16 @@ export class OtherProfile extends React.Component {
                                     receiverId={this.props.match.params.id}
                                 />
 
-                                <button
-                                    onClick={() => {
-                                        this.showChatBox();
-                                    }}
-                                >
-                                    Message
-                                </button>
+                                {true && (
+                                    <button
+                                        className="friend-btn"
+                                        onClick={() => {
+                                            this.showChatBox();
+                                        }}
+                                    >
+                                        Message
+                                    </button>
+                                )}
                             </span>
                         </div>
                     </div>

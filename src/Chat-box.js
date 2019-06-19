@@ -47,10 +47,9 @@ class ChatBox extends React.Component {
                             {this.props.first} {this.props.last}
                         </p>
                     </div>
-                    <div
-                        className="x-uploader-btn"
-                        onClick={this.props.hideChatBox}
-                    >
+                    <img src="/chat2.png" />
+
+                    <div className="x-btn" onClick={this.props.hideChatBox}>
                         X
                     </div>
                 </div>
@@ -90,6 +89,7 @@ class ChatBox extends React.Component {
                             </button>
                         </form>
                     </div>
+                    <img src="/chat.png" />
                 </div>
             </div>
         );
@@ -98,7 +98,6 @@ class ChatBox extends React.Component {
 
 const mapStateToProps = state => {
     console.log("state ", state);
-
     return {
         messages: state.privateMessages
     };

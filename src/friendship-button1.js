@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "./axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 export function FriendshipButton({ receiverId }) {
     let dropdown;
@@ -73,6 +75,12 @@ export function FriendshipButton({ receiverId }) {
     return (
         <div className="dropdown">
             <button className="friend-btn" onClick={updateFriendship}>
+                Following
+            </button>
+            <button className="friend-btn" onClick={updateFriendship}>
+                {friendshipStatus === "Unfriend" && (
+                    <FontAwesomeIcon icon={faCheck} />
+                )}
                 {friendshipStatus}
             </button>
             {friendshipStatus === "Unfriend" && (

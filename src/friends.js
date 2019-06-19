@@ -29,7 +29,7 @@ class Friends extends React.Component {
                                 <div key={friend.id}>
                                     <friends-list-item>
                                         <div className="">
-                                            <Link to={`/user/${friend.id}`}>
+                                            <Link to={`./user/${friend.id}`}>
                                                 <img
                                                     src={
                                                         friend.imgurl ||

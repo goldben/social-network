@@ -526,7 +526,7 @@ io.on("connection", async function(socket) {
         );
 
         console.log("messages in db: ", gangChat.length);
-        console.log("privateMessages in db: ", privateMessages);
+        //console.log("privateMessages in db: ", privateMessages);
 
         console.log(`user ${userId}, socket id ${socket.id} is connected`);
         socket.emit("getMessages", gangChat.reverse());

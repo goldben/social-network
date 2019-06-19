@@ -4,6 +4,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import axios from "./axios";
 import { Link } from "react-router-dom";
 import { FriendshipButton } from "./friendship-button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 export function FindPeople() {
     const [query, setQuery] = useState("last3");
@@ -76,9 +78,9 @@ export function FindPeople() {
                                         <FriendshipButton
                                             receiverId={user.id}
                                         />
-                                        <div className="small-message-btn">
+                                        <button className="friend-btn small-message-btn">
                                             ...
-                                        </div>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

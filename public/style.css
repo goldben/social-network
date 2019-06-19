@@ -404,7 +404,7 @@ header {
     flex-direction: row;
 }
 .x-btn {
-    position: absolute;
+    position: relative;
     right: 5px;
     top: 5px;
     color: grey;
@@ -519,7 +519,7 @@ header {
 }
 .results {
     margin-top: 10px;
-    width: 40%;
+    width: 620px;
     border: 1px solid dark-grey;
     border-radius: 5px;
 }
@@ -574,16 +574,15 @@ header {
     font-size: 11px;
     font-weight: bold;
     width: 80px;
-    height: 25px;
+    height: 27px;
 }
-
+.friend-btn span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .small-message-btn {
-    color: #4b4f56;
-    background-color: lightgrey;
-    height: 25px;
     width: 30px;
-    text-align: center;
-    border: solid grey 1px;
 }
 /*--------------------dropdown-------------------------- */
 
@@ -727,7 +726,7 @@ pending-list-item {
 }
 
 .chat-display {
-    overflow: scroll;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -762,17 +761,25 @@ pending-list-item {
     position: fixed;
     bottom: -60px;
     right: 100px;
-    width: 400px;
+    width: 350px;
     height: 500px;
     border: solid grey 1px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
 }
 
 .chat-header {
+    background-color: #f2f3f5;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 5px;
+    font-weight: bold;
+}
+
+.chat-box .x-btn {
+    position: relative;
+    color: #385898;
 }
