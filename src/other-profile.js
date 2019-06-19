@@ -10,7 +10,10 @@ import ChatBox from "./chat-box";
 export class OtherProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            showChatBox: false
+        };
+        this.showChatBox = this.showChatBox.bind(this);
     }
 
     componentDidMount() {
@@ -25,7 +28,19 @@ export class OtherProfile extends React.Component {
             }
         });
     }
-
+    showChatBox() {
+        console.log("showChatBox", this.state.showChatBox);
+        if (!this.state.showChatBox) {
+            this.setState({
+                showChatBox: true
+            });
+        } else {
+            this.setState({
+                showChatBox: false
+            });
+        }
+        console.log("showChatBox", this.state.showChatBox);
+    }
     render() {
         let coverImgurl;
         if (this.props.coverImgUrl) {
@@ -68,7 +83,13 @@ export class OtherProfile extends React.Component {
                                     receiverId={this.props.match.params.id}
                                 />
 
-                                <button>Message</button>
+                                <button
+                                    onClick={() => {
+                                        this.showChatBox();
+                                    }}
+                                >
+                                    Message
+                                </button>
                             </span>
                         </div>
                     </div>
@@ -94,7 +115,14 @@ export class OtherProfile extends React.Component {
                         <h3>posts</h3>
                     </div>
                 </div>
-                <ChatBox />
+                {this.state.showChatBox && (
+                    <ChatBox
+                        hideChatBox={this.showChatBox}
+                        imgurl={this.state.imgurl}
+                        first={this.state.first}
+                        last={this.state.last}
+                    />
+                )}
             </div>
         );
     }

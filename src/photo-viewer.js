@@ -14,10 +14,7 @@ export class PhotoViewer extends React.Component {
         console.log("props in uploader", this.props);
         return (
             <div className="uploader">
-                <div
-                    className="x-uploader-btn"
-                    onClick={this.props.hideUploader}
-                >
+                <div className="x-btn" onClick={this.props.hideUploader}>
                     X
                 </div>
                 <div className="update-container">

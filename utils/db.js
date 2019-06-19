@@ -164,3 +164,25 @@ exports.getMessages = function() {
         `
     );
 };
+////////////////////////////////   PRIVATE MESSAGES    /////////////////////////////////
+
+exports.storePrivateMessages = function(message, sender_id, receiver_id) {
+    return db.query(
+        `
+    INSERT INTO messages (message, sender_id, receiver_id)
+    VALUES ($1,$2)
+    RETURNING *
+    `,
+        [message, sender_id, receiver_id]
+    );
+};
+
+exports.getPrivateMessages = function(sender_id, receiver_id) {
+    return db.query(
+        `
+        SELECT messages.id, message, messages.created_at FROM messages
+        WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1) RETURNING *
+        ORDER BY id DESC LIMIT 20
+        `
+    );
+};

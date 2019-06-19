@@ -12,21 +12,21 @@ export function ForcedFriendshipButton({ receiverId, name }) {
                     "/friendship-status/" + receiverId
                 );
                 //    console.log("currentStatus", currentStatus.data);
-                console.log(
-                    "currentStatus.data.friendshipStatus",
-                    currentStatus.data.friendshipStatus
-                );
+                // console.log(
+                //     "currentStatus.data.friendshipStatus",
+                //     currentStatus.data.friendshipStatus
+                // );
                 setStatus(currentStatus.data.friendshipStatus);
             })();
         },
         [currentStatus]
     );
 
-    console.log("friend button have been rendered!");
-    console.log("currentStatus", currentStatus);
-
-    console.log("friendshipStatus", friendshipStatus);
-    console.log("receiverId", receiverId);
+    // console.log("friend button have been rendered!");
+    // console.log("currentStatus", currentStatus);
+    //
+    // console.log("friendshipStatus", friendshipStatus);
+    // console.log("receiverId", receiverId);
 
     async function forceFriendship() {
         console.log("button clicked");

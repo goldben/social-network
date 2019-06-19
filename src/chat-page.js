@@ -13,8 +13,6 @@ class ChatPage extends React.Component {
     }
 
     handleChange(e) {
-        console.log("name: ", e.target.name);
-        console.log("value: ", e.target.value);
         this.setState({
             newMessage: e.target.value
         });
@@ -27,7 +25,6 @@ class ChatPage extends React.Component {
     }
 
     render() {
-        console.log("render state.messages: ", this.props.messages);
         return (
             <div className="messenger">
                 <div className="chat-list">

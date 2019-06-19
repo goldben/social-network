@@ -13,8 +13,6 @@ class ChatBox extends React.Component {
     }
 
     handleChange(e) {
-        console.log("name: ", e.target.name);
-        console.log("value: ", e.target.value);
         this.setState({
             newMessage: e.target.value
         });
@@ -27,61 +25,59 @@ class ChatBox extends React.Component {
     }
 
     render() {
-        console.log("render state.messages: ", this.props.messages);
         return (
-            <div className="messenger">
-                <div className="chat-list">
-                    <h3>messenger</h3>
+            <div className="chat-box">
+                <div className="chat-header">
+                    <div className="img-icon">
+                        <img src={this.props.imgurl} />
+                    </div>
+                    <div className="info">
+                        <p>
+                            {this.props.first} {this.props.last}
+                        </p>
+                    </div>
+                    <div
+                        className="x-uploader-btn"
+                        onClick={this.props.hideChatBox}
+                    >
+                        X
+                    </div>
                 </div>
-                <div className="chat-right-panel">
-                    <h3>this chat</h3>
+                <div className="chat">
+                    <div className="chat-display">
+                        {this.props.messages &&
+                            this.props.messages.map(msg => (
+                                <div className="message-item" key={msg.id}>
+                                    <p>{msg.created_at}</p>
 
-                    <div className="chat-panel">
-                        <div className="chat">
-                            <div className="chat-display">
-                                {this.props.messages &&
-                                    this.props.messages.map(msg => (
-                                        <div
-                                            className="message-item"
-                                            key={msg.id}
-                                        >
-                                            <p>{msg.created_at}</p>
-
-                                            <div className="message">
-                                                <div className="img-icon">
-                                                    <img src={msg.imgurl} />
-                                                </div>
-                                                <div className="message-text">
-                                                    <p>{msg.message}</p>
-                                                </div>
-                                            </div>
+                                    <div className="message">
+                                        <div className="img-icon">
+                                            <img src={msg.imgurl} />
                                         </div>
-                                    ))}
-                            </div>
-                            <div className="text-container">
-                                <form
-                                    onSubmit={e => this.sendMessage(e)}
-                                    className="messge-form"
-                                >
-                                    <textarea
-                                        rows="3"
-                                        cols="35"
-                                        name="textarea"
-                                        onChange={e => this.handleChange(e)}
-                                    />
+                                        <div className="message-text">
+                                            <p>{msg.message}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
+                    <div className="text-container">
+                        <form
+                            onSubmit={e => this.sendMessage(e)}
+                            className="messge-form"
+                            defaultValue=""
+                        >
+                            <textarea
+                                rows="2"
+                                cols="35"
+                                name="textarea"
+                                onChange={e => this.handleChange(e)}
+                            />
 
-                                    <button
-                                        className="messge-form-btn"
-                                        type="submit"
-                                    >
-                                        Send
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                        <div className="manage-messages">
-                            right side nonesense
-                        </div>
+                            <button className="messge-form-btn" type="submit">
+                                Send
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
