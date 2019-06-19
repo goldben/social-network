@@ -1,15 +1,20 @@
 import React from "react";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
 import { Welcome } from "./welcome";
 import { App } from "./app";
+import { socket } from "./socket";
+import { init } from "./socket";
+import reducer from "./reducers";
 
-import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import reduxPromise from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
-import reducer from "./reducers";
 
-const store = createStore(reducer, applyMiddleware(reduxPromise));
+const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(reduxPromise))
+);
 
 import "../public/normalize.css";
 
@@ -19,6 +24,7 @@ let elem;
 if (location.pathname == "/welcome") {
     elem = <Welcome />;
 } else {
+    init(store);
     elem = (
         <Provider store={store}>
             <App />

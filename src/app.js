@@ -9,6 +9,7 @@ import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
+
 import ChatBox from "./chat-box";
 
 export class App extends React.Component {
@@ -59,7 +60,6 @@ export class App extends React.Component {
     render() {
         const imageUrl = this.state.imageUrl || "/img/default.png";
         const coverImgUrl = this.state.coverImgUrl;
-        console.log(coverImgUrl);
         const id = this.state.id;
         const first = this.state.first;
         const last = this.state.last;

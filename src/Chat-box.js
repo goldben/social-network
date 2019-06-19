@@ -4,15 +4,12 @@ import { socket } from "./socket";
 import { init } from "./socket";
 
 import { getMessages, newMessage } from "./actions";
-console.log("socket", init);
+
 class ChatBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
-    }
-    componentDidMount() {
-        this.props.dispatch(getMessages());
     }
 
     handleChange(e) {
@@ -25,7 +22,8 @@ class ChatBox extends React.Component {
     sendMessage(e) {
         e.preventDefault();
         console.log("send message: ", this.state.newMessage);
-        init().emit("newMessage", this.state.newMessage);
+        let socket = init();
+        socket.emit("newMessage", this.state.newMessage);
     }
 
     render() {
@@ -70,6 +68,7 @@ class ChatBox extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log("state ", state);
     return {
         messages: state.messages
     };

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-//import { getbio } from "./actions";
 import { Link } from "react-router-dom";
 import { FriendshipButton } from "./friendship-button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

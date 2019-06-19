@@ -143,7 +143,7 @@ module.exports.getfriends = function(userId) {
 
 ////////////////////////////////   MESSAGES    /////////////////////////////////
 
-function storeMessages(message, sender_id) {
+exports.storeMessages = function(message, sender_id) {
     return db.query(
         `
     INSERT INTO messages (message, sender_id)
@@ -152,9 +152,9 @@ function storeMessages(message, sender_id) {
     `,
         [message, sender_id]
     );
-}
+};
 
-function getMessages() {
+exports.getMessages = function() {
     return db.query(
         `
         SELECT messages.id, first, last, imgurl, message, messages.created_at FROM messages
@@ -163,4 +163,4 @@ function getMessages() {
         LIMIT 20
         `
     );
-}
+};

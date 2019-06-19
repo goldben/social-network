@@ -56,18 +56,14 @@ app.use(
         extended: false
     })
 );
-app.use(
-    cookieSession({
-        secret: `I'm always angry.`,
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    })
-);
+
 const cookieSessionMiddleware = cookieSession({
     secret: `I'm always angry.`,
     maxAge: 1000 * 60 * 60 * 24 * 90
 });
 app.use(cookieSessionMiddleware);
 io.use(function(socket, next) {
+    console.log("io is working");
     cookieSessionMiddleware(socket.request, socket.request.res, next);
 });
 ///////////////handle Vulnerabilities//////////////
@@ -89,33 +85,6 @@ app.get("/", (req, res, next) => {
         res.redirect("/welcome");
     } else {
         next();
-    }
-});
-///////////////////////////////SOCKET IO ///////////////////////////////////////
-
-io.on("connection", async function(socket) {
-    try {
-        if (!socket.request.session.userId) {
-            console.log(`Socket is disconnected`);
-            return socket.disconnect(true);
-        }
-        const userId = require.session.userId;
-        let messages = await db.getMessages();
-        console.log(`user ${userId}, socket id ${socket.id} is connected`);
-        socket.emit("getMessages", messages.rows.reverse());
-
-        socket.on("newMessage", async function(message) {
-            let newMessage = await db.storeMessages(message, userId);
-            io.emit("newMessage", newMessage.rows[0]);
-        });
-        socket.on("disconnect", function() {
-            console.log(
-                `user ${userId}, socket id ${socket.id} is disconnected`
-            );
-        });
-    } catch (err) {
-        console.log("socket.io error: ", err);
-        return socket.disconnect(true);
     }
 });
 
@@ -271,8 +240,6 @@ app.post("/find-users", (req, res) => {
     console.log("*******GET /USERS*******");
     db.findUsers(req.body.find)
         .then(results => {
-            console.log("found in db: ", results.rows);
-
             res.json({
                 users: results.rows
             });
@@ -537,4 +504,33 @@ app.get("*", function(req, res) {
 
 server.listen(8080, function() {
     console.log("I'm listening.");
+});
+///////////////////////////////SOCKET IO ///////////////////////////////////////
+
+io.on("connection", async function(socket) {
+    console.log("user trying to connect");
+    try {
+        if (!socket.request.session.userId) {
+            console.log(`Socket is disconnected`);
+            return socket.disconnect(true);
+        }
+        const userId = socket.request.session.userId;
+        const messages = await db.getMessages();
+        console.log("messages in db: ", messages);
+        console.log(`user ${userId}, socket id ${socket.id} is connected`);
+        io.sockets.emit("getMessages", messages.rows.reverse());
+
+        socket.on("newMessage", async function(message) {
+            let newMessage = await db.storeMessages(message, userId);
+            io.emit("newMessage", newMessage.rows[0]);
+        });
+        socket.on("disconnect", function() {
+            console.log(
+                `user ${userId}, socket id ${socket.id} is disconnected`
+            );
+        });
+    } catch (err) {
+        console.log("socket.io error: ", err);
+        return socket.disconnect(true);
+    }
 });
