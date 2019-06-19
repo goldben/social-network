@@ -38,6 +38,7 @@ export class Uploader extends React.Component {
                     <FontAwesomeIcon icon={faCamera} />
                     <p>Upload Cover Photo</p>
                 </span>
+
                 <div className="dropdown-content">
                     <a href="#">select photo</a>
                     <form>

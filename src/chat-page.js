@@ -18,13 +18,16 @@ class ChatPage extends React.Component {
         });
     }
     sendMessage(e) {
-        e.preventDefault();
-        console.log("send message: ", this.state.newMessage);
-        let socket = init();
-        socket.emit("newMessage", {
-            text: this.state.newMessage,
-            receiverId: null
-        });
+        if (e.key === "Enter") {
+            console.log("enter clicked");
+            e.preventDefault();
+            console.log("send message: ", this.state.newMessage);
+            let socket = init();
+            socket.emit("newMessage", {
+                text: this.state.newMessage,
+                receiverId: this.props.id
+            });
+        }
     }
 
     render() {
@@ -32,6 +35,23 @@ class ChatPage extends React.Component {
             <div className="messenger">
                 <div className="chat-list">
                     <h3>messenger</h3>
+                    <div className="chat-display">
+                        {this.props.privateMessages &&
+                            this.props.privateMessages.map(msg => (
+                                <div className="message-item" key={msg.id}>
+                                    <p>{msg.created_at}</p>
+
+                                    <div className="message">
+                                        <div className="img-icon">
+                                            <img src={msg.imgurl} />
+                                        </div>
+                                        <div className="message-text">
+                                            <p>{msg.message}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
                 </div>
                 <div className="chat-right-panel">
                     <h3>this chat</h3>
@@ -59,24 +79,12 @@ class ChatPage extends React.Component {
                                     ))}
                             </div>
                             <div className="text-container">
-                                <form
-                                    onSubmit={e => this.sendMessage(e)}
-                                    className="messge-form"
-                                >
-                                    <textarea
-                                        rows="3"
-                                        cols="35"
-                                        name="textarea"
-                                        onChange={e => this.handleChange(e)}
-                                    />
-
-                                    <button
-                                        className="messge-form-btn"
-                                        type="submit"
-                                    >
-                                        Send
-                                    </button>
-                                </form>
+                                <textarea
+                                    name="textarea"
+                                    placeholder="type message"
+                                    onChange={e => this.handleChange(e)}
+                                    onKeyPress={e => this.sendMessage(e)}
+                                />
                             </div>
                         </div>
                         <div className="manage-messages">
@@ -92,6 +100,7 @@ class ChatPage extends React.Component {
 const mapStateToProps = state => {
     console.log("state ", state);
     return {
+        privateMessages: state.privateMessages.reverse(),
         messages: state.messages
     };
 };

@@ -10,6 +10,7 @@ class ChatBox extends React.Component {
         super(props);
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
     }
     componentDidMount() {
         let userId = this.props.id;
@@ -25,14 +26,18 @@ class ChatBox extends React.Component {
             newMessage: e.target.value
         });
     }
+
     sendMessage(e) {
-        e.preventDefault();
-        console.log("send message: ", this.state.newMessage);
-        let socket = init();
-        socket.emit("newMessage", {
-            text: this.state.newMessage,
-            receiverId: this.props.id
-        });
+        if (e.key === "Enter") {
+            console.log("enter clicked");
+            e.preventDefault();
+            console.log("send message: ", this.state.newMessage);
+            let socket = init();
+            socket.emit("newMessage", {
+                text: this.state.newMessage,
+                receiverId: this.props.id
+            });
+        }
     }
 
     render() {
@@ -72,22 +77,12 @@ class ChatBox extends React.Component {
                             ))}
                     </div>
                     <div className="text-container">
-                        <form
-                            onSubmit={e => this.sendMessage(e)}
-                            className="messge-form"
-                            defaultValue=""
-                        >
-                            <textarea
-                                rows="2"
-                                cols="35"
-                                name="textarea"
-                                onChange={e => this.handleChange(e)}
-                            />
-
-                            <button className="messge-form-btn" type="submit">
-                                Send
-                            </button>
-                        </form>
+                        <textarea
+                            name="textarea"
+                            placeholder="type message"
+                            onChange={e => this.handleChange(e)}
+                            onKeyPress={e => this.sendMessage(e)}
+                        />
                     </div>
                     <img src="/chat.png" />
                 </div>

@@ -95,7 +95,7 @@ export class App extends React.Component {
                             <div className="nav-bar-2">
                                 <div className="nav-btn">FR</div>
                                 <Link to="/chat" className="nav-btn">
-                                    ME
+                                    <img src="/msg.png" className="logo" />
                                 </Link>
                                 <a href="/logout" className="nav-btn">
                                     <FontAwesomeIcon icon={faSignOutAlt} />
