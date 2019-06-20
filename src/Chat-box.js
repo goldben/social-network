@@ -72,7 +72,10 @@ class ChatBox extends React.Component {
                                     <p>
                                         {new Date(
                                             msg.created_at
-                                        ).toDateString()}
+                                        ).toDateString()}{" "}
+                                        {new Date(
+                                            msg.created_at
+                                        ).toLocaleTimeString()}
                                     </p>
 
                                     <div className="message">

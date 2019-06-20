@@ -417,6 +417,20 @@ app.post("/edit-bio", (req, res) => {
     }
 });
 
+/////////////////////////////////// get friends of friends //////////////////////
+app.get("/get-friends/:id", async (req, res) => {
+    console.log("**********  GET FRIENDS  ************");
+    const userId = req.params.id;
+    console.log("userId", userId);
+    try {
+        const friends = await db.getfriends(userId);
+        console.log("found", friends.rows.length, "friends: ", friends.rows);
+
+        res.json(friends.rows);
+    } catch (err) {
+        console.log("get-friends", err);
+    }
+});
 /////////////////////////////////// get friends //////////////////////
 app.get("/get-friends", async (req, res) => {
     console.log("**********  GET FRIENDS  ************");
@@ -533,7 +547,7 @@ io.on("connection", async function(socket) {
         socket.emit("getPrivateMessages", privateMessages);
 
         socket.on("newMessage", async function(message) {
-            console.log("message text", message.text);
+            //console.log("message text", message.text);
             console.log("message receiver id ", message.receiverId);
 
             let newMessage = await db.storeMessages(

@@ -2,12 +2,15 @@ import React from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
+
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
 import Friends from "./friends";
+import { FriendsOfFriends } from "./friends-of-friends";
 
 import { Posts } from "./posts";
 import FindPeopleInHeader from "./find-people-in-header";
@@ -99,10 +102,13 @@ export class App extends React.Component {
                                 <div className="nav-btn">Create</div>
                             </div>
                             <div className="nav-bar-2">
-                                <div className="nav-btn">FR</div>
                                 <Link to="/chat" className="nav-btn">
                                     <img src="/msg.png" className="logo" />
                                 </Link>
+                                <div className="nav-btn">
+                                    {" "}
+                                    <FontAwesomeIcon icon={faBell} />
+                                </div>
                                 <a href="/logout" className="nav-btn">
                                     <FontAwesomeIcon icon={faSignOutAlt} />
                                 </a>
@@ -143,6 +149,16 @@ export class App extends React.Component {
                         <Route
                             path={"/profile/friends"}
                             render={() => <Friends />}
+                        />
+                        <Route
+                            path={"/user/:id/friends"}
+                            render={props => (
+                                <FriendsOfFriends
+                                    key={props.match.url}
+                                    match={props.match}
+                                    history={props.history}
+                                />
+                            )}
                         />
                         <Route path={"/posts"} render={() => <Posts />} />
 

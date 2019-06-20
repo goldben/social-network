@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import axios from "./axios";
 import { Profile } from "./profile";
 import { ProfilePic } from "./profilepic";
@@ -108,20 +108,17 @@ export class OtherProfile extends React.Component {
                 <div className="timeline-nav-top">
                     <span className="timeline-nav-btn">Timeline</span>
                     <span className="timeline-nav-btn">About</span>
-                    <span className="timeline-nav-btn">Friends</span>
+                    <Link
+                        to={`/user/${this.props.match.params.id}/friends`}
+                        className="timeline-nav-btn"
+                    >
+                        Friends
+                    </Link>
                     <span className="timeline-nav-btn">Photos</span>
                     <span className="timeline-nav-btn">Archive</span>
                     <span className="timeline-nav-btn">More</span>
                 </div>
-                <div className="profile-bottom">
-                    <div className="bio-container">
-                        <h3>intro</h3>
-                        {this.state.bio}
-                    </div>
-                    <div className="posts-container">
-                        <h3>posts</h3>
-                    </div>
-                </div>
+                <div className="profile-bottom" />
                 {this.state.showChatBox && (
                     <ChatBox
                         hideChatBox={this.showChatBox}
