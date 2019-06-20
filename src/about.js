@@ -19,7 +19,7 @@ export class About extends React.Component {
         console.log("about props: ", this.props);
         return (
             <div className="main">
-                <div className>
+                <div>
                     <FontAwesomeIcon icon={faUser} className="icon" />
                     <h2>About</h2>
                 </div>

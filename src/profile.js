@@ -57,6 +57,7 @@ export class Profile extends React.Component {
             borderRight: "solid #d4dce9 1px",
             color: "white"
         };
+        console.log("this.props in prfile", this.props);
         return (
             <BrowserRouter>
                 <div className="profile-container">
@@ -105,9 +106,12 @@ export class Profile extends React.Component {
                         <Route path="/profile/friends" component={Friends} />
                         <Route
                             path="/profile/about"
-                            component={About}
-                            bio={this.props.bio}
-                            updateBio={this.updateBio}
+                            render={props => (
+                                <About
+                                    bio={this.props.bio}
+                                    updateBio={this.updateBio}
+                                />
+                            )}
                         />
                     </div>
                     {this.state.uploaderVisible && (

@@ -11,15 +11,25 @@ class ChatBox extends React.Component {
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
+        this.elemRef = React.createRef();
     }
     componentDidMount() {
         this.props.dispatch(currentChat(this.props.id));
+        this.handleScroll();
+    }
+    componentDidUpdate() {
+        this.handleScroll();
     }
 
     handleChange(e) {
         this.setState({
             newMessage: e.target.value
         });
+    }
+    handleScroll() {
+        this.elemRef.current.scrollTop =
+            this.elemRef.current.scrollHeight +
+            this.elemRef.current.offsetHeight;
     }
 
     sendMessage(e) {
@@ -32,6 +42,7 @@ class ChatBox extends React.Component {
                 text: this.state.newMessage,
                 receiverId: this.props.id
             });
+            e.target.value = "";
         }
     }
 
@@ -54,7 +65,7 @@ class ChatBox extends React.Component {
                     </div>
                 </div>
                 <div className="chat">
-                    <div className="chat-display">
+                    <div className="chat-display" ref={this.elemRef}>
                         {this.props.messages &&
                             this.props.messages.map(msg => (
                                 <div className="message-item" key={msg.id}>

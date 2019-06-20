@@ -10,8 +10,14 @@ class ChatPage extends React.Component {
         super(props);
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
+        this.elemRef = React.createRef();
     }
-
+    componentDidMount() {
+        this.handleScroll();
+    }
+    componentDidUpdate() {
+        this.handleScroll();
+    }
     handleChange(e) {
         this.setState({
             newMessage: e.target.value
@@ -27,7 +33,13 @@ class ChatPage extends React.Component {
                 text: this.state.newMessage,
                 receiverId: this.props.id
             });
+            e.target.value = "";
         }
+    }
+    handleScroll() {
+        this.elemRef.current.scrollTop =
+            this.elemRef.current.scrollHeight +
+            this.elemRef.current.offsetHeight;
     }
 
     render() {
@@ -58,7 +70,7 @@ class ChatPage extends React.Component {
 
                     <div className="chat-panel">
                         <div className="chat">
-                            <div className="chat-display">
+                            <div className="chat-display" ref={this.elemRef}>
                                 {this.props.messages &&
                                     this.props.messages.map(msg => (
                                         <div
@@ -100,7 +112,8 @@ class ChatPage extends React.Component {
 const mapStateToProps = state => {
     console.log("state ", state);
     return {
-        privateMessages: state.privateMessages.reverse(),
+        privateMessages:
+            state.privateMessages && state.privateMessages.reverse(),
         messages: state.messages
     };
 };
