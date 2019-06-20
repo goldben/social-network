@@ -69,7 +69,11 @@ class ChatBox extends React.Component {
                         {this.props.messages &&
                             this.props.messages.map(msg => (
                                 <div className="message-item" key={msg.id}>
-                                    <p>{msg.created_at}</p>
+                                    <p>
+                                        {new Date(
+                                            msg.created_at
+                                        ).toDateString()}
+                                    </p>
 
                                     <div className="message">
                                         <div className="img-icon">
@@ -105,6 +109,7 @@ class ChatBox extends React.Component {
 
 const mapStateToProps = state => {
     console.log("state ", state);
+    //console.log(state.privateMessages[0].created_at.toDateString());
     let userId = state.currentChat;
     let messages = state.privateMessages.filter(
         msg => msg.sender_id == userId || msg.receiver_id == userId

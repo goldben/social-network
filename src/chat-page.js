@@ -111,6 +111,7 @@ class ChatPage extends React.Component {
 
 const mapStateToProps = state => {
     console.log("state ", state);
+
     return {
         privateMessages:
             state.privateMessages && state.privateMessages.reverse(),
