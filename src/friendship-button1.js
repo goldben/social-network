@@ -75,10 +75,13 @@ export function FriendshipButton({ receiverId }) {
     return (
         <div className="dropdown">
             <button className="friend-btn" onClick={updateFriendship}>
-                {friendshipStatus === "Unfriend" && (
-                    <FontAwesomeIcon icon={faCheck} />
+                {friendshipStatus === "Unfriend" ? (
+                    <span>
+                        <FontAwesomeIcon icon={faCheck} /> <p>Friends</p>
+                    </span>
+                ) : (
+                    friendshipStatus
                 )}
-                {friendshipStatus}
             </button>
             {friendshipStatus === "Unfriend" && (
                 <div className="dropdown-content">
