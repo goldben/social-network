@@ -240,8 +240,12 @@ app.post("/find-users", (req, res) => {
     console.log("*******GET /USERS*******");
     db.findUsers(req.body.find)
         .then(results => {
+            let users = results.rows.filter(
+                user => user.id != req.session.userId
+            );
+
             res.json({
-                users: results.rows
+                users: users
             });
         })
         .catch(err => {
@@ -539,7 +543,7 @@ io.on("connection", async function(socket) {
             msg => msg.sender_id == userId || msg.receiver_id == userId
         );
 
-        console.log("messages in db: ", gangChat.length);
+        //console.log("messages in db: ", gangChat.length);
         //console.log("privateMessages in db: ", privateMessages);
 
         console.log(`user ${userId}, socket id ${socket.id} is connected`);
@@ -555,7 +559,7 @@ io.on("connection", async function(socket) {
                 userId,
                 message.receiverId
             );
-            console.log("newMessage", newMessage.rows[0].id);
+            //    console.log("newMessage", newMessage.rows[0].id);
             newMessage = await db.getNewMessage(newMessage.rows[0].id);
 
             io.sockets.emit("newMessage", newMessage.rows[0]);
