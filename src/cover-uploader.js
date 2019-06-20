@@ -33,29 +33,30 @@ export class Uploader extends React.Component {
     render() {
         console.log("props in uploader", this.props);
         return (
-            <div className="dropdown">
-                <span className="popup">
-                    <FontAwesomeIcon icon={faCamera} />
-                    <p>Upload Cover Photo</p>
-                </span>
+            <div>
+                <div className="dropdown cover-uploader">
+                    <span className="popup">
+                        <FontAwesomeIcon icon={faCamera} />
+                        <p>Upload Cover Photo</p>
+                    </span>
+                    <div className="dropdown-content">
+                        <a href="#">select photo</a>
+                        <form>
+                            <input
+                                type="file"
+                                name="file"
+                                onChange={e => this.handleChange(e)}
+                            />
 
-                <div className="dropdown-content">
-                    <a href="#">select photo</a>
-                    <form>
-                        <input
-                            type="file"
-                            name="file"
-                            onChange={e => this.handleChange(e)}
-                        />
-
-                        <button
-                            type="button"
-                            className="upload-btn"
-                            onClick={e => this.submit(e)}
-                        >
-                            Upload
-                        </button>
-                    </form>
+                            <button
+                                type="button"
+                                className="upload-btn"
+                                onClick={e => this.submit(e)}
+                            >
+                                Upload
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         );

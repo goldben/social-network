@@ -57,10 +57,10 @@ export function ForcedFriendshipButton({ receiverId, name }) {
 
     return (
         <div>
-            <button className="friend-btn" onClick={forceFriendship}>
+            <button className="force-btn" onClick={forceFriendship}>
                 Force Friendship
             </button>
-            <button className="friend-btn" onClick={forceRequest}>
+            <button className="force-btn" onClick={forceRequest}>
                 Force Request
             </button>
         </div>

@@ -152,29 +152,22 @@ header {
     height: 40px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    padding-left: 19%;
+    padding-left: 20%;
     padding-right: 15%;
-}
-.search-btn {
-    width: 23px;
-    height: 25px;
-    margin-right: 100px;
-    background-color: white;
-    color: #4b4f56;
 }
 
 .logo {
     width: auto;
-    height: 20px;
+    height: 21px;
+    margin: 3px 0 0 0;
 }
 .search-users {
     text-decoration: none;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     width: 600px;
+    margin-left: 5px;
 }
 
 .search-users input {
@@ -183,6 +176,11 @@ header {
     border-radius: 1px;
 }
 .search-btn {
+    width: 23px;
+    height: 25px;
+    margin-right: 100px;
+    background-color: white;
+    color: #4b4f56;
     position: relative;
     left: 0;
 }
@@ -272,15 +270,8 @@ header {
     bottom: -80px;
     left: 210px;
 }
-.clicker {
-    width: 800px;
-    height: 200px;
-    position: absolute;
-}
-.clicker:hover {
-    cursor: pointer;
-}
-.popup:hover .popup {
+
+.cover-img-container:hover .popup {
     opacity: 0.8;
 }
 .popup {
@@ -297,6 +288,13 @@ header {
     cursor: pointer;
     transition: opacity 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
         width 0.3s step-end;
+}
+.force-btn {
+    background-color: inherit;
+    color: white;
+    height: 20px;
+    border: none;
+    margin: 2px;
 }
 .popup p {
     display: inline-block;
@@ -508,10 +506,10 @@ header {
 .find-people input {
     position: absolute;
     top: 7px;
-    left: 348px;
-    width: 400px;
+    left: 22%;
+    width: 397px;
     height: 25px;
-    border-radius: 1px;
+    border: none;
     display: flex;
     flex-direction: column;
     justify-content: center;

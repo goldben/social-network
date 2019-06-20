@@ -71,6 +71,14 @@ export class OtherProfile extends React.Component {
                                 className="profile-img"
                                 alt={`${this.state.first} ${this.state.last}`}
                             />
+                            <div className="overlay">
+                                <div>
+                                    <ForcedFriendshipButton
+                                        receiverId={this.props.match.params.id}
+                                        name={this.state.first}
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div className="cover-content">
                             <span className="cover-name">
@@ -111,10 +119,6 @@ export class OtherProfile extends React.Component {
                         {this.state.bio}
                     </div>
                     <div className="posts-container">
-                        <ForcedFriendshipButton
-                            receiverId={this.props.match.params.id}
-                            name={this.state.first}
-                        />
                         <h3>posts</h3>
                     </div>
                 </div>

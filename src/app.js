@@ -77,7 +77,7 @@ export class App extends React.Component {
                 <div>
                     <div className="app-container">
                         <header>
-                            <Link to="/" className="nav-btn">
+                            <Link to="/posts" className="nav-btn">
                                 <img
                                     src="/img/facebook-logo.png"
                                     className="logo"
@@ -93,7 +93,7 @@ export class App extends React.Component {
                                     <img src={imageUrl} />
                                     <p>{first}</p>
                                 </Link>
-                                <Link to="/" className="nav-btn">
+                                <Link to="/posts" className="nav-btn">
                                     Home
                                 </Link>
                                 <div className="nav-btn">Create</div>
@@ -144,7 +144,7 @@ export class App extends React.Component {
                             path={"/profile/friends"}
                             render={() => <Friends />}
                         />
-                        <Route path={"/"} render={() => <Posts />} />
+                        <Route path={"/posts"} render={() => <Posts />} />
 
                         <Route path={"/find"} render={() => <FindPeople />} />
                         <Route path={"/chat"} render={() => <ChatPage />} />

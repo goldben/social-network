@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter, HashRouter, Route, Link } from "react-router-dom";
 import { About } from "./about";
 import { PhotoViewer } from "./photo-viewer";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { Uploader } from "./cover-uploader";
 import axios from "./axios";
 import { ProfilePic } from "./profilepic";
@@ -69,8 +70,8 @@ export class Profile extends React.Component {
                                 console.log("click", "show image viewer");
                             }}
                         >
-                            <div className="clicker" />
                             <Uploader />
+
                             <ProfilePic
                                 imageUrl={this.props.imageUrl}
                                 first={this.props.first}
