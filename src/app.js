@@ -77,10 +77,13 @@ export class App extends React.Component {
                 <div>
                     <div className="app-container">
                         <header>
-                            <img
-                                src="/img/facebook-logo.png"
-                                className="logo"
-                            />
+                            <Link to="/" className="nav-btn">
+                                <img
+                                    src="/img/facebook-logo.png"
+                                    className="logo"
+                                />
+                            </Link>
+
                             <FindPeopleInHeader />
                             <div className="nav-bar-1">
                                 <Link
@@ -141,6 +144,7 @@ export class App extends React.Component {
                             path={"/profile/friends"}
                             render={() => <Friends />}
                         />
+                        <Route path={"/"} render={() => <Posts />} />
 
                         <Route path={"/find"} render={() => <FindPeople />} />
                         <Route path={"/chat"} render={() => <ChatPage />} />

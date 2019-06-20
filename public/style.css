@@ -796,3 +796,9 @@ pending-list-item {
     position: relative;
     color: #385898;
 }
+
+.home {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("/homescreen2.png");
+}
