@@ -59,72 +59,67 @@ export class Profile extends React.Component {
         };
         console.log("this.props in prfile", this.props);
         return (
-            <BrowserRouter>
-                <div className="profile-container">
-                    <div className="profile-top">
-                        <div
-                            className="cover-img-container"
-                            style={backgroundImg}
-                            onClick={() => {
-                                this.showUploader();
-                                console.log("click", "show image viewer");
-                            }}
-                        >
-                            <Uploader />
+            <div className="profile-container">
+                <div className="profile-top">
+                    <div
+                        className="cover-img-container"
+                        style={backgroundImg}
+                        onClick={() => {
+                            this.showUploader();
+                            console.log("click", "show image viewer");
+                        }}
+                    >
+                        <Uploader />
 
-                            <ProfilePic
-                                imageUrl={this.props.imageUrl}
-                                first={this.props.first}
-                                last={this.props.last}
-                                showUploader={this.props.showUploader}
-                            />
-                            <div className="cover-content">
-                                <span className="cover-name">
-                                    <h1>
-                                        {this.props.first} {this.props.last}{" "}
-                                    </h1>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="timeline-nav-top">
-                        <span className="timeline-nav-btn">Timeline</span>
-                        <Link to="/profile/about" className="timeline-nav-btn">
-                            About
-                        </Link>
-                        <Link
-                            to="/profile/friends"
-                            className="timeline-nav-btn"
-                        >
-                            Friends
-                        </Link>
-                        <span className="timeline-nav-btn">Photos</span>
-                        <span className="timeline-nav-btn">Archive</span>
-                        <span className="timeline-nav-btn">More</span>
-                    </div>
-                    <div className="profile-bottom">
-                        <Route
-                            path="/profile/about"
-                            render={props => (
-                                <About
-                                    bio={this.props.bio}
-                                    updateBio={this.updateBio}
-                                />
-                            )}
-                        />
-                    </div>
-                    {this.state.uploaderVisible && (
-                        <PhotoViewer
-                            hideUploader={this.hideUploader}
-                            uploaded={this.uploaded}
-                            coverImageUrl={coverImgurl}
+                        <ProfilePic
                             imageUrl={this.props.imageUrl}
                             first={this.props.first}
                             last={this.props.last}
+                            showUploader={this.props.showUploader}
                         />
-                    )}
+                        <div className="cover-content">
+                            <span className="cover-name">
+                                <h1>
+                                    {this.props.first} {this.props.last}{" "}
+                                </h1>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </BrowserRouter>
+                <div className="timeline-nav-top">
+                    <span className="timeline-nav-btn">Timeline</span>
+                    <Link to="/profile/about" className="timeline-nav-btn">
+                        About
+                    </Link>
+                    <Link to="/profile/friends" className="timeline-nav-btn">
+                        Friends
+                    </Link>
+                    <span className="timeline-nav-btn">Photos</span>
+                    <span className="timeline-nav-btn">Archive</span>
+                    <span className="timeline-nav-btn">More</span>
+                </div>
+                <div className="profile-bottom">
+                    <Route
+                        path="/profile/about"
+                        render={props => (
+                            <About
+                                bio={this.props.bio}
+                                updateBio={this.updateBio}
+                            />
+                        )}
+                    />
+                </div>
+                {this.state.uploaderVisible && (
+                    <PhotoViewer
+                        hideUploader={this.hideUploader}
+                        uploaded={this.uploaded}
+                        coverImageUrl={coverImgurl}
+                        imageUrl={this.props.imageUrl}
+                        first={this.props.first}
+                        last={this.props.last}
+                    />
+                )}
+            </div>
         );
     }
 }

@@ -313,6 +313,7 @@ app.post("/login", (req, res) => {
                             success: true,
                             userId: user.id
                         });
+                        // res.redirect("/posts");
                     }
                 })
                 .then(results => {

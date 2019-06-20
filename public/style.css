@@ -172,15 +172,17 @@ header {
 
 .search-users input {
     width: 400px;
-    height: 25px;
+    height: 26px;
     border-radius: 1px;
 }
 .search-btn {
-    width: 23px;
+    width: 25px;
     height: 25px;
-    margin-right: 100px;
+    margin: 1px 100px 0 0;
     background-color: white;
     color: #4b4f56;
+    border: solid lightgrey 1px;
+    padding: 1px;
     position: relative;
     left: 0;
 }
@@ -193,7 +195,7 @@ header {
     width: 400px;
     color: black;
     top: 30px;
-    left: 270px;
+    left: 260px;
 }
 
 .nav-bar-1,
@@ -508,7 +510,7 @@ header {
     top: 7px;
     left: 22%;
     width: 397px;
-    height: 25px;
+    height: 26px;
     border: none;
     display: flex;
     flex-direction: column;
