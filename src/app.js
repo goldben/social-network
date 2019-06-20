@@ -7,6 +7,8 @@ import axios from "./axios";
 import { Profile } from "./profile";
 import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
+import Friends from "./friends";
+
 import { Posts } from "./posts";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
@@ -135,6 +137,11 @@ export class App extends React.Component {
                                 />
                             )}
                         />
+                        <Route
+                            path={"/profile/friends"}
+                            render={() => <Friends />}
+                        />
+
                         <Route path={"/find"} render={() => <FindPeople />} />
                         <Route path={"/chat"} render={() => <ChatPage />} />
                     </div>

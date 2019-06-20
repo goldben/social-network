@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, HashRouter, Route, Link } from "react-router-dom";
-import Friends from "./friends";
 import { About } from "./about";
 import { PhotoViewer } from "./photo-viewer";
 
@@ -103,7 +102,6 @@ export class Profile extends React.Component {
                         <span className="timeline-nav-btn">More</span>
                     </div>
                     <div className="profile-bottom">
-                        <Route path="/profile/friends" component={Friends} />
                         <Route
                             path="/profile/about"
                             render={props => (

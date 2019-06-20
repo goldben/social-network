@@ -37,7 +37,7 @@ export function FindPeople() {
             <input
                 name="find"
                 type="text"
-                placeholder="find people"
+                placeholder="search"
                 onChange={e => setQuery(e.target.value)}
             />
             <div className="find-main">

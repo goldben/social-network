@@ -505,6 +505,17 @@ header {
     flex-direction: column;
     justify-content: center;
 }
+.find-people input {
+    position: absolute;
+    top: 7px;
+    left: 348px;
+    width: 400px;
+    height: 25px;
+    border-radius: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .find-main {
     display: flex;
     flex-direction: row;
@@ -634,7 +645,9 @@ header {
 }
 .friends {
     width: 950px;
-
+    position: absolute;
+    top: 400px;
+    left: 304px;
     font-size: 12px;
     display: flex;
     flex-direction: column;
