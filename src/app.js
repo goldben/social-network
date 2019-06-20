@@ -7,6 +7,7 @@ import axios from "./axios";
 import { Profile } from "./profile";
 import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
+import { Posts } from "./posts";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
 

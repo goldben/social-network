@@ -38,6 +38,8 @@ export default function reducer(state = {}, action) {
                 };
             }
             return { ...state, messages: [...state.messages, action.data] };
+        case "CURRENT_CHAT":
+            return { ...state, currentChat: action.data };
         default:
             return state;
     }

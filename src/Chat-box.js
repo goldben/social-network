@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { socket } from "./socket";
 import { init } from "./socket";
 
-import { getMessages, newMessage } from "./actions";
+import { getMessages, newMessage, currentChat } from "./actions";
 
 class ChatBox extends React.Component {
     constructor(props) {
@@ -13,14 +13,9 @@ class ChatBox extends React.Component {
         this.sendMessage = this.sendMessage.bind(this);
     }
     componentDidMount() {
-        let userId = this.props.id;
-        const messages = this.props.messages.filter(
-            msg => msg.sender_id == userId || msg.receiver_id == userId
-        );
-        this.setState({
-            messages: messages
-        });
+        this.props.dispatch(currentChat(this.props.id));
     }
+
     handleChange(e) {
         this.setState({
             newMessage: e.target.value
@@ -60,8 +55,8 @@ class ChatBox extends React.Component {
                 </div>
                 <div className="chat">
                     <div className="chat-display">
-                        {this.state.messages &&
-                            this.state.messages.map(msg => (
+                        {this.props.messages &&
+                            this.props.messages.map(msg => (
                                 <div className="message-item" key={msg.id}>
                                     <p>{msg.created_at}</p>
 
@@ -93,8 +88,12 @@ class ChatBox extends React.Component {
 
 const mapStateToProps = state => {
     console.log("state ", state);
+    let userId = state.currentChat;
+    let messages = state.privateMessages.filter(
+        msg => msg.sender_id == userId || msg.receiver_id == userId
+    );
     return {
-        messages: state.privateMessages
+        messages: messages
     };
 };
 

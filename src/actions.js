@@ -65,3 +65,9 @@ export function newMessage(msg) {
         data: msg
     };
 }
+export function currentChat(id) {
+    return {
+        type: "CURRENT_CHAT",
+        data: id
+    };
+}
