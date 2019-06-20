@@ -313,7 +313,6 @@ app.post("/login", (req, res) => {
                             success: true,
                             userId: user.id
                         });
-                        // res.redirect("/posts");
                     }
                 })
                 .then(results => {
@@ -530,8 +529,8 @@ io.on("connection", async function(socket) {
         //console.log("privateMessages in db: ", privateMessages);
 
         console.log(`user ${userId}, socket id ${socket.id} is connected`);
-        socket.emit("getMessages", gangChat.reverse());
-        socket.emit("getPrivateMessages", privateMessages.reverse());
+        socket.emit("getMessages", gangChat);
+        socket.emit("getPrivateMessages", privateMessages);
 
         socket.on("newMessage", async function(message) {
             console.log("message text", message.text);

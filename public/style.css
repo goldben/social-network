@@ -758,10 +758,16 @@ pending-list-item {
 }
 
 .message-text {
-    background-color: #f2f3f5;
     border-radius: 15px;
     padding: 10px;
     margin-left: 10px;
+}
+.user1 {
+    background-color: #f2f3f5;
+}
+.user2 {
+    color: white;
+    background-color: #3b5998;
 }
 .text-container {
 }

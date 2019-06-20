@@ -75,7 +75,13 @@ class ChatBox extends React.Component {
                                         <div className="img-icon">
                                             <img src={msg.imgurl} />
                                         </div>
-                                        <div className="message-text">
+                                        <div
+                                            className={
+                                                msg.sender_id == this.props.id
+                                                    ? "message-text user1"
+                                                    : "message-text user2"
+                                            }
+                                        >
                                             <p>{msg.message}</p>
                                         </div>
                                     </div>

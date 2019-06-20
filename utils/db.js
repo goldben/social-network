@@ -170,7 +170,7 @@ exports.getNewMessage = function(messages_id) {
         SELECT messages.id, first, last, imgurl, message, receiver_id , sender_id ,messages.created_at FROM messages
         JOIN users
         ON sender_id = users.id
-        WHERE messages.id = $1
+        WHERE messages.id = $1 ORDER BY id DESC LIMIT 20
         `,
         [messages_id]
     );
