@@ -495,13 +495,28 @@ header {
 .upload-btn {
     width: 150px;
 }
+.friends-bio {
+    width: 100%;
+    background: white;
+    height: 400px;
+    padding: 50px;
+    font-size: 19px;
+}
 .bio-container,
 .posts-container {
     background: white;
     position: relative;
-    width: 50%;
+    width: 100%;
+    padding: 50px;
     border: solid #d4dce9 1px;
     border-radius: 5px;
+    font-family: Helvetica, Arial, sans-serif;
+    word-spacing: 1px;
+
+    font-size: 17px;
+    line-height: 30px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .bio-container {
@@ -660,6 +675,8 @@ header {
 }
 .friends {
     width: 950px;
+    min-height: 450px;
+    padding: 20px;
     position: absolute;
     top: 400px;
     left: 304px;
@@ -739,11 +756,17 @@ pending-list-item {
 }
 
 .chat {
+    font-family: Helvetica, Arial, sans-serif;
+    word-spacing: 1px;
+    font-size: 13px;
+    line-height: 16px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
     display: flex;
     flex-direction: column;
     height: 80%;
     width: 100%;
-    border: solid grey 1px;
+    border: solid lightgrey 1px;
 }
 .manage-messages {
     width: 100%;
@@ -788,6 +811,9 @@ pending-list-item {
 }
 .chat textarea {
     width: 100%;
+    boeder: solid lightgrey 1px;
+
+    border-radius: 2px;
 }
 .chat-box {
     background-color: white;
@@ -797,10 +823,11 @@ pending-list-item {
     right: 100px;
     width: 350px;
     height: 500px;
-    border: solid grey 1px;
+    border: solid lightgrey 1px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    z-index: 100;
 }
 
 .chat-header {

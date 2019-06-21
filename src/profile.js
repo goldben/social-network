@@ -99,15 +99,7 @@ export class Profile extends React.Component {
                     <span className="timeline-nav-btn">More</span>
                 </div>
                 <div className="profile-bottom">
-                    <Route
-                        path="/profile/about"
-                        render={props => (
-                            <About
-                                bio={this.props.bio}
-                                updateBio={this.updateBio}
-                            />
-                        )}
-                    />
+                    <About bio={this.props.bio} updateBio={this.updateBio} />
                 </div>
                 {this.state.uploaderVisible && (
                     <PhotoViewer

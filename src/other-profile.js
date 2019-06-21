@@ -124,7 +124,7 @@ export class OtherProfile extends React.Component {
                     <span className="timeline-nav-btn">More</span>
                 </div>
                 <div className="profile-bottom">
-                    <div className="main">{this.state.bio}</div>
+                    <div className="friends-bio">{this.state.bio}</div>
                 </div>
                 {this.state.showChatBox && (
                     <ChatBox

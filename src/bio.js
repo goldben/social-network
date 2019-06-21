@@ -45,10 +45,7 @@ export class Bio extends React.Component {
 
         return (
             <div className="bio-container" onClick={this.showBioEditor}>
-                <div className="text-container">
-                    <h3>my bio</h3>
-                    {bio}
-                </div>
+                <div className="text-container">{bio}</div>
 
                 {this.state.editorVisible && (
                     <div className="bio-editor">
@@ -64,14 +61,14 @@ export class Bio extends React.Component {
                         >
                             <textarea
                                 rows="10"
-                                cols="20"
+                                cols="85"
                                 name="textarea"
                                 onChange={e => this.handleChange(e)}
                                 defaultValue={this.props.bio}
                             />
 
                             <button className="login-form-btn" type="submit">
-                                save
+                                Save changes
                             </button>
                         </form>
                     </div>

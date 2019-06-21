@@ -489,6 +489,18 @@ app.post("/end-friendship", async (req, res) => {
         console.log("/end-friendship error: "), err;
     }
 });
+//////////////////////////////random////////////////////////////////////////////////
+app.post("/random", async (req, res) => {
+    console.log("********** RANDOM FRIEND  ************");
+    try {
+        for (var i = 2; i < 190; i++) {
+            const random = await db.forceToBeFriends(i, i + 1, true);
+            console.log("forced friendship", random);
+        }
+    } catch (err) {
+        console.log("/random-friendship", err);
+    }
+});
 //////////////////////////////////////////////////////////////////////////////
 app.post("/forced-friendship", async (req, res) => {
     console.log("**********  FORCED FRIEND  ************");

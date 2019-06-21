@@ -5,7 +5,7 @@ import { init } from "./socket";
 
 import { getMessages, newMessage, currentChat } from "./actions";
 
-class ChatBox extends React.Component {
+class Conversations extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -113,13 +113,18 @@ class ChatBox extends React.Component {
 const mapStateToProps = state => {
     console.log("state ", state);
     //console.log(state.privateMessages[0].created_at.toDateString());
-    let userId = state.currentChat;
-    let messages = state.privateMessages.filter(
-        msg => msg.sender_id == userId || msg.receiver_id == userId
-    );
+    let firstMsgs = [];
+    state.privateMessages.forEach(msg => {
+        chats.forEach(item => {
+            if (msg.sender.id != item.id) {
+                firstMsgs.push(msg);
+            }
+        });
+    });
+    console.log("firstMsgs: ", firstMsgs);
     return {
         messages: messages
     };
 };
 
-export default connect(mapStateToProps)(ChatBox);
+export default connect(mapStateToProps)(Conversations);
