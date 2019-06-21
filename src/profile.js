@@ -61,14 +61,14 @@ export class Profile extends React.Component {
         return (
             <div className="profile-container">
                 <div className="profile-top">
-                    <div
-                        className="cover-img-container"
-                        style={backgroundImg}
-                        onClick={() => {
-                            this.showUploader();
-                            console.log("click", "show image viewer");
-                        }}
-                    >
+                    <div className="cover-img-container" style={backgroundImg}>
+                        <div
+                            className="clickble"
+                            onClick={() => {
+                                this.showUploader();
+                                console.log("click", "show image viewer");
+                            }}
+                        />
                         <Uploader />
 
                         <ProfilePic

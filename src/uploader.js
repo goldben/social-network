@@ -36,25 +36,48 @@ export class Uploader extends React.Component {
                 <div className="x-btn" onClick={this.props.hideUploader}>
                     X
                 </div>
-                <img src={this.props.imageUrl} />
+                <div className="centralizer">
+                    <span className="img-container">
+                        <img src={this.props.imageUrl} />
+                    </span>
 
-                <p>change profile image</p>
+                    <div className="update-img-form">
+                        <p>change profile image</p>
 
-                <form>
-                    <input
-                        type="file"
-                        name="file"
-                        onChange={e => this.handleChange(e)}
-                    />
+                        <div>
+                            <Link to="/profile" className="owner">
+                                <img src={this.props.imageUrl} />
+                                <p>
+                                    {this.props.first} {this.props.last}
+                                </p>
+                            </Link>
+                        </div>
+                        <form>
+                            <input
+                                type="file"
+                                name="file"
+                                onChange={e => this.handleChange(e)}
+                            />
 
-                    <button
-                        type="button"
-                        className="upload-btn"
-                        onClick={e => this.submit(e)}
-                    >
-                        Upload
-                    </button>
-                </form>
+                            <button
+                                type="button"
+                                className="upload-btn"
+                                onClick={e => this.submit(e)}
+                            >
+                                Upload
+                            </button>
+                        </form>
+                        <div>
+                            <span className="owner">
+                                <img
+                                    src={this.props.imageUrl}
+                                    className="fake-owner"
+                                />
+                            </span>
+                            <img src="./capture1.png" />
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

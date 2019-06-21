@@ -262,7 +262,10 @@ header {
 .profile-bottom > {
 }
 /*--------------------profile pic-------------------------- */
-.cover-img-container img {
+.clickble {
+    width: 900px;
+    height: 300px;
+    position: absolute;
 }
 .cover-content {
     width: 100%;
@@ -392,7 +395,6 @@ header {
 /*--------------------uploder-------------------------- */
 
 .uploader {
-    background-color: white;
     background-color: rgba(0, 0, 0, 0.9);
     border: solid 1px;
     position: fixed;
@@ -402,11 +404,9 @@ header {
     height: 100%;
     padding: 50px;
     z-index: 100;
-    display: flex;
-    flex-direction: row;
 }
 .x-btn {
-    position: relative;
+    position: absolute;
     right: 5px;
     top: 5px;
     color: grey;
@@ -418,38 +418,48 @@ header {
 .x-btn:hover {
     color: white;
 }
+.centralizer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.update-img-form {
+}
 .update-container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
-.update-img {
+.img-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 700px;
+}
+.img-container img {
     height: 500px;
-    max-height: 100%;
-    max-width: 100%;
 }
 .uploader img {
     image-rendering: optimizeQuality;
-
     width: auto;
-    max-width: 100%;
-    max-height: 90%;
 }
 .update-img-form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 400px;
-    height: 600px;
+    height: 500px;
     background-color: white;
     color: #1c1e21;
     text-align: left;
     font-size: 13px;
     padding: 20px;
+}
+.update-img-form img {
+    height: 300px;
+    width: ;
 }
 .update-img-form form {
     display: flex;
@@ -476,6 +486,10 @@ header {
     position: relative;
     top: 273px;
     left: -10px;
+}
+.fake-owner .owner img {
+    width: 40px;
+    height: 40px;
 }
 
 .upload-btn {
@@ -542,7 +556,6 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     padding: 20px 30px 20px 20px;
     color: #385898;
     margin-bottom: 2px;

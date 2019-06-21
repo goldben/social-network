@@ -107,7 +107,12 @@ export class OtherProfile extends React.Component {
                 </div>
                 <div className="timeline-nav-top">
                     <span className="timeline-nav-btn">Timeline</span>
-                    <span className="timeline-nav-btn">About</span>
+                    <Link
+                        to={`/user/${this.props.match.params.id}`}
+                        className="timeline-nav-btn"
+                    >
+                        About
+                    </Link>
                     <Link
                         to={`/user/${this.props.match.params.id}/friends`}
                         className="timeline-nav-btn"
@@ -118,7 +123,9 @@ export class OtherProfile extends React.Component {
                     <span className="timeline-nav-btn">Archive</span>
                     <span className="timeline-nav-btn">More</span>
                 </div>
-                <div className="profile-bottom" />
+                <div className="profile-bottom">
+                    <div className="main">{this.state.bio}</div>
+                </div>
                 {this.state.showChatBox && (
                     <ChatBox
                         hideChatBox={this.showChatBox}
