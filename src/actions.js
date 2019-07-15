@@ -1,7 +1,18 @@
 import axios from "./axios";
 
 // all ajax requests will go in this file
-
+export async function getBio(bio) {
+    try {
+        let data = await axios.get("/user");
+        console.log("current bio : ", data.data.bio);
+        return {
+            type: "GET_BIO",
+            data: data.data.bio
+        };
+    } catch (err) {
+        console.log(err);
+    }
+}
 export async function getFriends() {
     try {
         let data = await axios.get("/get-friends");
@@ -26,7 +37,16 @@ export function send(id) {
         data: id
     };
 }
-
+export function updateBio(newBio) {
+    axios.post("/edit-bio", {
+        bio: newBio
+    });
+    console.log("bio updated");
+    return {
+        type: "UPDATE_BIO",
+        data: newBio
+    };
+}
 export function accept(id) {
     axios.post("/accept-friendship", {
         otherUserId: id

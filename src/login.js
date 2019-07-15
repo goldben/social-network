@@ -28,7 +28,7 @@ export class Login extends React.Component {
             })
             .then(({ data }) => {
                 if (data.success) {
-                    location.replace("/posts");
+                    location.replace("/profile");
                 } else {
                     this.setState({
                         error: data.error

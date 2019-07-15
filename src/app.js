@@ -12,7 +12,6 @@ import { FindPeople } from "./find-people";
 import Friends from "./friends";
 import { FriendsOfFriends } from "./friends-of-friends";
 
-import { Posts } from "./posts";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
 
@@ -89,19 +88,11 @@ export class App extends React.Component {
                                     <img src={imageUrl} />
                                     <p>{first}</p>
                                 </Link>
-                                <Link to="/posts" className="nav-btn">
-                                    Home
+                                <Link to="/chat" className="nav-btn">
+                                    <p>messages</p>
                                 </Link>
-                                <div className="nav-btn">Create</div>
                             </div>
                             <div className="nav-bar-2">
-                                <Link to="/chat" className="nav-btn">
-                                    <img src="/msg.png" className="logo" />
-                                </Link>
-                                <div className="nav-btn">
-                                    {" "}
-                                    <FontAwesomeIcon icon={faBell} />
-                                </div>
                                 <a href="/logout" className="nav-btn">
                                     <FontAwesomeIcon icon={faSignOutAlt} />
                                 </a>
@@ -153,8 +144,6 @@ export class App extends React.Component {
                                 />
                             )}
                         />
-                        <Route path={"/posts"} render={() => <Posts />} />
-
                         <Route path={"/find"} render={() => <FindPeople />} />
                         <Route path={"/chat"} render={() => <ChatPage />} />
                     </div>

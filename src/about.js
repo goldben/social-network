@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { FriendshipButton } from "./friendship-button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Bio } from "./bio";
+import Bio from "./bio";
 
-export class About extends React.Component {
+export default class About extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -23,7 +23,7 @@ export class About extends React.Component {
                     <FontAwesomeIcon icon={faUser} className="icon" />
                     <h2>About</h2>
                 </div>
-                <Bio bio={this.props.bio} updateBio={this.props.updateBio} />
+                <Bio />
             </div>
         );
     }

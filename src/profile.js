@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, HashRouter, Route, Link } from "react-router-dom";
-import { About } from "./about";
+import About from "./about";
 import { PhotoViewer } from "./photo-viewer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
@@ -87,19 +87,15 @@ export class Profile extends React.Component {
                     </div>
                 </div>
                 <div className="timeline-nav-top">
-                    <span className="timeline-nav-btn">Timeline</span>
                     <Link to="/profile/about" className="timeline-nav-btn">
                         About
                     </Link>
                     <Link to="/profile/friends" className="timeline-nav-btn">
                         Friends
                     </Link>
-                    <span className="timeline-nav-btn">Photos</span>
-                    <span className="timeline-nav-btn">Archive</span>
-                    <span className="timeline-nav-btn">More</span>
                 </div>
                 <div className="profile-bottom">
-                    <About bio={this.props.bio} updateBio={this.updateBio} />
+                    <About />
                 </div>
                 {this.state.uploaderVisible && (
                     <PhotoViewer

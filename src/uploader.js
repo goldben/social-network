@@ -74,7 +74,6 @@ export class Uploader extends React.Component {
                                     className="fake-owner"
                                 />
                             </span>
-                            <img src="./capture1.png" />
                         </div>
                     </div>
                 </div>

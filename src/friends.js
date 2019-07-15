@@ -92,7 +92,7 @@ class Friends extends React.Component {
                     </friends-list>
                 </div>
                 <div>
-                    <h1>Pending list</h1>
+                    <h1>Pending</h1>
 
                     <pending-list>
                         {this.props.pending.length &&

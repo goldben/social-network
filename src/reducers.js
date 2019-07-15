@@ -2,6 +2,10 @@
 
 export default function reducer(state = {}, action) {
     switch (action.type) {
+        case "GET_BIO":
+            return { ...state, bio: action.data };
+        case "UPDATE_BIO":
+            return { ...state, bio: action.data };
         case "GET_FRIENDS":
             return { ...state, friends: action.data };
         case "SEND_FRIEND_REQUEST":

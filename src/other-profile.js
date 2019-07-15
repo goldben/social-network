@@ -4,7 +4,6 @@ import axios from "./axios";
 import { Profile } from "./profile";
 import { ProfilePic } from "./profilepic";
 import { FriendshipButton } from "./friendship-button1";
-import { ForcedFriendshipButton } from "./forced-friendship-button";
 import ChatBox from "./chat-box";
 
 export class OtherProfile extends React.Component {
@@ -71,14 +70,6 @@ export class OtherProfile extends React.Component {
                                 className="profile-img"
                                 alt={`${this.state.first} ${this.state.last}`}
                             />
-                            <div className="overlay">
-                                <div>
-                                    <ForcedFriendshipButton
-                                        receiverId={this.props.match.params.id}
-                                        name={this.state.first}
-                                    />
-                                </div>
-                            </div>
                         </div>
                         <div className="cover-content">
                             <span className="cover-name">
@@ -119,9 +110,6 @@ export class OtherProfile extends React.Component {
                     >
                         Friends
                     </Link>
-                    <span className="timeline-nav-btn">Photos</span>
-                    <span className="timeline-nav-btn">Archive</span>
-                    <span className="timeline-nav-btn">More</span>
                 </div>
                 <div className="profile-bottom">
                     <div className="friends-bio">{this.state.bio}</div>
