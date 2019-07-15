@@ -142,6 +142,8 @@ form div {
 /*--------------------header-------------------------- */
 
 header {
+    position: fixed;
+    top: 0;
     font-weight: bold;
     background-color: #3b5998;
     border: solid black 1px;
@@ -151,6 +153,7 @@ header {
     align-items: center;
     padding-left: 20%;
     padding-right: 15%;
+    z-index: 10000;
 }
 
 .logo {
@@ -619,6 +622,7 @@ header {
 .small-message-btn {
     width: 30px;
 }
+
 /*--------------------dropdown-------------------------- */
 
 .dropbtn {
@@ -725,22 +729,16 @@ pending-list-item {
 /*--------------------   chat  ----------------------- */
 
 .messenger {
+    position: fixed;
+    top: 40px;
+    right: 200px;
     background-color: white;
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 600px;
     border: solid grey 1px;
 }
 
-.chat-list {
-    width: 300px;
-    height: 100vh;
-    border: solid grey 1px;
-}
-.chat-right-panel {
-    width: 100%;
-}
 .chat-panel {
     display: flex;
     flex-direction: row;
@@ -754,29 +752,19 @@ pending-list-item {
     word-spacing: 1px;
     font-size: 13px;
     line-height: 16px;
-    overflow-wrap: break-word;
     white-space: pre-wrap;
     display: flex;
     flex-direction: column;
-    height: 80%;
     width: 100%;
     border: solid lightgrey 1px;
-}
-.manage-messages {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border: solid grey 1px;
 }
 
 .chat-display {
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    height: 90%;
-    width: 100%<;
+    height: 100%;
+    width: 100%;
 }
 .message-item > p {
     color: grey;
@@ -788,7 +776,6 @@ pending-list-item {
     display: flex;
     flex-direction: row;
 }
-
 .message-text {
     border-radius: 15px;
     padding: 10px;

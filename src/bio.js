@@ -83,7 +83,6 @@ class Bio extends React.Component {
     }
 }
 const mapStateToProps = state => {
-    console.log("bio", state.bio);
     if (state.bio) {
         return {
             bio: state.bio

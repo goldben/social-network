@@ -10,7 +10,7 @@ export class OtherProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showChatBox: false
+            showChatBox: true
         };
         this.showChatBox = this.showChatBox.bind(this);
     }

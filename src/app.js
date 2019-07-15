@@ -15,21 +15,33 @@ import { FriendsOfFriends } from "./friends-of-friends";
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
 
-import ChatPage from "./chat-page";
+import LastChats from "./last-chats";
 
 export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             uploaderVisible: false,
+            showChats: false,
             query: "last3"
         };
         this.updateBio = this.updateBio.bind(this);
         this.uploaded = this.uploaded.bind(this);
         this.showUploader = this.showUploader.bind(this);
+        this.showChats = this.showChats.bind(this);
+        this.hideChats = this.hideChats.bind(this);
         this.hideUploader = this.hideUploader.bind(this);
     }
-
+    showChats() {
+        this.setState({
+            showChats: true
+        });
+    }
+    hideChats(e) {
+        this.setState({
+            showChats: false
+        });
+    }
     uploaded(url) {
         this.setState({
             imageUrl: url,
@@ -88,9 +100,13 @@ export class App extends React.Component {
                                     <img src={imageUrl} />
                                     <p>{first}</p>
                                 </Link>
-                                <Link to="/chat" className="nav-btn">
+                                <div
+                                    className="nav-btn"
+                                    onClick={this.showChats}
+                                >
                                     <p>messages</p>
-                                </Link>
+                                    {this.state.showChats && <LastChats />}
+                                </div>
                             </div>
                             <div className="nav-bar-2">
                                 <a href="/logout" className="nav-btn">
@@ -98,54 +114,59 @@ export class App extends React.Component {
                                 </a>
                             </div>
                         </header>
-                        {this.state.uploaderVisible && (
-                            <Uploader
-                                uploaded={this.uploaded}
-                                hideUploader={this.hideUploader}
-                                imageUrl={imageUrl}
-                            />
-                        )}
-                        <Route
-                            path="/profile"
-                            render={() => (
-                                <Profile
+                        <div className="body" onClick={this.hideChats}>
+                            {this.state.uploaderVisible && (
+                                <Uploader
+                                    uploaded={this.uploaded}
+                                    hideUploader={this.hideUploader}
                                     imageUrl={imageUrl}
-                                    coverImgUrl={coverImgUrl}
-                                    id={id}
-                                    first={first}
-                                    last={last}
-                                    bio={bio}
-                                    showUploader={this.showUploader}
-                                    updateBio={this.updateBio}
                                 />
                             )}
-                        />
-                        <Route
-                            path="/user/:id"
-                            render={props => (
-                                <OtherProfile
-                                    key={props.match.url}
-                                    match={props.match}
-                                    history={props.history}
-                                />
-                            )}
-                        />
-                        <Route
-                            path={"/profile/friends"}
-                            render={() => <Friends />}
-                        />
-                        <Route
-                            path={"/user/:id/friends"}
-                            render={props => (
-                                <FriendsOfFriends
-                                    key={props.match.url}
-                                    match={props.match}
-                                    history={props.history}
-                                />
-                            )}
-                        />
-                        <Route path={"/find"} render={() => <FindPeople />} />
-                        <Route path={"/chat"} render={() => <ChatPage />} />
+                            <Route
+                                path="/profile"
+                                render={() => (
+                                    <Profile
+                                        imageUrl={imageUrl}
+                                        coverImgUrl={coverImgUrl}
+                                        id={id}
+                                        first={first}
+                                        last={last}
+                                        bio={bio}
+                                        showUploader={this.showUploader}
+                                        updateBio={this.updateBio}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path="/user/:id"
+                                render={props => (
+                                    <OtherProfile
+                                        key={props.match.url}
+                                        match={props.match}
+                                        history={props.history}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path={"/profile/friends"}
+                                render={() => <Friends />}
+                            />
+                            <Route
+                                path={"/user/:id/friends"}
+                                render={props => (
+                                    <FriendsOfFriends
+                                        key={props.match.url}
+                                        match={props.match}
+                                        history={props.history}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path={"/find"}
+                                render={() => <FindPeople />}
+                            />
+                            <Route path={"/chat"} render={() => <ChatPage />} />
+                        </div>
                     </div>
                 </div>
             </BrowserRouter>

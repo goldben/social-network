@@ -58,7 +58,6 @@ class ChatBox extends React.Component {
                             {this.props.first} {this.props.last}
                         </p>
                     </div>
-                    <img src="/chat2.png" />
 
                     <div className="x-btn" onClick={this.props.hideChatBox}>
                         X
@@ -103,7 +102,6 @@ class ChatBox extends React.Component {
                             onKeyPress={e => this.sendMessage(e)}
                         />
                     </div>
-                    <img src="/chat.png" />
                 </div>
             </div>
         );

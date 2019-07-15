@@ -4,7 +4,6 @@ import axios from "./axios";
 export async function getBio(bio) {
     try {
         let data = await axios.get("/user");
-        console.log("current bio : ", data.data.bio);
         return {
             type: "GET_BIO",
             data: data.data.bio
