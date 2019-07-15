@@ -38,17 +38,11 @@ export class Registration extends React.Component {
         return (
             <div className="registration-container">
                 <div className="recent-logins">
-                    <div>
-                        <h1>Recent logins</h1>
-                        <p>Click your picture or add an account.</p>
-                    </div>
-                    <div className="Add Acount">Add Account</div>
-                    <div> sfdfdsfdsfdsf</div>
+                    <div className="Add Acount" />
                 </div>
                 <div className="registration-form">
                     <div>
                         <h1>Create a new account</h1>
-                        <p>It's free and always will be.</p>
                     </div>
                     <form
                         onSubmit={e => this.submit(e)}
@@ -84,13 +78,7 @@ export class Registration extends React.Component {
                             required
                             onChange={e => this.handleChange(e)}
                         />
-                        <div className="terms">
-                            By clicking Sign Up, you agree to our Terms. Learn
-                            how we collect, use and share your data in our Data
-                            Policy and how we use cookies and similar technology
-                            in our Cookie Policy. You may receive SMS
-                            notifications from us and can opt out at any time.
-                        </div>
+
                         <button
                             disabled={!this.state.first}
                             className="registration-form-btn"

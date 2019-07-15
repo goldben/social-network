@@ -39,21 +39,23 @@ export class Login extends React.Component {
     render() {
         return (
             <div className="bluebar">
-                <h1>fakebook</h1>
+                <h1>social network</h1>
                 <div className="login-form">
-                    <div>
-                        <span>email</span>
-                        <span> passsword</span>
-                    </div>
                     <form onSubmit={e => this.submit(e)}>
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder="email"
-                            required
-                            onChange={e => this.handleChange(e)}
-                        />
                         <div>
+                            <span>email</span>
+
+                            <input
+                                name="email"
+                                type="email"
+                                placeholder="email"
+                                required
+                                onChange={e => this.handleChange(e)}
+                            />
+                        </div>
+
+                        <div>
+                            <span> passsword</span>
                             <input
                                 name="password"
                                 type="password"
@@ -61,15 +63,18 @@ export class Login extends React.Component {
                                 required
                                 onChange={e => this.handleChange(e)}
                             />
-                            Forgotten account?
                         </div>
-                        <button
-                            disabled={!this.state.email}
-                            className="login-form-btn"
-                            type="submit"
-                        >
-                            Login
-                        </button>
+                        <div>
+                            <span />
+                            <button
+                                disabled={!this.state.email}
+                                className="login-form-btn"
+                                type="submit"
+                            >
+                                Login
+                            </button>
+                        </div>
+
                         {this.state.error && (
                             <div className="error-message">
                                 {this.state.error}

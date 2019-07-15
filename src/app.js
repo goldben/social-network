@@ -80,13 +80,6 @@ export class App extends React.Component {
                 <div>
                     <div className="app-container">
                         <header>
-                            <Link to="/posts" className="nav-btn">
-                                <img
-                                    src="/img/facebook-logo.png"
-                                    className="logo"
-                                />
-                            </Link>
-
                             <FindPeopleInHeader />
                             <div className="nav-bar-1">
                                 <Link

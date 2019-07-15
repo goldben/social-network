@@ -132,7 +132,6 @@ app.get("/otheruser/:id", async (req, res) => {
                 userId,
                 otherUserId
             );
-            //console.log("friendshipStatus: ", friendshipStatus);
             let noRequest = friendshipStatus.rowCount == 0;
 
             if (noRequest) {
