@@ -37,9 +37,6 @@ export class Registration extends React.Component {
     render() {
         return (
             <div className="registration-container">
-                <div className="recent-logins">
-                    <div className="Add Acount" />
-                </div>
                 <div className="registration-form">
                     <div>
                         <h1>Create a new account</h1>
