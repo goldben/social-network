@@ -113,6 +113,7 @@ app.get("/user", (req, res) => {
             })
             .catch(err => {
                 console.log("GET USER DATA", err);
+                res.json({ success: false });
             });
     }
 });

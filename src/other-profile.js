@@ -20,7 +20,7 @@ export class OtherProfile extends React.Component {
         axios.get("/otheruser/" + id).then(({ data }) => {
             //console.log("request for same user");
             if (data.success == false) {
-                this.props.history.push("/");
+                this.props.history.push("/profile");
             } else {
                 //        console.log("data at other profile", data);
                 this.setState(data);
@@ -97,7 +97,6 @@ export class OtherProfile extends React.Component {
                     </div>
                 </div>
                 <div className="timeline-nav-top">
-                    <span className="timeline-nav-btn">Timeline</span>
                     <Link
                         to={`/user/${this.props.match.params.id}`}
                         className="timeline-nav-btn"

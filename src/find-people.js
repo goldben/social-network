@@ -33,7 +33,7 @@ export function FindPeople() {
     );
 
     return (
-        <div className="find-people">
+        <div className="find-page">
             <input
                 name="find"
                 type="text"
@@ -78,9 +78,6 @@ export function FindPeople() {
                                         <FriendshipButton
                                             receiverId={user.id}
                                         />
-                                        <button className="friend-btn small-message-btn">
-                                            ...
-                                        </button>
                                     </div>
                                 </div>
                             </div>

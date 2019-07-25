@@ -1,30 +1,101 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useState, useEffect } from "react";
+import { getBio, updateBio } from "./actions";
 import { Link } from "react-router-dom";
 import { FriendshipButton } from "./friendship-button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import Bio from "./bio";
 
-export default class About extends React.Component {
+class About extends React.Component {
+    componentDidMount() {
+        this.props.dispatch(getBio());
+    }
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            editorVisible: false
+        };
+        this.showBioEditor = this.showBioEditor.bind(this);
+        this.hideBioEditor = this.hideBioEditor.bind(this);
     }
-    componentDidMount() {
-        //this.props.dispatch(getBio());
+    handleChange({ target }) {
+        console.log("name: ", target.name);
+        // console.log("target value: ", target.value);
+        this.setState({
+            newBio: target.value
+        });
     }
+    submit(e) {
+        e.preventDefault();
+        this.props.dispatch(updateBio(this.state.newBio));
+        this.setState({
+            editorVisible: false
+        });
+    }
+    showBioEditor() {
+        this.setState({
+            editorVisible: true
+        });
+    }
+    hideBioEditor(e) {
+        this.setState({
+            editorVisible: false
+        });
+    }
+
     render() {
-        console.log("about props: ", this.props);
-        return (
-            <div className="main">
-                <div>
-                    <FontAwesomeIcon icon={faUser} className="icon" />
-                    <h2>About</h2>
+        if (!this.props.bio) {
+            return <div className="loading" />;
+        } else {
+            return (
+                <div className="bio-container" onClick={this.showBioEditor}>
+                    <div>
+                        <h2>About</h2>
+                    </div>
+                    <div className="text-container">{this.props.bio}</div>
+
+                    {this.state.editorVisible && (
+                        <div className="bio-editor">
+                            <div
+                                className="x-bio-editor-btn"
+                                onClick={this.hideBioEditor}
+                            >
+                                x
+                            </div>
+                            <form
+                                onSubmit={e => this.submit(e)}
+                                className="bio-form"
+                            >
+                                <textarea
+                                    rows="10"
+                                    cols="85"
+                                    name="textarea"
+                                    onChange={e => this.handleChange(e)}
+                                    defaultValue={this.props.bio}
+                                />
+
+                                <button
+                                    className="login-form-btn"
+                                    type="submit"
+                                >
+                                    Save changes
+                                </button>
+                            </form>
+                        </div>
+                    )}
                 </div>
-                <Bio />
-            </div>
-        );
+            );
+        }
     }
 }
+const mapStateToProps = state => {
+    if (state.bio) {
+        return {
+            bio: state.bio
+        };
+    } else {
+        return {
+            bio: "go on, write your bio"
+        };
+    }
+};
+
+export default connect(mapStateToProps)(About);

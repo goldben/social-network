@@ -1,4 +1,4 @@
-* {
+find-page* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -88,6 +88,7 @@ form div {
     display: flex;
     flex-direction: row;
     padding: 0 550px;
+    height: 85vh;
 }
 .recent-logins {
     width: 800px;
@@ -157,13 +158,19 @@ header {
     padding-right: 15%;
     z-index: 10000;
 }
-
+.body {
+    position: absolute;
+    display: flex;
+    align-content: center;
+    top: 40px;
+    left: 0;
+}
 .logo {
     width: auto;
     height: 21px;
     margin: 3px 0 0 0;
 }
-.search-users {
+.search-header {
     text-decoration: none;
     display: flex;
     flex-direction: row;
@@ -171,32 +178,35 @@ header {
     margin-left: 5px;
 }
 
-.search-users input {
+.search-header input {
+    padding-left: 30px;
+    position: fixed;
+    top: 5px;
+    left: 22%;
     width: 400px;
     height: 26px;
     border-radius: 1px;
 }
+
 .search-btn {
     width: 25px;
-    height: 25px;
-    margin: 1px 100px 0 0;
-    background-color: white;
+    height: 26px;
     color: #4b4f56;
-    border: solid lightgrey 1px;
-    padding: 1px;
+    padding: 2px;
     position: relative;
-    left: 0;
+    left: 32px;
+    top: 4px;
 }
 .header-search-results {
-    z-index: 1000;
     position: fixed;
     background: white;
-    border: solid light-grey 1px;
+    border: solid light-grey 2px;
     border-radius: 3px;
-    width: 400px;
+    width: 430px;
     color: black;
     top: 30px;
-    left: 260px;
+    left: 22%;
+    padding: 2px;
 }
 
 .nav-bar-1,
@@ -205,11 +215,11 @@ header {
     flex-direction: row;
     justify-content: center;
     height: 100%;
+    width: 140px;
 }
 
 .nav-bar-1 .nav-btn {
     color: white;
-    width: 70px;
     border-radius: 6px;
     display: flex;
     flex-direction: row;
@@ -217,10 +227,11 @@ header {
     justify-content: center;
     font-size: 12px;
     text-decoration: none;
+    margin-right: 30px;
     border-right: 1px dashed #355088;
 }
 .nav-bar-1 .nav-btn:hover {
-    background-color: #355088;
+    background-color: #355087;
 }
 .img-icon img {
     position: relative;
@@ -248,7 +259,7 @@ header {
 }
 /*---------------------------------profile---------------------------------- */
 .profile-container {
-    width: 950px;
+    width: 1550px;
     margin: 0 20% 0;
     height: 100vh;
 }
@@ -258,8 +269,7 @@ header {
     display: flex;
     flex-direction: row;
 }
-.profile-bottom > {
-}
+
 /*--------------------profile pic-------------------------- */
 .clickble {
     width: 900px;
@@ -273,7 +283,6 @@ header {
     flex-direction: row;
     align-items: center;
     position: relative;
-    bottom: -80px;
     left: 210px;
 }
 
@@ -312,16 +321,19 @@ header {
     width: 400px;
 }
 .profile-action {
-    width: 600px;
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
 }
 .profile-action button {
     width: 100px;
     height: 30px;
     color: #606770;
 }
+
 .profile-img-container {
     overflow: hidden;
-
     border-radius: 2px;
     display: block;
     height: 150px;
@@ -372,7 +384,7 @@ header {
     align-items: center;
     justify-content: center;
     height: 45px;
-    width: 100%;
+    width: 700px;
     padding-left: 250px;
     padding-right: 150px;
     margin-bottom: 20px;
@@ -501,14 +513,22 @@ header {
     padding: 50px;
     font-size: 19px;
 }
-.bio-container,
-.posts-container {
-    background: white;
-    position: relative;
-    width: 100%;
-    padding: 50px;
-    border: solid #d4dce9 1px;
-    border-radius: 5px;
+.about {
+    position: absolute;
+    top: 400px;
+    left: 20%;
+}
+.bio-container {
+    width: 930px;
+    min-height: 450px;
+    padding: 20px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 370px;
+    left: 20%;
     font-family: Helvetica, Arial, sans-serif;
     word-spacing: 1px;
 
@@ -530,21 +550,21 @@ header {
 }
 
 /*--------------------find poeple-------------------------- */
-.find-people {
+.find-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.find-people input {
-    position: absolute;
-    top: 7px;
-    left: 22%;
-    width: 397px;
+.find-page input {
+    border-left: none;
+    position: fixed;
+    top: 5px;
+    left: 24%;
+    width: 400px;
     height: 26px;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border-radius: 1px;
+    z-index: 1000001;
+    padding-left: 2px;
 }
 .find-main {
     display: flex;
@@ -571,7 +591,7 @@ header {
     flex-direction: row;
     align-items: center;
     padding: 20px 30px 20px 20px;
-    color: #385898;
+    color: #195881;
     margin-bottom: 2px;
 }
 .no-results {
@@ -601,6 +621,7 @@ header {
 
 .friend-btn-container {
     position: relative;
+    top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -614,15 +635,13 @@ header {
     font-size: 11px;
     font-weight: bold;
     width: 80px;
-    height: 27px;
+    height: 30px;
 }
 .friend-btn span {
+    height: 30px;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-}
-.small-message-btn {
-    width: 30px;
+    align-items: center;
 }
 
 /*--------------------dropdown-------------------------- */
@@ -674,16 +693,16 @@ header {
     background-color: #3e8e41;
 }
 .friends {
-    width: 950px;
+    width: 930px;
     min-height: 450px;
     padding: 20px;
-    position: absolute;
-    top: 400px;
-    left: 304px;
     font-size: 12px;
     display: flex;
     flex-direction: column;
     background-color: white;
+    position: absolute;
+    top: 370px;
+    left: 20%;
 }
 friends-list,
 pending-list {
@@ -704,7 +723,7 @@ pending-list-item {
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: #385898;
+    color: #195881;
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 2px;
 }
@@ -758,7 +777,8 @@ pending-list-item {
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: solid lightgrey 1px;
+    padding: 5px;
+    height: 70%;
 }
 
 .chat-display {
@@ -794,7 +814,7 @@ pending-list-item {
 }
 .chat textarea {
     width: 100%;
-    boeder: solid lightgrey 1px;
+    border: solid lightgrey 1px;
 
     border-radius: 2px;
 }
@@ -805,12 +825,17 @@ pending-list-item {
     bottom: -60px;
     right: 100px;
     width: 350px;
-    height: 500px;
+    height: 430px;
     border: solid lightgrey 1px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     z-index: 100;
+}
+.chat-box textarea {
+    position: fixed;
+    bottom: 15px;
+    width: 300px;
 }
 
 .chat-header {

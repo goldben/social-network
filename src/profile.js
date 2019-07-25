@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, HashRouter, Route, Link } from "react-router-dom";
-import About from "./about";
 import { PhotoViewer } from "./photo-viewer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
@@ -94,9 +93,7 @@ export class Profile extends React.Component {
                         Friends
                     </Link>
                 </div>
-                <div className="profile-bottom">
-                    <About />
-                </div>
+                <div className="profile-bottom" />
                 {this.state.uploaderVisible && (
                     <PhotoViewer
                         hideUploader={this.hideUploader}

@@ -46,6 +46,10 @@ class Bio extends React.Component {
         } else {
             return (
                 <div className="bio-container" onClick={this.showBioEditor}>
+                    <div>
+                        <FontAwesomeIcon icon={faUser} className="icon" />
+                        <h2>About</h2>
+                    </div>
                     <div className="text-container">{this.props.bio}</div>
 
                     {this.state.editorVisible && (

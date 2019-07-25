@@ -85,19 +85,10 @@ export function FriendshipButton({ receiverId }) {
             </button>
             {friendshipStatus === "Unfriend" && (
                 <div className="dropdown-content">
-                    <a href="#">Get notifications</a>
-                    <a href="#">Close friends</a>
-                    <a href="#">acquaintances</a>
-                    <a href="#">Add to another list</a>
                     <a href="#" onClick={updateFriendship}>
                         {friendshipStatus}
                     </a>
                 </div>
-            )}
-            {friendshipStatus === "Unfriend" && (
-                <button className="friend-btn" onClick={updateFriendship}>
-                    Following
-                </button>
             )}
         </div>
     );

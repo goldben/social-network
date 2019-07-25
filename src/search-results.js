@@ -26,9 +26,7 @@ export class SearchResults extends React.Component {
         return (
             <div className="find-people">
                 <div className="find-main">
-                    <div className="filter">
-                        <h2> Filter results</h2>
-                    </div>
+                    <div className="filter" />
 
                     <div className="results">
                         {users.length

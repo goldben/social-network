@@ -11,6 +11,7 @@ import { OtherProfile } from "./other-profile";
 import { FindPeople } from "./find-people";
 import Friends from "./friends";
 import { FriendsOfFriends } from "./friends-of-friends";
+import About from "./about";
 
 import FindPeopleInHeader from "./find-people-in-header";
 import { Uploader } from "./uploader";
@@ -25,7 +26,6 @@ export class App extends React.Component {
             showChats: false,
             query: "last3"
         };
-        this.updateBio = this.updateBio.bind(this);
         this.uploaded = this.uploaded.bind(this);
         this.showUploader = this.showUploader.bind(this);
         this.showChats = this.showChats.bind(this);
@@ -48,11 +48,7 @@ export class App extends React.Component {
             uploaderVisible: false
         });
     }
-    updateBio(newText) {
-        this.setState({
-            bio: newText
-        });
-    }
+
     showUploader() {
         this.setState({
             uploaderVisible: true
@@ -80,7 +76,6 @@ export class App extends React.Component {
         const id = this.state.id;
         const first = this.state.first;
         const last = this.state.last;
-        const bio = this.state.bio;
         const query = this.state.query;
 
         if (!id) {
@@ -122,6 +117,7 @@ export class App extends React.Component {
                                     imageUrl={imageUrl}
                                 />
                             )}
+
                             <Route
                                 path="/profile"
                                 render={() => (
@@ -131,9 +127,7 @@ export class App extends React.Component {
                                         id={id}
                                         first={first}
                                         last={last}
-                                        bio={bio}
                                         showUploader={this.showUploader}
-                                        updateBio={this.updateBio}
                                     />
                                 )}
                             />
@@ -150,6 +144,10 @@ export class App extends React.Component {
                             <Route
                                 path={"/profile/friends"}
                                 render={() => <Friends />}
+                            />
+                            <Route
+                                path={"/profile/about"}
+                                render={() => <About />}
                             />
                             <Route
                                 path={"/user/:id/friends"}

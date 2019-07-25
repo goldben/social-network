@@ -35,7 +35,7 @@ export default function FindPeopleInHeader() {
 
     return (
         <div>
-            <span className="search-users">
+            <span className="search-header">
                 <input
                     name="find"
                     type="text"
